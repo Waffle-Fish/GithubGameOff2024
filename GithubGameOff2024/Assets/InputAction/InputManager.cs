@@ -32,4 +32,9 @@ public class InputManager : MonoBehaviour
     public Vector2 GetPlayerMovement() {
         return inputActions.Player.Move.ReadValue<Vector2>();
     }
+
+    public bool IsInteractButtonPressed() {
+        float val = inputActions.Player.Interact.ReadValue<float>();
+        return val == 1.0f;
+    }
 }
