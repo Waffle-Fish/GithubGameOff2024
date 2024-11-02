@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
@@ -32,4 +33,9 @@ public class InputManager : MonoBehaviour
     public Vector2 GetPlayerMovement() {
         return inputActions.Player.Move.ReadValue<Vector2>();
     }
+
+    public bool GetFishing(){
+        return  1.0f == inputActions.Player.Fish.ReadValue<float>();
+    }
+
 }
