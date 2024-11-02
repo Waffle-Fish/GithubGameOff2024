@@ -37,4 +37,9 @@ public class InputManager : MonoBehaviour
         float val = inputActions.Player.Interact.ReadValue<float>();
         return val == 1.0f;
     }
+
+    public bool WasInteractButtonPressed()
+    {
+        return inputActions.Player.Interact.WasPressedThisFrame();
+    }
 }
