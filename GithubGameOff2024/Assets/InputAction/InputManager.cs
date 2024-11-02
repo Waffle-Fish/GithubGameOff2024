@@ -30,7 +30,6 @@ public class InputManager : MonoBehaviour
     }
 
     public Vector2 GetPlayerMovement() {
-        Debug.Log(inputActions.Player.Move.ReadValue<Vector2>());
         return inputActions.Player.Move.ReadValue<Vector2>();
     }
 }
