@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class NPC : MonoBehaviour
 {
-    [SerializeField] private IInteractable idleActivity;
-    
+    public NavMeshAgent agent;
+    public IInteractable idleActivity;
+    public float maxRoamDistance = 20f;
+
     public NPCStateMachine StateMachine { get; set; }
     public NPCIdleState IdleState { get; set; }
     public NPCRoamState RoamState { get; set; }
@@ -31,5 +34,17 @@ public class NPC : MonoBehaviour
     private void FixedUpdate()
     {
         StateMachine.CurrentNPCState.PhysicsUpdate();
+    }
+
+    public Vector3 GetRandomNavPoint()
+    {
+        Vector3 samplePos = transform.position + Random.insideUnitSphere * maxRoamDistance;
+
+        NavMeshHit hit;
+        NavMesh.SamplePosition(samplePos, out hit, maxRoamDistance, 1);
+
+        Vector3 newDestination = hit.position;
+
+        return newDestination;
     }
 }

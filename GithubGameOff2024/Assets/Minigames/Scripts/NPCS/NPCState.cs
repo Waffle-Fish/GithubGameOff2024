@@ -4,7 +4,8 @@ public class NPCState
 {
     protected NPC npc;
     protected NPCStateMachine npcStateMachine;
-    protected float time;
+    protected float _time;
+    protected float _waitTime;
 
     public NPCState(NPC npc, NPCStateMachine npcStateMachine)
     {
@@ -14,13 +15,13 @@ public class NPCState
 
     public virtual void EnterState() 
     {
-        time = 0;
+        _time = 0;
     }
 
     public virtual void ExitState() { }
     public virtual void FrameUpdate() 
     {
-        time += Time.deltaTime;
+        _time += Time.deltaTime;
     }
 
     public virtual void PhysicsUpdate() { }

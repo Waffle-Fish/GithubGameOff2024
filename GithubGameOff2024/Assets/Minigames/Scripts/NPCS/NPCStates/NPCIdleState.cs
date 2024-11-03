@@ -15,6 +15,7 @@ public class NPCIdleState : NPCState
     public override void EnterState()
     {
         base.EnterState();
+        _waitTime = Random.Range(5f, 10f);
     }
 
     public override void ExitState()
@@ -26,7 +27,11 @@ public class NPCIdleState : NPCState
     {
         base.FrameUpdate();
 
-        Debug.Log(time);
+        if(_time >= _waitTime)
+        {
+            npc.StateMachine.ChangeState(npc.RoamState);
+        }
+
     }
 
     public override void PhysicsUpdate()
