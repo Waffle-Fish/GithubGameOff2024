@@ -12,7 +12,6 @@ public class NPCStateMachine
 
     public void ChangeState(NPCState newState)
     {
-        Debug.Log(newState);
         CurrentNPCState.ExitState();
         CurrentNPCState = newState;
         CurrentNPCState.EnterState();

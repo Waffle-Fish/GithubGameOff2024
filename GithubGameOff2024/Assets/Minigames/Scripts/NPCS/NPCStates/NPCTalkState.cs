@@ -2,9 +2,7 @@ using UnityEngine;
 
 public class NPCTalkState : NPCState
 {
-    public NPCTalkState(NPC npc, NPCStateMachine npcStateMachine) : base(npc, npcStateMachine)
-    {
-    }
+    public NPCTalkState(NPC npc, NPCStateMachine npcStateMachine) : base(npc, npcStateMachine) { }
 
     public override void AnimationTriggerEvent()
     {

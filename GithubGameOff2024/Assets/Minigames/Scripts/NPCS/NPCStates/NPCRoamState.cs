@@ -4,9 +4,7 @@ public class NPCRoamState : NPCState
 {
     private Vector3 _targetPos;
 
-    public NPCRoamState(NPC npc, NPCStateMachine npcStateMachine) : base(npc, npcStateMachine)
-    {
-    }
+    public NPCRoamState(NPC npc, NPCStateMachine npcStateMachine) : base(npc, npcStateMachine) { }
 
     public override void AnimationTriggerEvent()
     {
@@ -18,8 +16,7 @@ public class NPCRoamState : NPCState
         base.EnterState();
         _waitTime = Random.Range(15f, 25f);
 
-        _targetPos = npc.GetRandomNavPoint();
-        Debug.Log(_targetPos);
+        _targetPos = npc.GetRandomActivity();
         npc.agent.SetDestination(_targetPos);
     }
 
@@ -32,9 +29,14 @@ public class NPCRoamState : NPCState
     {
         base.FrameUpdate();
 
-        if (_time >= _waitTime || (npc.transform.position - _targetPos).sqrMagnitude < 0.01f)
+        if (_time >= _waitTime)
         {
             npc.StateMachine.ChangeState(npc.IdleState);
+        }
+
+        if ((npc.transform.position - _targetPos).sqrMagnitude < 0.01f)
+        {
+            npc.StateMachine.ChangeState(npc.ActivityState);
         }
     }
 

@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class NPCIdleState : NPCState
+public class NPCActivityState : NPCState
 {
-    public NPCIdleState(NPC npc, NPCStateMachine npcStateMachine) : base(npc, npcStateMachine) { }
+    public NPCActivityState(NPC npc, NPCStateMachine npcStateMachine) : base(npc, npcStateMachine) { }
 
     public override void AnimationTriggerEvent()
     {
@@ -12,23 +12,26 @@ public class NPCIdleState : NPCState
     public override void EnterState()
     {
         base.EnterState();
-        _waitTime = Random.Range(5f, 10f);
+
+        npc.activity.NPCInteract();
+        _waitTime = Random.Range(npc.activity._timeMinMax.x, npc.activity._timeMinMax.y);
     }
 
     public override void ExitState()
     {
         base.ExitState();
+
+        npc.activity = null;
     }
 
     public override void FrameUpdate()
     {
         base.FrameUpdate();
 
-        if(_time >= _waitTime)
+        if (_time >= _waitTime)
         {
-            npc.StateMachine.ChangeState(npc.RoamState);
+            npc.StateMachine.ChangeState(npc.IdleState);
         }
-
     }
 
     public override void PhysicsUpdate()
