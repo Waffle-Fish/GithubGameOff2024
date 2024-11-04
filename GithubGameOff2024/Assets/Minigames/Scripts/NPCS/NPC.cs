@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class NPC : MonoBehaviour
+public class NPC : MonoBehaviour, IInteractable
 {
     public NavMeshAgent agent;
     public IInteractableNPC activity;
@@ -54,5 +54,10 @@ public class NPC : MonoBehaviour
     {
         activity = NPCManager.Instance.GetRandomActivity();
         return activity.GetPosition();
+    }
+
+    public void Interact()
+    {
+
     }
 }
