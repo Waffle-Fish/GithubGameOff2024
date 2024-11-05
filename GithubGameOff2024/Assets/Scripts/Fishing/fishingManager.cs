@@ -15,6 +15,16 @@ public class fishingManager : MonoBehaviour
         DoneFishing
     }
 
+    [Tooltip("Player")]
+    [SerializeField]
+    public GameObject Player;
+
+    [Tooltip("Fishing Spot Object")]
+    [SerializeField]
+    public GameObject FishingIndicator;
+    private GameObject CurrentFishIndicator;
+
+
     [Tooltip("Current State of the player")]
     [SerializeField]
     public Actions CurrentAction;
@@ -33,7 +43,7 @@ public class fishingManager : MonoBehaviour
     private RaycastHit CastingRayCast;
     private Vector3 CurrentCastingDistance;
     [SerializeField]
-    private Vector3 TempHeight = new Vector3(0,20,0);
+    private Vector3 TempHeight = new Vector3(0,0,0);
     private void Awake() {
         
         inputManager = InputManager.Instance;
@@ -79,23 +89,21 @@ public class fishingManager : MonoBehaviour
     private void Casting(){
         float NewDistance = CasttingSpeed * Time.fixedDeltaTime;
         CurrentCastingDistance += transform.forward * NewDistance;
-
-
         if (Physics.Raycast(transform.position + CurrentCastingDistance  + TempHeight, transform.TransformDirection(Vector3.down), out  CastingRayCast, Mathf.Infinity))
 
         { 
             Debug.DrawRay(transform.position+ CurrentCastingDistance + TempHeight, transform.TransformDirection(Vector3.down) *  CastingRayCast.distance, Color.blue); 
             Debug.Log("Did Hit"); 
+            Debug.Log(CastingRayCast.point); 
         }
-        else
-        { 
-            Debug.DrawRay(transform.position + CurrentCastingDistance + TempHeight, transform.TransformDirection(Vector3.down) * 1000, Color.red); 
-            Debug.Log("Did not Hit"); 
-        }
-       
+      
+       UpdateFishFishingIndicator(CastingRayCast.point);
     }
 
     private void StartCasting(){
+        Destroy(CurrentFishIndicator);
+        CurrentFishIndicator = Instantiate(FishingIndicator, Player.transform);
+        CurrentFishIndicator.transform.localPosition = Player.transform.position;
         CurrentCastingDistance = Vector3.zero;
         StartCoroutine(StartCastingTimer());
     }
@@ -113,6 +121,14 @@ public class fishingManager : MonoBehaviour
       
     }
 
+
+    void UpdateFishFishingIndicator(Vector3 Target) {
+        if (CurrentFishIndicator & Target != Vector3.zero) {
+
+            CurrentFishIndicator.transform.position = Target;
+        }
+        
+    }
     // Update is called once per frame
     void Update()
     {

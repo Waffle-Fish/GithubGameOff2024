@@ -488,10 +488,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59dca6ed80be8c84faa968cea54ba75e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: {fileID: 1166907697}
+  FishingIndicator: {fileID: 4667581328360241479, guid: af029951c0c14fa49b856c8aaaa71624, type: 3}
   CurrentAction: 0
   CastingTime: 0
   CasttingDistance: 0
-  CasttingSpeed: 0
+  CasttingSpeed: 3.07
   TempHeight: {x: 0, y: 20, z: 0}
 --- !u!1 &479741529
 GameObject:
