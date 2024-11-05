@@ -4,13 +4,12 @@ using UnityEngine.Events;
 
 public class Door : MonoBehaviour
 {
-    private MeshRenderer outsideObject;
+    [SerializeField] private MeshRenderer outsideObject;
     private Material[] outsideMaterials;
     private const float fadeInOutDuration = 0.3f;
 
     private void Awake()
     {
-        outsideObject = GetComponent<MeshRenderer>();
         outsideMaterials = outsideObject.materials;
     }
 
