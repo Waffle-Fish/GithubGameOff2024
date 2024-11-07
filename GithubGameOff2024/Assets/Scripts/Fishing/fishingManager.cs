@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.InputSystem.iOS;
+using UnityEngine.UIElements;
 
 
 public class fishingManager : MonoBehaviour
@@ -22,15 +23,16 @@ public class fishingManager : MonoBehaviour
     [Tooltip("Fishing Spot Object")]
     [SerializeField]
     public GameObject FishingIndicator;
+    public GameObject FishingMiniGame;
     private GameObject CurrentFishIndicator;
 
 
     [Tooltip("Current State of the player")]
     [SerializeField]
     public Actions CurrentAction;
-    [Tooltip("Time it takes to cast.")]
+    [Tooltip("height of where fishing can take places")]
     [SerializeField]
-    private int CastingTime;
+    private int HeightOfWater;
     [SerializeField]
 
     [Tooltip("Distance of the cast.")]
@@ -41,6 +43,7 @@ public class fishingManager : MonoBehaviour
     
     private InputManager inputManager;
     private RaycastHit CastingRayCast;
+    
     private Vector3 CurrentCastingDistance;
     [SerializeField]
     private Vector3 TempHeight = new Vector3(0,0,0);
@@ -49,14 +52,35 @@ public class fishingManager : MonoBehaviour
         inputManager = InputManager.Instance;
     
     }
- 
+    
+
+
+
+
+
+
+   
     private void Fishing(){
+
+        if ( CurrentAction == Actions.Fishing) return;
+
         bool IsFishing = InputManager.Instance.GetFishing();
         if (!IsFishing) 
         {
+            if ( CurrentAction == Actions.Casting){
+                if ( CheckIfCanFish()){
+                    StartFishingMiniGame();
+
+                    DestroyImmediate(CurrentFishIndicator);
+                    return;
+                }
+            }
+            DestroyImmediate(CurrentFishIndicator);
+            
             CurrentAction = Actions.Idle;
             return;
         }
+
     
            
 
@@ -93,8 +117,8 @@ public class fishingManager : MonoBehaviour
 
         { 
             Debug.DrawRay(transform.position+ CurrentCastingDistance + TempHeight, transform.TransformDirection(Vector3.down) *  CastingRayCast.distance, Color.blue); 
-            Debug.Log("Did Hit"); 
-            Debug.Log(CastingRayCast.point); 
+           // Debug.Log("Did Hit"); 
+           // Debug.Log(CastingRayCast.point); 
         }
       
        UpdateFishFishingIndicator(CastingRayCast.point);
@@ -105,14 +129,14 @@ public class fishingManager : MonoBehaviour
         CurrentFishIndicator = Instantiate(FishingIndicator, Player.transform);
         CurrentFishIndicator.transform.localPosition = Player.transform.position;
         CurrentCastingDistance = Vector3.zero;
-        StartCoroutine(StartCastingTimer());
+        ///StartCoroutine(StartCastingTimer());
     }
     IEnumerator StartCastingTimer()
     {
         
         Debug.Log("Timer started");
-        yield return new WaitForSeconds(CastingTime); // Wait for delay seconds
-        Debug.Log("Timer ended after " + CastingTime + " seconds");
+        yield return new WaitForSeconds(1); // Wait for delay seconds
+         // Debug.Log("Timer ended after " + CastingTime + " seconds");
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -134,6 +158,24 @@ public class fishingManager : MonoBehaviour
     {
         
     }
+
+
+    bool CheckIfCanFish()
+    {
+        if ( CastingRayCast.point.y <= HeightOfWater ) return true;
+
+        return false;
+        
+
+    }
+
+
+    void StartFishingMiniGame(){
+        CurrentAction = Actions.Fishing;
+        Debug.Log("we are fishingggggggg!!!!!!!!!");
+        
+    }
+
 
     void FixedUpdate()
     {
