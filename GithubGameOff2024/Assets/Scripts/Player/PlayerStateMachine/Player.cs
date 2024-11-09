@@ -4,6 +4,7 @@ using UnityEngine.AI;
 public class Player : MonoBehaviour
 {
     public PlayerMovement movement;
+    public GameObject interactingObject;
 
     #region state machine stuff
     public PlayerStateMachine StateMachine { get; set; }

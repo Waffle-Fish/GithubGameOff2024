@@ -33,4 +33,9 @@ public class PlayerFishingState : PlayerState
     {
         return base.ShouldInteract();
     }
+
+    public override void Interacted(GameObject interactObj)
+    {
+        base.Interacted(interactObj);
+    }
 }

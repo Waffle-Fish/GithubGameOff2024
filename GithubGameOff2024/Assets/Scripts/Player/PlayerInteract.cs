@@ -27,7 +27,7 @@ public class PlayerInteract : MonoBehaviour
             {
                 if (interactable != null)
                 {
-                    interactable.Interact();
+                    player.StateMachine.CurrentPlayerState.Interacted(interactable.Interact());
                 }
             }
         }

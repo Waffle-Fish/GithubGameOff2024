@@ -34,4 +34,24 @@ public class PlayerDefaultState : PlayerState
     {
         return true;
     }
+
+    public override void Interacted(GameObject interactObj)
+    {
+        base.Interacted(interactObj);
+
+        if (interactObj == null)
+            return;
+
+        player.interactingObject = interactObj;
+
+        switch (interactObj.layer)
+        {
+            case 11: // npc
+                player.StateMachine.ChangeState(player.TalkState);
+                break;
+            case 12: // activity
+                player.StateMachine.ChangeState(player.ActivityState);
+                break;
+        }
+    }
 }

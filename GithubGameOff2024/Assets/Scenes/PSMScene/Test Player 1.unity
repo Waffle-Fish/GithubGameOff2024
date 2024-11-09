@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 261671020}
   - component: {fileID: 261671019}
   - component: {fileID: 261671023}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PretendInteractable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1332,6 +1332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {fileID: 6257305280076519959}
+  interactingObject: {fileID: 0}
 --- !u!135 &8842964216213829462
 SphereCollider:
   m_ObjectHideFlags: 0

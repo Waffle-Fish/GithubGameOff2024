@@ -31,6 +31,12 @@ public class PlayerTalkState : PlayerState
 
     public override bool ShouldInteract()
     {
+        player.StateMachine.ChangeState(player.DefaultState);
         return base.ShouldInteract();
+    }
+
+    public override void Interacted(GameObject interactObj)
+    {
+        base.Interacted(interactObj);
     }
 }

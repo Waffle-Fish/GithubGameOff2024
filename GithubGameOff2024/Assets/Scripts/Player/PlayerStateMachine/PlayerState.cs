@@ -18,4 +18,5 @@ public class PlayerState
     public virtual void AnimationTriggerEvent() { }
 
     public virtual bool ShouldInteract() { return false; } // use as a way to see if interact was pressed and avoid interacting with something when you shouldn't
+    public virtual void Interacted(GameObject interactObj) { }
 }
