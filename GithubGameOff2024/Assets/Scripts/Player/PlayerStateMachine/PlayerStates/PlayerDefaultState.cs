@@ -12,6 +12,7 @@ public class PlayerDefaultState : PlayerState
     public override void EnterState()
     {
         base.EnterState();
+        player.interactingObject = null;
     }
 
     public override void ExitState()
