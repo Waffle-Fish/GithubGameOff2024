@@ -56,8 +56,8 @@ public class NPC : MonoBehaviour, IInteractable
         return activity.GetPosition();
     }
 
-    public void Interact()
+    public GameObject Interact()
     {
-
+        return gameObject;
     }
 }

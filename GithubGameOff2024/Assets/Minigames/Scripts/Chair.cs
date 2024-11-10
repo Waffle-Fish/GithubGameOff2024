@@ -8,7 +8,7 @@ public class Chair : MonoBehaviour, IInteractable
 
     private bool toggled;
 
-    public void Interact()
+    public GameObject Interact()
     {
         if (toggled)
             reinteractEvent.Invoke();
@@ -16,5 +16,7 @@ public class Chair : MonoBehaviour, IInteractable
             interactEvent.Invoke();
 
         toggled = !toggled;
+
+        return gameObject;
     }
 }
