@@ -26,8 +26,13 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        //Move();
+        Gravity(); //This should be running regardless if player can move
+    }
+
+    public void MoveUpdate()
+    {
         Move();
-        Gravity();
     }
     
     private void Move() {

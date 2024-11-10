@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class InteractDebug : MonoBehaviour, IInteractable
 {
-    public void Interact()
+    public GameObject Interact()
     {
         Debug.Log("Interacted");
+        return gameObject;
     }
 }

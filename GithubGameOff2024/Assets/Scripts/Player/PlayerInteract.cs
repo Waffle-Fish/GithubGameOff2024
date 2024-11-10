@@ -5,11 +5,16 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField] private Transform interactIcon;
 
     private Transform intertactableTransform;
+    private Player player;
     private IInteractable interactable;
 
     private void Start()
     {
+        player = GetComponentInParent<Player>();
         interactIcon.parent = null;
+
+        if (player == null)
+            Debug.Log("Using the og player");
     }
 
     private void Update()
@@ -21,9 +26,15 @@ public class PlayerInteract : MonoBehaviour
 
         if(InputManager.Instance.WasInteractButtonPressed())
         {
-            if(interactable != null)
+            if (player == null)
+                return;
+
+            if(player.StateMachine.CurrentPlayerState.ShouldInteract())
             {
-                interactable.Interact();
+                if (interactable != null)
+                {
+                    player.StateMachine.CurrentPlayerState.Interacted(interactable.Interact());
+                }
             }
         }
     }
