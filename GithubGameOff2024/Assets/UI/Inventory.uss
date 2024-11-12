@@ -1,0 +1,124 @@
+.Container {
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+.InventoryContainer {
+    flex-grow: 1;
+    width: 90%;
+    height: 75%;
+    max-width: 90%;
+    max-height: 75%;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    background-color: rgb(63, 29, 0);
+    border-top-width: 0;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.InventoryView {
+    -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
+    font-size: 12px;
+    flex-grow: 1;
+    flex-align: center;
+}
+
+.InventoryTab {
+    flex-direction: row;
+    flex-grow: 1;
+    height: 100%;
+}
+
+.TabContainer {
+    flex-direction: row;
+    flex-grow: 1;
+    height: 100%;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.SlotContainer {
+    background-color: rgba(255, 255, 255, 0);
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 65%;
+    align-content: flex-start;
+    overflow: hidden;
+}
+
+.DescriptionContainer {
+    background-color: rgb(213, 184, 149);
+    width: 32%;
+    height: auto;
+    border-radius: 4px;
+    margin-left: 3%;
+}
+
+.Slot {
+    width: 64px;
+    height: 64px;
+    margin: 4px;
+    background-color: rgb(213, 184, 149);
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.SlotIcon {
+    padding: 15px;
+    flex-shrink: 0;
+    flex-grow: 1;
+}
+
+
+
+.ItemName {
+    -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
+    font-size: 24px;
+    color: rgb(255, 255, 255);
+    margin: 10px;
+    -unity-text-align: middle-center;
+}
+
+.ItemDescription {
+    -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
+    font-size: 16px;
+    color: rgb(255, 255, 255);
+    margin: 10px;
+    white-space: normal;
+    -unity-text-align: middle-left;
+}
+
+.ItemWeight {
+    -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
+    font-size: 14px;
+    color: rgb(255, 255, 255);
+    margin: 5px 10px;
+}
+
+.ItemRarity {
+    -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
+    font-size: 14px;
+    color: rgb(255, 255, 255);
+    margin: 5px 10px;
+}
+
+.ItemValue {
+    -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
+    font-size: 14px;
+    color: rgb(255, 255, 255);
+    margin: 5px 10px;
+}

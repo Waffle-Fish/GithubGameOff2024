@@ -1,0 +1,29 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Inventory.uss?fileID=7433441132597879392&amp;guid=5f10b64da6d4ada438eb17cd63fed364&amp;type=3#Inventory" />
+    <ui:VisualElement name="Container" class="Container">
+        <ui:VisualElement name="Inventory" class="InventoryContainer">
+            <ui:Label text="Inventory" name="Header" selectable="true" style="-unity-font-definition: resource(&apos;Fonts &amp; Materials/BaksoSapi&apos;); color: rgb(255, 255, 255); -unity-text-align: middle-left; margin-top: 2px; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-bottom-width: 0; border-top-left-radius: 1px; border-top-right-radius: 1px; border-bottom-right-radius: 1px; border-bottom-left-radius: 1px; align-items: auto; align-self: auto; font-size: 24px; align-content: auto;" />
+            <ui:TabView name="InventoryView" class="InventoryView" style="font-size: 24px;">
+                <ui:Tab label="Fish" name="Fish" view-data-key="FishTab" class="InventoryTab" style="flex-direction: column-reverse;">
+                    <ui:VisualElement name="TabContainer" class="TabContainer">
+                        <ui:VisualElement name="FishSlotContainer" class="SlotContainer" />
+                        <ui:VisualElement name="FishDescriptionSlot" enabled="true" view-data-key="FishDescriptionSlot" class="DescriptionContainer" />
+                    </ui:VisualElement>
+                </ui:Tab>
+                <ui:Tab label="Tools" name="Tool" view-data-key="ToolTab" class="InventoryTab">
+                    <ui:VisualElement name="TabContainer" class="TabContainer" style="flex-grow: 1;">
+                        <ui:VisualElement name="ToolDescriptionSlot" enabled="true" view-data-key="FishDescriptionSlot" class="DescriptionContainer" style="flex-grow: 1;" />
+                        <ui:VisualElement name="ToolSlotContainer" class="SlotContainer" style="flex-grow: 1;" />
+                    </ui:VisualElement>
+                </ui:Tab>
+                <ui:Tab label="Trinkets" name="Trinkets" view-data-key="TrinketTab" class="InventoryTab">
+                    <ui:VisualElement name="TabContainer" style="flex-grow: 1;">
+                        <ui:VisualElement name="TrinketSlotContainer" class="SlotContainer" style="flex-grow: 1;">
+                            <ui:VisualElement name="TrinketDescriptionSlot" enabled="true" view-data-key="FishDescriptionSlot" class="DescriptionContainer" style="flex-grow: 1; background-color: rgb(213, 184, 149);" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:Tab>
+            </ui:TabView>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
