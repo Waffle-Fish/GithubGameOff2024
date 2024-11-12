@@ -12,7 +12,13 @@ public class PlayerDefaultState : PlayerState
     public override void EnterState()
     {
         base.EnterState();
-        player.interactingObject = null;
+        if(player.interactingObject != null)
+        {
+            player.interactingObject.GetComponent<IInteractable>().Interact();
+            player.targetGroup.RemoveMember(player.interactingObject.transform);
+            player.interactingObject = null;
+        }
+        player.interactionCamera.Priority = 5;
     }
 
     public override void ExitState()
@@ -54,5 +60,8 @@ public class PlayerDefaultState : PlayerState
                 player.StateMachine.ChangeState(player.ActivityState);
                 break;
         }
+
+        player.interactionCamera.Priority = 15;
+        player.targetGroup.AddMember(interactObj.transform, 1, 1);
     }
 }

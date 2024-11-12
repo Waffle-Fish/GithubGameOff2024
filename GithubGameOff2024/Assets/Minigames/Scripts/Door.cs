@@ -15,7 +15,7 @@ public class Door : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer != 31)
+        if (other.gameObject.layer != 10)
             return;
 
         StopAllCoroutines();
@@ -25,7 +25,7 @@ public class Door : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer != 31)
+        if (other.gameObject.layer != 10)
             return;
 
         StopAllCoroutines();

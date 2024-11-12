@@ -12,11 +12,13 @@ public class NPCTalkState : NPCState
     public override void EnterState()
     {
         base.EnterState();
+        npc.agent.isStopped = true;
     }
 
     public override void ExitState()
     {
         base.ExitState();
+        npc.agent.isStopped = false;
     }
 
     public override void FrameUpdate()

@@ -6,6 +6,7 @@ public class NPC : MonoBehaviour, IInteractable
     public NavMeshAgent agent;
     public IInteractableNPC activity;
     public float maxRoamDistance = 20f;
+    public NPCState pausedState;
 
     public NPCStateMachine StateMachine { get; set; }
     public NPCIdleState IdleState { get; set; }
@@ -58,6 +59,17 @@ public class NPC : MonoBehaviour, IInteractable
 
     public GameObject Interact()
     {
+        if(StateMachine.CurrentNPCState != TalkState)
+        {
+            pausedState = StateMachine.CurrentNPCState;
+            StateMachine.ChangeState(TalkState);
+        }
+        else
+        {
+            StateMachine.ChangeState(pausedState);
+            pausedState = null;
+        }
+
         return gameObject;
     }
 }
