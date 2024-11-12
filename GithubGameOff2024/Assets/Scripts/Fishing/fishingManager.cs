@@ -24,6 +24,8 @@ public class fishingManager : MonoBehaviour
     [SerializeField]
     public GameObject FishingIndicator;
     public GameObject FishingMiniGame;
+
+    public GameObject CurrentFishingMiniGame;
     private GameObject CurrentFishIndicator;
 
 
@@ -55,11 +57,6 @@ public class fishingManager : MonoBehaviour
     
 
 
-
-
-
-
-   
     private void Fishing(){
 
         if ( CurrentAction == Actions.Fishing) return;
@@ -123,28 +120,17 @@ public class fishingManager : MonoBehaviour
       
        UpdateFishFishingIndicator(CastingRayCast.point);
     }
-
     private void StartCasting(){
         Destroy(CurrentFishIndicator);
         CurrentFishIndicator = Instantiate(FishingIndicator, Player.transform);
         CurrentFishIndicator.transform.localPosition = Player.transform.position;
         CurrentCastingDistance = Vector3.zero;
-        ///StartCoroutine(StartCastingTimer());
-    }
-    IEnumerator StartCastingTimer()
-    {
         
-        Debug.Log("Timer started");
-        yield return new WaitForSeconds(1); // Wait for delay seconds
-         // Debug.Log("Timer ended after " + CastingTime + " seconds");
     }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
       
     }
-
 
     void UpdateFishFishingIndicator(Vector3 Target) {
         if (CurrentFishIndicator & Target != Vector3.zero) {
@@ -159,7 +145,6 @@ public class fishingManager : MonoBehaviour
         
     }
 
-
     bool CheckIfCanFish()
     {
         if ( CastingRayCast.point.y <= HeightOfWater ) return true;
@@ -171,6 +156,7 @@ public class fishingManager : MonoBehaviour
 
 
     void StartFishingMiniGame(){
+        CurrentFishingMiniGame = Instantiate(FishingMiniGame);
         CurrentAction = Actions.Fishing;
         Debug.Log("we are fishingggggggg!!!!!!!!!");
         
