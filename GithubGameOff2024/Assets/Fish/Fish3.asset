@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Fish3
   m_EditorClassIdentifier: 
   itemName: Fish3
+  itemGUID: 62135e6c-ce7e-4796-bf27-2822b6049667
   description: Fish3
   rarity: 2
   weight: 0
   value: 0
+  itemIcon: {fileID: 21300000, guid: e7c5ae4db890a0644ad1b50c7211e02c, type: 3}

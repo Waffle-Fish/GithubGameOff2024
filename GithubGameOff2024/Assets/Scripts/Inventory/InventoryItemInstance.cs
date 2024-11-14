@@ -5,7 +5,7 @@ public class InventoryItemInstance
     public InventoryItem ItemType;
     public float weight;
     public float value;
-
+    public string itemGUID;
     public InventoryItemRarity rarity;
     public InventoryItemInstance(InventoryItem item)
     {
@@ -13,12 +13,14 @@ public class InventoryItemInstance
         this.weight = item.weight;
         this.value = item.value;
         this.rarity = item.rarity;
+        this.itemGUID = System.Guid.NewGuid().ToString();
     }
 }
 public class FishInstance : InventoryItemInstance
 {
     public FishInstance(InventoryItem item) : base(item)
     {
+
         this.ItemType = item;
         // Randomize weight based on rarity
         switch (item.rarity)

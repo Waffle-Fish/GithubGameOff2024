@@ -4,13 +4,10 @@ using UnityEngine.UIElements;
 public class InventoryItem : ScriptableObject
 {
     public string itemName;
+    public string itemGUID;
     public string description;
     public InventoryItemRarity rarity;
     public float weight;
     public float value;
-    public Image itemIcon;
-    //public GameObject model;
-
-
-
+    public Sprite itemIcon;
 }
