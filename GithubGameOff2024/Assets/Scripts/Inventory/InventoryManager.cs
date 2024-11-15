@@ -62,9 +62,10 @@ public class InventoryManager : MonoBehaviour
         }
         return null;
     }
-    public InventoryItemInstance GetItemByGUID(string guid)
+    public InventoryItemInstance GetItemByGUID(System.Guid guid)
     {
-        return FishInventory.Find(item => item.itemGUID == guid);
+        Debug.Log("getting item by guid" + guid);
+        return FishInventory.Find(item => item.ItemGUID == guid);
     }
     public bool AddItem(InventoryType inventoryType, InventoryItemInstance item)
     {

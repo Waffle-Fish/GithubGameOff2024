@@ -1,5 +1,6 @@
 using UnityEngine.UIElements;
 using UnityEngine.Scripting;
+using UnityEngine;
 public class DescriptionSlot : VisualElement
 {
     #region UXML
@@ -51,10 +52,6 @@ public class DescriptionSlot : VisualElement
         ClearDetails();
     }
 
-    /// <summary>
-    /// Updates the description slot with the details of the selected item.
-    /// </summary>
-    /// <param name="item">The selected inventory item.</param>
     public void SetItemDetails(InventoryItemInstance item)
     {
         if (item == null)
@@ -62,6 +59,7 @@ public class DescriptionSlot : VisualElement
             ClearDetails();
             return;
         }
+        Debug.Log("item details" + item.ItemType.name);
 
         M_Name.text = item.ItemType.name;
         M_Description.text = item.ItemType.description;

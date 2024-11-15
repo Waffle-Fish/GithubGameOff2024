@@ -94,7 +94,7 @@ public class InventoryUIManager : MonoBehaviour
                 if (added)
                 {
                     // Only update empty slots with the new item
-                    if (string.IsNullOrEmpty(slot.M_ItemGUID))
+                    if (slot.ItemGUID == System.Guid.Empty)
                     {
                         slot.HoldItem(item);
                         break; // Exit after finding first empty slot
@@ -103,7 +103,7 @@ public class InventoryUIManager : MonoBehaviour
                 else
                 {
                     // Clear the slot if it contains the removed item
-                    if (slot.M_ItemGUID == item.itemGUID)
+                    if (slot.ItemGUID == item.ItemGUID)
                     {
                         slot.ClearItem();
                         break;
@@ -122,20 +122,28 @@ public class InventoryUIManager : MonoBehaviour
         slot.AddToClassList("selected");
 
         // Update description
-        var item = InventoryManager.Instance.GetItemByGUID(slot.M_ItemGUID);
+        var item = InventoryManager.Instance.GetItemByGUID(slot.ItemGUID);
+        if (item == null)
+        {
+            Debug.Log("item is null");
+            return;
+        }
         if (slot.parent == fishInventoryContainer)
         {
+            Debug.Log("fish description slot" + fishDescriptionSlot);
             fishDescriptionSlot.Q<DescriptionSlot>().SetItemDetails(item);
         }
         else if (slot.parent == toolsInventoryContainer)
         {
+            Debug.Log("tools description slot" + toolsDescriptionSlot);
             toolsDescriptionSlot.Q<DescriptionSlot>().SetItemDetails(item);
         }
         else if (slot.parent == trinketsInventoryContainer)
         {
+            Debug.Log("trinkets description slot" + trinketsDescriptionSlot);
             trinketsDescriptionSlot.Q<DescriptionSlot>().SetItemDetails(item);
         }
-        Debug.Log("item clicked" + slot.M_ItemGUID);
+        Debug.Log("item clicked" + slot.ItemGUID);
     }
 
     private void ClearAllSelections()

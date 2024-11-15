@@ -12,38 +12,44 @@ public class InventorySlot : VisualElement
     [Preserve]
     public new class UxmlTraits : VisualElement.UxmlTraits { }
     #endregion
-    private InventoryUIManager M_InventoryUIManager;
-    public Image M_Icon;
-    public string M_ItemGUID;
+    private InventoryUIManager _inventoryUIManager;
+    public Image Icon;
+    public System.Guid ItemGUID;
     public InventorySlot()
     {
-        M_InventoryUIManager = GameObject.FindFirstObjectByType<InventoryUIManager>();
-        M_ItemGUID = null;
-        M_Icon = new Image();
-        Add(M_Icon);
+        _inventoryUIManager = GameObject.FindFirstObjectByType<InventoryUIManager>();
+        ItemGUID = System.Guid.Empty;
+        Icon = new Image();
+        Add(Icon);
 
-        M_Icon.AddToClassList("SlotIcon");
+        Icon.AddToClassList("SlotIcon");
         AddToClassList("Slot");
 
-        // Add click event listener
-        this.RegisterCallback<ClickEvent>(evt => OnSlotClicked());
+        this.RegisterCallback<ClickEvent>(OnSlotClicked);
     }
 
-    private void OnSlotClicked()
+    private void OnSlotClicked(ClickEvent evt)
     {
-        // Notify the InventoryUIManager about the click
-        M_InventoryUIManager.OnInventorySlotClicked(this);
+        Debug.Log($"Slot clicked - GUID: {ItemGUID}, Has Manager: {_inventoryUIManager != null}");
+        if (_inventoryUIManager != null)
+        {
+            _inventoryUIManager.OnInventorySlotClicked(this);
+        }
+        else
+        {
+            Debug.LogError("InventoryUIManager reference is null!");
+        }
     }
 
     public void HoldItem(InventoryItemInstance item)
     {
-        M_Icon.sprite = item.ItemType.itemIcon;
-        M_ItemGUID = item.ItemType.itemGUID;
+        Icon.sprite = item.ItemType.itemIcon;
+        ItemGUID = item.ItemGUID;
     }
     public void ClearItem()
     {
-        M_Icon.sprite = null;
-        M_ItemGUID = null;
+        Icon.sprite = null;
+        ItemGUID = System.Guid.Empty;
     }
 
 }
