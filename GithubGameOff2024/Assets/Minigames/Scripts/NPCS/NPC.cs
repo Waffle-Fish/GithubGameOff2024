@@ -7,6 +7,8 @@ public class NPC : MonoBehaviour, IInteractable
     public IInteractableNPC activity;
     public float maxRoamDistance = 20f;
     public NPCState pausedState;
+    public Dialogue dialogue;
+    public DialogueManager dialogueManager;
 
     public NPCStateMachine StateMachine { get; set; }
     public NPCIdleState IdleState { get; set; }
@@ -22,6 +24,8 @@ public class NPC : MonoBehaviour, IInteractable
         RoamState = new NPCRoamState(this, StateMachine);
         TalkState = new NPCTalkState(this, StateMachine);
         ActivityState = new NPCActivityState(this, StateMachine);
+
+        dialogueManager = GameObject.FindFirstObjectByType<DialogueManager>();
     }
 
     private void Start()
@@ -71,5 +75,10 @@ public class NPC : MonoBehaviour, IInteractable
         }
 
         return gameObject;
+    }
+
+    public bool Talk()
+    {
+        return dialogueManager.DisplayNextSentence();
     }
 }

@@ -30,16 +30,17 @@ public class DialogueManager : MonoBehaviour
         DisplayNextSentence();
     }
 
-    public void DisplayNextSentence()
+    public bool DisplayNextSentence()
     {
         if (sentences.Count == 0)
         {
             EndDialogue();
-            return;
+            return false;
         }
         string sentence = sentences.Dequeue();
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
+        return true;
     }
 
     void EndDialogue()
@@ -60,13 +61,13 @@ public class DialogueManager : MonoBehaviour
 
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && !_isDialogueComplete)
-        {
-            DisplayNextSentence();
-        }
-    }
+    //void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Space) && !_isDialogueComplete)
+    //    {
+    //        DisplayNextSentence();
+    //    }
+    //}
 
     public bool IsDialogueComplete()
     {
