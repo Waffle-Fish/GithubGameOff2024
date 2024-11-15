@@ -164,6 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clicks: 5
+  Owner: {fileID: 0}
 --- !u!1 &6417666688863390275
 GameObject:
   m_ObjectHideFlags: 0

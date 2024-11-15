@@ -8,36 +8,26 @@ using UnityEngine.UI;
 
 public class FishingMiniGame : MonoBehaviour
 {
-      public enum Actions
-    {
-        Blocked,
-        Fishing,
-    }
-
-    private Actions CurrentActions;
+   
     public GameObject MainProgressBar;
 
-    [SerializeField]
     public Image ProgressBar;
 
-    [Tooltip("Block to stop Progress")]
-    [SerializeField]
+  
     public GameObject BlockerBar;
     public GameObject CurrentBlocker;
-    [SerializeField]
+
 
    
     public Vector2 FishRate;
     public bool DoneFishing;
     
-    [SerializeField]
-    public Vector2 ProgressStart = new Vector2(0,0); 
+      public Vector2 ProgressStart = new Vector2(0,0); 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void StartMiniGame(float WeightOfObject)
     {
 
-
-      foreach (var item in new RangeInt[10])
+      foreach (var item in new RangeInt[5])
       {
       Vector2 HeightOfProgressbar =  ProgressBar.rectTransform.sizeDelta;
       Vector2 ProgressbarPosition = ProgressBar.rectTransform.position;
@@ -45,9 +35,8 @@ public class FishingMiniGame : MonoBehaviour
       UnityEngine.Debug.Log(RandomSpawn);
       Quaternion spawnRotation = Quaternion.identity; 
       Vector3 BlockLocation = new Vector3(0,RandomSpawn,0);
-      GameObject Bar =  Instantiate(BlockerBar);
-      //Bar.GetComponent<Blocker>().Owner = this.GameObject;
-      Bar.transform.SetParent(MainProgressBar.transform, true);
+      GameObject Bar =  Instantiate(BlockerBar,MainProgressBar.transform);
+      //Bar.transform.SetParent(MainProgressBar.transform, true);
       Bar.transform.localPosition = BlockLocation;
       }
       
@@ -56,9 +45,7 @@ public class FishingMiniGame : MonoBehaviour
     void FixedUpdate()
     {
 
-    
   
-
       if (DoneFishing) return;
 
       if (Input.GetMouseButtonDown(0))
