@@ -22,7 +22,7 @@ public class TestInventory : MonoBehaviour
                 var items = InventoryManager.Instance.GetInventory(InventoryManager.InventoryType.Fish);
                 foreach (var item in items)
                 {
-                    if (item.ItemType == fish1)
+                    if (item.item == fish1)
                     {
                         InventoryManager.Instance.RemoveItem(InventoryManager.InventoryType.Fish, item);
                         break;
@@ -34,7 +34,7 @@ public class TestInventory : MonoBehaviour
                 var items = InventoryManager.Instance.GetInventory(InventoryManager.InventoryType.Fish);
                 foreach (var item in items)
                 {
-                    if (item.ItemType == fish2)
+                    if (item.item == fish2)
                     {
                         InventoryManager.Instance.RemoveItem(InventoryManager.InventoryType.Fish, item);
                         break;
@@ -46,7 +46,7 @@ public class TestInventory : MonoBehaviour
                 var items = InventoryManager.Instance.GetInventory(InventoryManager.InventoryType.Fish);
                 foreach (var item in items)
                 {
-                    if (item.ItemType == fish3)
+                    if (item.item == fish3)
                     {
                         InventoryManager.Instance.RemoveItem(InventoryManager.InventoryType.Fish, item);
                         break;

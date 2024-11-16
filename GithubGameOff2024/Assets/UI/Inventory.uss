@@ -1,271 +1,285 @@
-.Container {
+.container {
     flex-grow: 1;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
-.InventoryContainer {
+.inventory-container {
     flex-grow: 1;
     width: 90%;
-    height: 50%;
+    height: 70%;
     max-width: 90%;
-    max-height: 75%;
+    max-height: 90%;
     margin: 0;
-    padding: 15px;
-    background-color: rgb(63, 29, 0);
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    border-width: 2px;
-    border-color: rgb(213, 184, 149);
+    padding: 24px;
+    background-color: rgb(95, 52, 14);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border-width: 6px;
+    border-color: rgb(243, 214, 179);
+    background-image: url("project://database/Assets/Sprites/ui-background-placeholder.jpg?fileID=2800000&guid=b73f7e2b8a202ae479b05646ccd7aa20&type=3#ui-background-placeholder");
 }
 
-.InventoryView {
+.inventory-view {
     -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
     font-size: 48px;
     flex-grow: 1;
     flex-align: center;
 }
 
-.InventoryTab {
+.inventory-tab {
     flex-direction: row;
     flex-grow: 1;
     height: 700px;
 }
 
-.TabContainer {
+.tab-container {
     flex-direction: row;
     flex-grow: 1;
-    height: 100%;
+    min-height: 800px;
     justify-content: space-between;
-    padding: 10px;
+    padding: 16px;
     align-items: center;
     align-self: auto;
-    min-height: 700px;
     width: 100%;
 }
 
-.SlotContainer {
+.slot-container {
     background-color: rgba(0, 0, 0, 0.2);
     flex-direction: row;
     flex-wrap: wrap;
     width: 70%;
-    align-content: flex-start;
+    align-content: center;
     overflow: hidden;
-    border-radius: 6px;
-    padding: 8px;
+    border-radius: 20px;
+    padding: 24px;
     justify-content: center;
     align-items: center;
-    height: 75%;
+    height: 78%;
     align-self: flex-start;
+    border-width: 4px;
+    border-color: rgba(243, 214, 179, 0.4);
 }
 
-.DescriptionContainer {
-    background-color: rgb(193, 164, 129);
+.description-container {
+    background-color: rgb(203, 174, 139);
     width: 30%;
-    height: 75%;
-    border-radius: 6px;
+    height: 78%;
+    border-radius: 20px;
     margin-left: 1%;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
-    padding: 10px;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.15);
+    padding: 16px;
     align-items: flex-start;
     align-self: flex-start;
+    border-width: 4px;
+    border-color: rgba(243, 214, 179, 0.4);
 }
 
-.Slot {
-    width: 128px;
-    height: 128px;
-    margin: 4px;
-    background-color: rgb(213, 184, 149);
-    border-radius: 6px;
+.slot {
+    width: 130px;
+    height: 130px;
+    margin: 8px;
+    background-color: rgb(243, 214, 179);
+    border-radius: 16px;
     flex-shrink: 0;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    border-width: 3px;
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
-.SlotIcon {
-    padding: 12px;
+.slot:hover {
+    scale: 1.1;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    rotate: 2deg;
+}
+
+.slot-icon {
+    padding: 16px;
     flex-shrink: 0;
     flex-grow: 1;
-    opacity: 0.9;
+    opacity: 0.95;
 }
 
-.SlotIcon:hover {
+.slot-icon:hover {
     opacity: 1;
 }
 
-.ItemName {
+.item-name {
     -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
-    font-size: 48px;
-    color: rgb(255, 255, 255);
-    margin: 12px;
+    -unity-font-style: bold;
+    font-size: 36px;
+    margin: 16px;
+    margin-bottom: 12px;
+    color: rgb(255, 246, 229);
     -unity-text-align: middle-center;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.ItemDescription {
+.item-description {
     -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
-    font-size: 24px;
-    color: rgb(255, 255, 255);
-    margin: 12px;
+    font-size: 28px;
+    margin: 16px;
+    margin-bottom: 12px;
     white-space: normal;
+    color: rgb(253, 240, 221);
     -unity-text-align: middle-left;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    line-height: 1.5;
 }
 
-.ItemWeight {
+.item-weight {
     -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
-    font-size: 24px;
-    color: rgb(233, 204, 169);
-    margin: 6px 12px;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    font-size: 52px;
+    color: rgb(229, 213, 191);
+    margin: 6px 0;
+    padding: 8px 16px;
+    background-color: rgba(0, 0, 0, 0.12);
+    border-radius: 12px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-.ItemRarity {
+.item-rarity {
     -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
-    font-size: 24px;
-    color: rgb(233, 204, 169);
-    margin: 6px 12px;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    font-size: 52px;
+    color: rgb(229, 213, 191);
+    margin: 6px 0;
+    padding: 8px 16px;
+    background-color: rgba(0, 0, 0, 0.12);
+    border-radius: 12px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-.ItemValue {
+.item-value {
     -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
-    font-size: 24px;
-    color: rgb(233, 204, 169);
-    margin: 6px 12px;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    font-size: 52px;
+    color: rgb(229, 213, 191);
+    margin: 6px 0;
+    padding: 8px 16px;
+    background-color: rgba(0, 0, 0, 0.12);
+    border-radius: 12px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-.DescriptionLabelsContainer {
+.description-labels-container {
     width: 100%;
 }
 
 .selected {
-    border-width: 2px;
-    border-color: rgb(255, 215, 0);
-    border-radius: 4px;
-    background-color: rgba(255, 215, 0, 0.1);
+    border-width: 4px;
+    border-color: rgb(255, 223, 89);
+    border-radius: 16px;
+    background-color: rgba(255, 223, 89, 0.15);
 }
 
 .description-slot {
-    padding: 15px;
-    background-color: rgba(44, 33, 28, 0.85);
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    background-color: rgba(54, 43, 38, 0.9);
+    border-radius: 24px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
     width: 100%;
     height: 100%;
 }
 
-.description-container {
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
-    transition: all 0.2s ease-in-out;
-}
-
-.item-name {
-    -unity-font-style: bold;
-    font-size: 48px;
-    margin-bottom: 8px;
-    color: rgb(255, 236, 209);
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-}
-
-.item-description {
-    margin-bottom: 15px;
-    white-space: normal;
-    color: rgb(233, 220, 201);
-    line-height: 1.4;
-    font-size: 48px;
-}
-
-.item-weight {
-    margin: 4px 0;
-    padding: 4px 8px;
-    background-color: rgba(0, 0, 0, 0.15);
-    border-radius: 4px;
-    color: rgb(209, 193, 171);
-    font-size: 48px;
-}
-
-.item-rarity {
-    margin: 4px 0;
-    padding: 4px 8px;
-    background-color: rgba(0, 0, 0, 0.15);
-    border-radius: 4px;
-    color: rgb(209, 193, 171);
-    font-size: 48px;
-}
-
-.item-value {
-    margin: 4px 0;
-    padding: 4px 8px;
-    background-color: rgba(0, 0, 0, 0.15);
-    border-radius: 4px;
-    color: rgb(209, 193, 171);
-    font-size: 48px;
-}
-
 .rarity-common {
-    border-left-color: rgb(226, 226, 226);
-    border-left-width: 3px;
-    background-color: rgba(226, 226, 226, 0.05);
+    border-left-width: 6px;
 }
 
 .rarity-uncommon {
-    border-left-color: rgb(144, 238, 144);
-    border-left-width: 3px;
-    background-color: rgba(144, 238, 144, 0.05);
+    border-left-width: 6px;
 }
 
 .rarity-rare {
-    border-left-color: rgb(147, 147, 255);
-    border-left-width: 3px;
-    background-color: rgba(147, 147, 255, 0.05);
+    border-left-width: 6px;
+}
+
+.rarity-common {
+    border-left-color: rgb(236, 236, 236);
+    background-color: rgba(236, 236, 236, 0.08);
+}
+
+.rarity-uncommon {
+    border-left-color: rgb(164, 255, 164);
+    background-color: rgba(164, 255, 164, 0.08);
+}
+
+.rarity-rare {
+    border-left-color: rgb(167, 167, 255);
+    background-color: rgba(167, 167, 255, 0.08);
 }
 
 .unity-tab-view {
-    border-radius: 8px;
-    padding: 8px;
+    border-radius: 24px;
+    padding: 12px;
 }
 
 .unity-tab-view__header-container {
-    margin-left: 10px;
+    margin-left: 16px;
 }
 
 .unity-tab__header {
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 16px;
-    border-width: 8px;
-    border-color: rgb(209, 193, 171);
-    padding: 10px;
-    margin: 4px;
-    color: rgb(209, 193, 171);
-    font-size: 48px;
+    background-color: rgb(58, 47, 40);
+    border-radius: 24px;
+    border-width: 4px;
+    border-color: rgb(229, 213, 191);
+    padding: 16px 32px;
+    margin: 6px;
+    color: rgb(229, 213, 191);
+    font-size: 52px;
     -unity-font-style: bold;
+    transition: all 0.2s ease-out;
 }
 
 .unity-tab__header:hover {
-    background-color: rgba(233, 220, 201, 0.1);
+    background-color: rgba(253, 240, 221, 0.15);
+    scale: 1.05;
+    rotate: 1deg;
 }
 
 .unity-tab__header--selected {
-    background-color: rgba(233, 220, 201, 0.15);
-    border-bottom-width: 2px;
-    border-bottom-color: rgb(233, 220, 201);
+    background-color: rgba(253, 240, 221, 0.3);
+    border-bottom-width: 6px;
+    border-bottom-color: rgb(253, 240, 221);
+    scale: 1.1;
+    rotate: -1deg;
 }
 
 .unity-tab__content {
-    background-color: rgba(0, 0, 0, 0.5);
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    padding: 16px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    padding: 24px;
 }
 
 .unity-tab-view__tab-strip {
-    padding-left: 10;
-    background-color: rgba(0, 0, 0, 0.3);
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
+    padding-left: 16px;
+    background-color: rgba(0, 0, 0, 0.25);
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+.inventory-header {
+    -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
+    color: rgb(255, 255, 255);
+    -unity-text-align: middle-center;
+    font-size: 64px;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+    margin-bottom: 20px;
+    letter-spacing: 3px;
+}
+
+.description-header {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.description-icon {
+    width: 128px;
+    height: 128px;
+    margin-right: 16px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    -unity-background-scale-mode: scale-to-fit;
 }

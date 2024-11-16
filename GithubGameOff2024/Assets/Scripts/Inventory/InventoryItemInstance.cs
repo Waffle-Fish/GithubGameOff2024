@@ -3,17 +3,17 @@ using UnityEngine;
 
 public class InventoryItemInstance
 {
-    public InventoryItem ItemType;
+    public InventoryItem item;
     public float weight;
     public float value;
     public System.Guid ItemGUID;
+    //!TODO: Remove rarity since it is already in InventoryItem
     public InventoryItemRarity rarity;
     public InventoryItemInstance(InventoryItem item)
     {
-        this.ItemType = item;
+        this.item = item;
         this.weight = item.weight;
         this.value = item.value;
-        this.rarity = item.rarity;
         this.ItemGUID = System.Guid.NewGuid();
     }
 }
@@ -22,7 +22,7 @@ public class FishInstance : InventoryItemInstance
     public FishInstance(InventoryItem item) : base(item)
     {
 
-        this.ItemType = item;
+        this.item = item;
         // Randomize weight based on rarity
         switch (item.rarity)
         {

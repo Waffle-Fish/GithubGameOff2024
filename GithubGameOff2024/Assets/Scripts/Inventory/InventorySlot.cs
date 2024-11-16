@@ -18,8 +18,8 @@ public class InventorySlot : VisualElement
         Icon = new Image();
         Add(Icon);
 
-        Icon.AddToClassList("SlotIcon");
-        AddToClassList("Slot");
+        Icon.AddToClassList("slot-icon");
+        AddToClassList("slot");
 
         this.RegisterCallback<ClickEvent>(OnSlotClicked);
     }
@@ -37,10 +37,10 @@ public class InventorySlot : VisualElement
         }
     }
 
-    public void HoldItem(InventoryItemInstance item)
+    public void HoldItem(InventoryItemInstance itemInstance)
     {
-        Icon.sprite = item.ItemType.itemIcon;
-        ItemGUID = item.ItemGUID;
+        Icon.sprite = itemInstance.item.itemIcon;
+        ItemGUID = itemInstance.ItemGUID;
     }
     public void ClearItem()
     {
