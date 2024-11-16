@@ -1,15 +1,11 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Scripting;
 using UnityEngine.UIElements;
 
 public class InventorySlot : VisualElement
 {
     #region UXML
-    [Preserve]
     public new class UxmlFactory : UxmlFactory<InventorySlot, UxmlTraits> { }
-
-    [Preserve]
     public new class UxmlTraits : VisualElement.UxmlTraits { }
     #endregion
     private InventoryUIManager _inventoryUIManager;

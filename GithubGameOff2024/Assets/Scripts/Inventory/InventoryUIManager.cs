@@ -126,6 +126,18 @@ public class InventoryUIManager : MonoBehaviour
         if (item == null)
         {
             Debug.Log("item is null");
+            if (slot.parent == fishInventoryContainer)
+            {
+                fishDescriptionSlot.Q<DescriptionSlot>().ClearDetails();
+            }
+            else if (slot.parent == toolsInventoryContainer)
+            {
+                toolsDescriptionSlot.Q<DescriptionSlot>().ClearDetails();
+            }
+            else if (slot.parent == trinketsInventoryContainer)
+            {
+                trinketsDescriptionSlot.Q<DescriptionSlot>().ClearDetails();
+            }
             return;
         }
         if (slot.parent == fishInventoryContainer)
