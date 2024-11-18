@@ -16,7 +16,9 @@ public class InventoryItemInstance
         this.value = item.value;
         this.ItemGUID = System.Guid.NewGuid();
     }
-}
+} 
+
+[System.Serializable]
 public class FishInstance : InventoryItemInstance
 {
     public FishInstance(InventoryItem item) : base(item)

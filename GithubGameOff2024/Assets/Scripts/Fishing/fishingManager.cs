@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.InputSystem.iOS;
 using UnityEngine.UIElements;
+using UnityEditor.SearchService;
 
 
 public class fishingManager : MonoBehaviour
@@ -148,7 +149,7 @@ public class fishingManager : MonoBehaviour
     bool CheckIfCanFish()
     {
         if ( CastingRayCast.point.y <= HeightOfWater ) return true;
-
+        
         return false;
         
 
@@ -158,6 +159,7 @@ public class fishingManager : MonoBehaviour
     void StartFishingMiniGame(){
         CurrentFishingMiniGame = Instantiate(FishingMiniGame);
         CurrentAction = Actions.Fishing;
+
         Debug.Log("we are fishingggggggg!!!!!!!!!");
         
     }

@@ -11,9 +11,9 @@ public class TestDialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (InputManager.Instance.IsInteractButtonPressed())
-        {
-            dialogueTrigger.TriggerDialogue();
-        }
+       /// if (InputManager.Instance.IsInteractButtonPressed())
+        //{
+          //  dialogueTrigger.TriggerDialogue();
+       // }
     }
 }

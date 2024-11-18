@@ -491,9 +491,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1166907697}
   FishingIndicator: {fileID: 4667581328360241479, guid: af029951c0c14fa49b856c8aaaa71624, type: 3}
-  FishingMiniGame: {fileID: 401675667248924029, guid: 7566edf17f7331c49b14e41df00be553, type: 3}
+  FishingMiniGame: {fileID: 5671354132895730767, guid: 9ad570d0eb960ad479631469cd5b859a, type: 3}
+  CurrentFishingMiniGame: {fileID: 5671354132895730767, guid: 9ad570d0eb960ad479631469cd5b859a, type: 3}
   CurrentAction: 0
-  HeightOfWater: -1
+  HeightOfWater: 0
   CasttingDistance: 0
   CasttingSpeed: 3.07
   TempHeight: {x: 0, y: 20, z: 0}
@@ -735,7 +736,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 828f6e5ae21f2144bab0c0ff2f2f7953, type: 2}
+  - {fileID: 2100000, guid: d575d6863a7060349b3d3992ae3f6646, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
