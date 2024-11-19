@@ -1,3 +1,4 @@
+using System;
 using System.Net.Sockets;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -17,7 +18,7 @@ public class InventoryUIManager : MonoBehaviour
     void Awake()
     {
         InventoryManager.Instance.OnInventoryChanged += OnInventoryChanged;
-        CurrencyManager.instance.AddCurrency(43);
+        CurrencyManager.Instance.AddCurrency(43);
 
         uiDocument = gameObject.GetComponent<UIDocument>();
         if (uiDocument != null)
@@ -36,7 +37,7 @@ public class InventoryUIManager : MonoBehaviour
             trinketsDescriptionSlot = root.Q<VisualElement>("TrinketDescriptionSlot");
 
             coinLabel = root.Q<Label>("CoinAmount");
-            coinLabel.text = CurrencyManager.instance.amount.ToString();
+            coinLabel.text = CurrencyManager.Instance.GetCurrency().ToString();
         }
         else
         {
@@ -46,6 +47,30 @@ public class InventoryUIManager : MonoBehaviour
     void OnDestroy()
     {
         InventoryManager.Instance.OnInventoryChanged -= OnInventoryChanged;
+    }
+    void PopulateInventory()
+    {
+        foreach (InventoryItemInstance item in InventoryManager.Instance.GetInventory(InventoryManager.InventoryType.Fish))
+        {
+            if (fishInventoryContainer.Q<InventorySlot>().ItemGUID == System.Guid.Empty)
+            {
+                fishInventoryContainer.Q<InventorySlot>().HoldItem(item);
+            }
+        }
+        foreach (InventoryItemInstance item in InventoryManager.Instance.GetInventory(InventoryManager.InventoryType.Tools))
+        {
+            if (toolsInventoryContainer.Q<InventorySlot>().ItemGUID == System.Guid.Empty)
+            {
+                toolsInventoryContainer.Q<InventorySlot>().HoldItem(item);
+            }
+        }
+        foreach (InventoryItemInstance item in InventoryManager.Instance.GetInventory(InventoryManager.InventoryType.Trinkets))
+        {
+            if (trinketsInventoryContainer.Q<InventorySlot>().ItemGUID == System.Guid.Empty)
+            {
+                trinketsInventoryContainer.Q<InventorySlot>().HoldItem(item);
+            }
+        }
     }
 
 

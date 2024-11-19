@@ -1,62 +1,75 @@
 using UnityEngine;
 
-
 public class InventoryItemInstance
 {
-    public InventoryItem item;
-    public float weight;
-    public float value;
-    public System.Guid ItemGUID;
-    //!TODO: Remove rarity since it is already in InventoryItem
-    public InventoryItemRarity rarity;
-    public InventoryItemInstance(InventoryItem item)
+    public InventoryItem item { get; protected set; }
+    public float weight { get; protected set; }
+    public int value { get; protected set; }
+    public System.Guid ItemGUID { get; private set; }
+
+    protected InventoryItemInstance(InventoryItem item)
     {
         this.item = item;
+        this.ItemGUID = System.Guid.NewGuid();
+        InitializeInstance();
+    }
+
+    protected virtual void InitializeInstance()
+    {
         this.weight = item.weight;
         this.value = item.value;
-        this.ItemGUID = System.Guid.NewGuid();
     }
 }
+
 public class FishInstance : InventoryItemInstance
 {
     public FishInstance(InventoryItem item) : base(item)
     {
+    }
 
-        this.item = item;
-        // Randomize weight based on rarity
-        switch (item.rarity)
+    protected override void InitializeInstance()
+    {
+        // Calculate randomized weight based on rarity
+        weight = item.rarity switch
         {
-            case InventoryItemRarity.Common:
-                this.weight = Random.Range(0.5f, 2f);
-                break;
-            case InventoryItemRarity.Uncommon:
-                this.weight = Random.Range(1.5f, 4f);
-                break;
-            case InventoryItemRarity.Rare:
-                this.weight = Random.Range(3f, 7f);
-                break;
-        }
+            InventoryItemRarity.Common => Random.Range(0.5f, 2f),
+            InventoryItemRarity.Uncommon => Random.Range(1.5f, 4f),
+            InventoryItemRarity.Rare => Random.Range(3f, 7f),
+            _ => 1f
+        };
+
         // Calculate value based on weight and rarity multiplier
-        float rarityMultiplier = 1f;
-        switch (item.rarity)
+        float rarityMultiplier = item.rarity switch
         {
-            case InventoryItemRarity.Common:
-                rarityMultiplier = 2f;
-                break;
-            case InventoryItemRarity.Uncommon:
-                rarityMultiplier = 5f;
-                break;
-            case InventoryItemRarity.Rare:
-                rarityMultiplier = 10f;
-                break;
-        }
-        // Max possible values:
-        // Common: 2kg * 2 = 4 coins
-        // Uncommon: 4kg * 5 = 20 coins  
-        // Rare: 7kg * 10 = 70 coins
-        this.value = this.weight * rarityMultiplier;
+            InventoryItemRarity.Common => 2f,
+            InventoryItemRarity.Uncommon => 5f,
+            InventoryItemRarity.Rare => 10f,
+            _ => 1f
+        };
+
+        value = (int)(weight * rarityMultiplier);
     }
 }
+
+[System.Serializable]
+public class ShopItem : InventoryItemInstance
+{
+    public bool isPurchasable { get; set; } = true;
+    public int quantity { get; set; } = 1;
+    public float priceMultiplier { get; set; } = 1f;
+
+    public ShopItem(InventoryItem item, float priceMultiplier = 1f) : base(item)
+    {
+        this.priceMultiplier = priceMultiplier;
+    }
+
+    protected override void InitializeInstance()
+    {
+        base.InitializeInstance();
+        value = (int)(value * priceMultiplier);
+    }
+}
+
 public enum InventoryItemRarity
 {
     Common,

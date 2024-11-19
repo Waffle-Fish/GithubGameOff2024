@@ -6,9 +6,10 @@ public class InventoryItem : ScriptableObject
     public string description;
     public InventoryItemRarity rarity;
     public float weight;
-    public float value;
+    public int value;
     public Sprite itemIcon;
     public ItemType itemType;
+    public int defaultQuantity;
 }
 public enum ItemType
 {
