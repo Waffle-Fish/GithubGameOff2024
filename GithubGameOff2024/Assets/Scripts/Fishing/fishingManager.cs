@@ -60,7 +60,15 @@ public class fishingManager : MonoBehaviour
 
     private void Fishing(){
 
-        if ( CurrentAction == Actions.Fishing) return;
+        if ( CurrentAction == Actions.Fishing){
+            if (!CurrentFishingMiniGame)
+            {
+                CurrentAction = Actions.Idle;
+            }
+            return;
+        }
+
+         
 
         bool IsFishing = InputManager.Instance.GetFishing();
         if (!IsFishing) 
@@ -95,6 +103,8 @@ public class fishingManager : MonoBehaviour
             break;
 
         case Actions.Fishing:
+
+     
             break;
         case Actions.DoneFishing:
             break;
@@ -109,6 +119,7 @@ public class fishingManager : MonoBehaviour
     }
 
     private void Casting(){
+
         float NewDistance = CasttingSpeed * Time.fixedDeltaTime;
         CurrentCastingDistance += transform.forward * NewDistance;
         if (Physics.Raycast(transform.position + CurrentCastingDistance  + TempHeight, transform.TransformDirection(Vector3.down), out  CastingRayCast, Mathf.Infinity))
@@ -159,7 +170,6 @@ public class fishingManager : MonoBehaviour
     void StartFishingMiniGame(){
         CurrentFishingMiniGame = Instantiate(FishingMiniGame);
         CurrentAction = Actions.Fishing;
-
         Debug.Log("we are fishingggggggg!!!!!!!!!");
         
     }

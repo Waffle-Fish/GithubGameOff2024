@@ -20,7 +20,7 @@ public class FishingMiniGame : MonoBehaviour
     };
     public float timerDuration = 2f;
 
-
+    public InventoryManager CurrentInventory;
     public FishInstance CurrentFish;
     public GameObject MainProgressBar;
     public Image ProgressBar;
@@ -134,12 +134,9 @@ public class FishingMiniGame : MonoBehaviour
 
         while (timeRemaining > 0)
         {
-           UnityEngine.Debug.Log($"Time remaining: {timeRemaining:F2} seconds");
             yield return new WaitForSeconds(1f); // Wait for 1 second
             timeRemaining -= 1f;
         }
-
-       UnityEngine. Debug.Log("Timer ended!");
        RedBarCanProgress = true;
     }
 
@@ -147,9 +144,16 @@ public class FishingMiniGame : MonoBehaviour
 
   void EndMiniGame(bool DidWinMiniGame = false)
   {
-    if (!DidWinMiniGame) Destroy(gameObject);
+    if (!DidWinMiniGame) 
+    {
+      Destroy(gameObject);
+      return ;
 
+    };
+    CurrentInventory.AddItem(InventoryManager.InventoryType.Fish, CurrentFish);
     UnityEngine.Debug.Log("You Won!!");
+    Destroy(gameObject);
+    
 
     /// add fish to inventory
 
