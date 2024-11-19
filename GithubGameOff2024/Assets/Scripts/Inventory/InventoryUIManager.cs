@@ -11,11 +11,13 @@ public class InventoryUIManager : MonoBehaviour
     private VisualElement fishDescriptionSlot;
     private VisualElement toolsDescriptionSlot;
     private VisualElement trinketsDescriptionSlot;
+
+    private Label coinLabel;
     // Start is called before the first frame update
     void Awake()
     {
         InventoryManager.Instance.OnInventoryChanged += OnInventoryChanged;
-
+        CurrencyManager.instance.AddCurrency(43);
 
         uiDocument = gameObject.GetComponent<UIDocument>();
         if (uiDocument != null)
@@ -32,6 +34,9 @@ public class InventoryUIManager : MonoBehaviour
             fishDescriptionSlot = root.Q<VisualElement>("FishDescriptionSlot");
             toolsDescriptionSlot = root.Q<VisualElement>("ToolDescriptionSlot");
             trinketsDescriptionSlot = root.Q<VisualElement>("TrinketDescriptionSlot");
+
+            coinLabel = root.Q<Label>("CoinAmount");
+            coinLabel.text = CurrencyManager.instance.amount.ToString();
         }
         else
         {

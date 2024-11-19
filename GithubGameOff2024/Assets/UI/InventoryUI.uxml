@@ -2,7 +2,13 @@
     <Style src="project://database/Assets/UI/Inventory.uss?fileID=7433441132597879392&amp;guid=5f10b64da6d4ada438eb17cd63fed364&amp;type=3#Inventory" />
     <ui:VisualElement name="Container" class="container">
         <ui:VisualElement name="Inventory" class="inventory-container">
-            <ui:Label text="Inventory" name="Header" class="inventory-header" />
+            <ui:VisualElement name="HeaderContainer" class="header-container">
+                <ui:Label text="Inventory" name="Header" class="inventory-header" />
+                <ui:VisualElement name="CoinDisplay" class="coin-display">
+                    <ui:VisualElement name="CoinIcon" class="coin-icon" />
+                    <ui:Label text="0" name="CoinAmount" class="coin-amount" />
+                </ui:VisualElement>
+            </ui:VisualElement>
             <ui:TabView name="InventoryView" class="inventory-view">
                 <ui:Tab label="Fish" name="Fish" view-data-key="FishTab" class="inventory-tab">
                     <ui:VisualElement name="TabContainer" class="tab-container">

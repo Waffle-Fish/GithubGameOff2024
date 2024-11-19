@@ -13,9 +13,9 @@ public class PlayerInteract : MonoBehaviour
 
     private void Update()
     {
-        if(InputManager.Instance.WasInteractButtonPressed())
+        if (InputManager.Instance.WasInteractButtonPressed())
         {
-            if(interactable != null)
+            if (interactable != null)
             {
                 interactable.Interact();
             }
@@ -25,7 +25,7 @@ public class PlayerInteract : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         IInteractable newInteract;
-        if(other.TryGetComponent(out newInteract))
+        if (other.TryGetComponent(out newInteract))
         {
             interactable = newInteract;
             interactIcon.gameObject.SetActive(true);
@@ -38,7 +38,7 @@ public class PlayerInteract : MonoBehaviour
         IInteractable newInteract;
         if (other.TryGetComponent(out newInteract))
         {
-            if(newInteract == interactable)
+            if (newInteract == interactable)
             {
                 interactable = null;
                 interactIcon.gameObject.SetActive(false);

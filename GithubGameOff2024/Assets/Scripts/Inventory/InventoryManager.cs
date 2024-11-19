@@ -37,11 +37,11 @@ public class InventoryManager : MonoBehaviour
 
 
     public List<InventoryItemInstance> FishInventory = new List<InventoryItemInstance>();
-    public int maxFish = 24;
+    public int maxFish = 28;
     public List<InventoryItemInstance> ToolsInventory = new List<InventoryItemInstance>();
     public int maxTools = 4;
     public List<InventoryItemInstance> TrinketsInventory = new List<InventoryItemInstance>();
-    public int maxTrinkets = 24;
+    public int maxTrinkets = 28;
 
     public enum InventoryType
     {

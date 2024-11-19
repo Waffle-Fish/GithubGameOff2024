@@ -18,7 +18,6 @@
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     border-width: 6px;
     border-color: rgb(243, 214, 179);
-    background-image: url("project://database/Assets/Sprites/ui-background-placeholder.jpg?fileID=2800000&guid=b73f7e2b8a202ae479b05646ccd7aa20&type=3#ui-background-placeholder");
 }
 
 .inventory-view {
@@ -219,7 +218,7 @@
 }
 
 .unity-tab__header {
-    background-color: rgb(58, 47, 40);
+    background-color: rgba(0, 0, 0, 0.2);
     border-radius: 24px;
     border-width: 4px;
     border-color: rgb(229, 213, 191);
@@ -282,4 +281,48 @@
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 12px;
     -unity-background-scale-mode: scale-to-fit;
+}
+
+.header-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.coin-display {
+    flex-direction: row;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 8px 16px;
+    border-radius: 16px;
+    border-width: 3px;
+    border-color: rgb(255, 223, 89);
+}
+
+.coin-icon {
+    width: 48px;
+    height: 48px;
+    background-image: resource('Assets/Sprites/icons/coin-icon-placeholder.png'); 
+    -unity-background-scale-mode: scale-to-fit;
+    margin-right: 8px;
+}
+
+.coin-amount {
+    -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
+    color: rgb(255, 223, 89);
+    font-size: 42px;
+    -unity-font-style: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.tab-header-container {
+    position: absolute;
+    right: 24px;
+    top: 12px;
+}
+
+.unity-tab-view__header-container {
+    margin-right: 200px;
 }
