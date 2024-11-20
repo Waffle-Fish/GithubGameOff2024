@@ -119,6 +119,96 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &41462378
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 41462380}
+  - component: {fileID: 41462379}
+  m_Layer: 0
+  m_Name: Shop1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &41462379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41462378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65f811cbb870c164db088e57423dd932, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shopConfig: {fileID: 11400000, guid: 4dc31b0b7d762ad48b158429df887413, type: 2}
+--- !u!4 &41462380
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41462378}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 632.82886, y: 187.21255, z: 806.91034}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &280159653
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 280159655}
+  - component: {fileID: 280159654}
+  m_Layer: 0
+  m_Name: Shop2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &280159654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 280159653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65f811cbb870c164db088e57423dd932, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shopConfig: {fileID: 11400000, guid: c9f437f1cbb69414089c8cf26ae29f8e, type: 2}
+--- !u!4 &280159655
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 280159653}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 632.82886, y: 187.21255, z: 806.91034}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &999036795
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,6 +286,10 @@ MonoBehaviour:
   fish1: {fileID: 11400000, guid: a92254a7e83e84f1ab90049a094e47fc, type: 2}
   fish2: {fileID: 11400000, guid: efc994febea08492491db6f48079ff9f, type: 2}
   fish3: {fileID: 11400000, guid: a26ca28adbc074b20892e5e8aba1a159, type: 2}
+  shopConfig: {fileID: 11400000, guid: 4dc31b0b7d762ad48b158429df887413, type: 2}
+  UIManager: {fileID: 1062733844}
+  shopManager: {fileID: 41462379}
+  shopManager2: {fileID: 280159654}
 --- !u!4 &1062733843
 Transform:
   m_ObjectHideFlags: 0
@@ -573,29 +667,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2054023162}
-  - component: {fileID: 2054023161}
   - component: {fileID: 2054023163}
   - component: {fileID: 2054023164}
   m_Layer: 0
-  m_Name: Shop
+  m_Name: ShopUIManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2054023161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2054023160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65f811cbb870c164db088e57423dd932, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shopConfig: {fileID: 11400000, guid: 4dc31b0b7d762ad48b158429df887413, type: 2}
 --- !u!4 &2054023162
 Transform:
   m_ObjectHideFlags: 0
@@ -652,3 +732,5 @@ SceneRoots:
   - {fileID: 1062733843}
   - {fileID: 999036797}
   - {fileID: 2054023162}
+  - {fileID: 41462380}
+  - {fileID: 280159655}

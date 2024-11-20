@@ -1,5 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Inventory.uss?fileID=7433441132597879392&amp;guid=5f10b64da6d4ada438eb17cd63fed364&amp;type=3#Inventory" />
+    <Style src="project://database/Assets/UI/UIAnimations.uss?fileID=7433441132597879392&amp;guid=2ea762a4abedb42469ae103676d2ff64&amp;type=3#UIAnimations" />
     <ui:VisualElement name="Container" class="container">
         <ui:VisualElement name="Inventory" class="inventory-container">
             <ui:VisualElement name="HeaderContainer" class="header-container">
