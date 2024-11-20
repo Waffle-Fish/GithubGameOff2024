@@ -13,7 +13,7 @@ public class NPCTalkState : NPCState
     {
         base.EnterState();
         npc.agent.isStopped = true;
-        npc.dialogueManager.StartDialogue(npc.dialogue);
+        npc.dialogueManager.StartDialogue(npc.dialogue[npc.dialogueIndex]);
     }
 
     public override void ExitState()

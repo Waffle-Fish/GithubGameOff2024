@@ -7,7 +7,8 @@ public class NPC : MonoBehaviour, IInteractable
     public IInteractableNPC activity;
     public float maxRoamDistance = 20f;
     public NPCState pausedState;
-    public Dialogue dialogue;
+    public Dialogue[] dialogue;
+    public int dialogueIndex;
     public DialogueManager dialogueManager;
 
     public NPCStateMachine StateMachine { get; set; }
@@ -80,5 +81,11 @@ public class NPC : MonoBehaviour, IInteractable
     public bool Talk()
     {
         return dialogueManager.DisplayNextSentence();
+    }
+
+    public GameObject ShowTrinket()
+    {
+        dialogueIndex++;
+        return Interact();
     }
 }
