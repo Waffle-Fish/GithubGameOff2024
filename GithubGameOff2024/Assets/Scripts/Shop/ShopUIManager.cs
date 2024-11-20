@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
-using UnityEngine.Rendering;
 using System.Linq;
 using System.Collections;
 
@@ -25,19 +24,9 @@ public class ShopUIManager : MonoBehaviour
     private CurrencyManager _currencyManager;
 
 
-
-    private void Start()
+    private IEnumerator Start()
     {
         // Wait a frame to ensure ShopManager is initialized
-        StartCoroutine(InitializeAfterDelay());
-    }
-
-    private IEnumerator InitializeAfterDelay()
-    {
-        yield return null; // Wait one frame
-
-        root = GetComponent<UIDocument>().rootVisualElement;
-
         _playerInventory = InventoryManager.Instance;
         if (_playerInventory == null)
         {
@@ -51,6 +40,16 @@ public class ShopUIManager : MonoBehaviour
             Debug.LogError("CurrencyManager instance not found!");
             yield break;
         }
+        StartCoroutine(InitializeAfterDelay());
+    }
+
+    private IEnumerator InitializeAfterDelay()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        root = GetComponent<UIDocument>().rootVisualElement;
+
+
 
         _shopManager = GetComponent<ShopManager>();
         if (_shopManager == null)
@@ -98,9 +97,16 @@ public class ShopUIManager : MonoBehaviour
         foreach (var shopItem in availableItems)
         {
             var slot = new ShopSlot();
-            slot.SetItem(shopItem, shopItem.value);
+            slot.SetItem(shopItem);
             shopInventoryContainer.Add(slot);
             shopSlots[shopItem.ItemGUID] = slot;
+
+            // Add visual feedback for unpurchasable items
+            if (!_shopManager.CanPurchaseItem(shopItem) || _currencyManager.GetCurrency() < shopItem.value)
+            {
+                slot.AddToClassList("disabled");
+            }
+
             Debug.Log($"Added shop item: {shopItem.item.itemName}");
         }
     }
@@ -116,7 +122,7 @@ public class ShopUIManager : MonoBehaviour
         {
             var slot = new ShopSlot();
             // Show sell value instead of buy value for player items
-            slot.SetItem(item, item.value);
+            slot.SetItem(item);
             playerInventoryContainer.Add(slot);
             playerSlots[item.ItemGUID] = slot;
         }
@@ -138,11 +144,11 @@ public class ShopUIManager : MonoBehaviour
             var item = _shopManager.GetAvailableItems()
                 .FirstOrDefault(i => i.ItemGUID == slot.ItemGUID);
 
-            if (item != null && item.isPurchasable)
+            if (item != null)
             {
                 itemDescription.SetItemDetails(item);
                 buyButton.style.display =
-                    _currencyManager.GetCurrency() >= item.value
+                    _shopManager.CanPurchaseItem(item) && _currencyManager.GetCurrency() >= item.value
                     ? DisplayStyle.Flex
                     : DisplayStyle.None;
             }
@@ -167,6 +173,7 @@ public class ShopUIManager : MonoBehaviour
         {
             // UI will update via currency changed event
             UpdatePlayerInventory();
+            UpdateCoinDisplay();
 
             // Clear selection
             selectedSlot = null;
@@ -186,6 +193,7 @@ public class ShopUIManager : MonoBehaviour
         {
             // UI will update via currency changed event
             UpdatePlayerInventory();
+            UpdateCoinDisplay();
             PopulateShop(); // Refresh shop in case quantities changed
 
             // Clear selection

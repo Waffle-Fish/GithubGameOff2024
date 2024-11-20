@@ -5,6 +5,8 @@ public class InventoryItemInstance
     public InventoryItem item { get; protected set; }
     public float weight { get; protected set; }
     public int value { get; protected set; }
+    public int quantity { get; set; } = 1;
+
     public System.Guid ItemGUID { get; private set; }
 
     protected InventoryItemInstance(InventoryItem item)
@@ -18,6 +20,8 @@ public class InventoryItemInstance
     {
         this.weight = item.weight;
         this.value = item.value;
+        this.quantity = item.defaultQuantity;
+
     }
 }
 
@@ -55,7 +59,7 @@ public class FishInstance : InventoryItemInstance
 public class ShopItem : InventoryItemInstance
 {
     public bool isPurchasable { get; set; } = true;
-    public int quantity { get; set; } = 1;
+
     public float priceMultiplier { get; set; } = 1f;
 
     public ShopItem(InventoryItem item, float priceMultiplier = 1f) : base(item)
@@ -67,6 +71,7 @@ public class ShopItem : InventoryItemInstance
     {
         base.InitializeInstance();
         value = (int)(value * priceMultiplier);
+
     }
 }
 

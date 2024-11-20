@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class ProgressionShop : BaseShop
 {
@@ -12,7 +13,7 @@ public class ProgressionShop : BaseShop
 
     public override List<ShopItem> GetAvailableItems()
     {
-        return _shopItems;
+        return _shopItems.GetRange(0, Mathf.Min(_currentUnlockedIndex + 1, _shopItems.Count));
     }
 
     protected override void OnItemPurchased(ShopItem item)

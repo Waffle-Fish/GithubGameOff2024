@@ -59,9 +59,9 @@ public class ShopManager : MonoBehaviour
     {
         var shop = gameObject.AddComponent<QuantityShop>();
         shop.InitializeItems(items);
-        foreach (var kvp in quantities)
+        foreach (ShopItem item in items)
         {
-            ((QuantityShop)shop).SetItemQuantity(kvp.Key, kvp.Value);
+            shop.SetItemQuantity(item, item.quantity);
         }
         _currentShop = shop;
         Debug.Log($"Initialized QuantityShop with {items.Count} items");
@@ -95,5 +95,9 @@ public class ShopManager : MonoBehaviour
             return new List<ShopItem>();
         }
         return _currentShop.GetAvailableItems();
+    }
+    public bool CanPurchaseItem(ShopItem item)
+    {
+        return _currentShop.CanPurchaseItem(item);
     }
 }

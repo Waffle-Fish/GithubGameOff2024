@@ -17,6 +17,10 @@ public class ShopDescriptionSlot : VisualElement
     private VisualElement M_Icon;
     private Label M_Name;
     private Label M_Description;
+    private VisualElement M_StatsContainer;
+    private Label M_Rarity;
+    private Label M_Weight;
+    private Label M_Quantity;
     private VisualElement M_PriceTag;
     private Label M_Value;
 
@@ -40,6 +44,19 @@ public class ShopDescriptionSlot : VisualElement
         M_Description = new Label();
         M_Description.AddToClassList("shop-item-description");
 
+        // Create stats container
+        M_StatsContainer = new VisualElement();
+        M_StatsContainer.AddToClassList("stats-container");
+
+        M_Rarity = new Label();
+        M_Rarity.AddToClassList("item-stat");
+
+        M_Weight = new Label();
+        M_Weight.AddToClassList("item-stat");
+
+        M_Quantity = new Label();
+        M_Quantity.AddToClassList("item-stat");
+
         // Create price tag
         M_PriceTag = new VisualElement();
         M_PriceTag.AddToClassList("price-tag");
@@ -59,6 +76,10 @@ public class ShopDescriptionSlot : VisualElement
 
         M_Container.Add(M_IconContainer);
         M_Container.Add(M_Description);
+        M_Container.Add(M_StatsContainer);
+        M_StatsContainer.Add(M_Rarity);
+        M_StatsContainer.Add(M_Weight);
+        M_StatsContainer.Add(M_Quantity);
         M_Container.Add(M_PriceTag);
 
         Add(M_Container);
@@ -77,6 +98,9 @@ public class ShopDescriptionSlot : VisualElement
         M_Icon.style.backgroundImage = new StyleBackground(itemInstance.item.itemIcon);
         M_Name.text = itemInstance.item.name;
         M_Description.text = itemInstance.item.description;
+        M_Rarity.text = $"Rarity: {itemInstance.item.rarity}";
+        M_Weight.text = $"Weight: {itemInstance.item.weight:F1}";
+        M_Quantity.text = $"Quantity: {itemInstance.quantity}";
         M_Value.text = $"{itemInstance.value:F0}";
 
         // Add visual feedback for rarity
@@ -91,6 +115,9 @@ public class ShopDescriptionSlot : VisualElement
         M_Icon.style.backgroundImage = null;
         M_Name.text = "Select an item";
         M_Description.text = "No item selected";
+        M_Rarity.text = "--";
+        M_Weight.text = "--";
+        M_Quantity.text = "--";
         M_Value.text = "--";
 
         M_Container.RemoveFromClassList("rarity-common");

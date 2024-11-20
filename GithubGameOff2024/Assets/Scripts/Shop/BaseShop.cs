@@ -37,7 +37,6 @@ public abstract class BaseShop : MonoBehaviour, IShop
         return false;
     }
 
-    // Selling logic is now final and identical for all shops
     public bool SellItem(InventoryItemInstance item)
     {
         if (InventoryManager.Instance.RemoveItem(InventoryManager.InventoryType.Fish, item))

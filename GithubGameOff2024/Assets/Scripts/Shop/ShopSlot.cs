@@ -9,7 +9,6 @@ public class ShopSlot : VisualElement
 
     private ShopUIManager _shopUIManager;
     public Image Icon;
-    public Label PriceLabel;
     public System.Guid ItemGUID;
 
     public ShopSlot()
@@ -25,19 +24,6 @@ public class ShopSlot : VisualElement
         Icon.AddToClassList("slot-icon");
         container.Add(Icon);
 
-        // Create price tag
-        var priceTag = new VisualElement();
-        priceTag.AddToClassList("price-tag");
-
-        var coinIcon = new VisualElement();
-        coinIcon.AddToClassList("coin-icon");
-
-        PriceLabel = new Label("0");
-        PriceLabel.AddToClassList("price-amount");
-
-        priceTag.Add(coinIcon);
-        priceTag.Add(PriceLabel);
-        container.Add(priceTag);
 
         Add(container);
 
@@ -52,18 +38,16 @@ public class ShopSlot : VisualElement
         }
     }
 
-    public void SetItem(InventoryItemInstance itemInstance, int price)
+    public void SetItem(InventoryItemInstance itemInstance)
     {
         Icon.sprite = itemInstance.item.itemIcon;
         Debug.Log("Setting item " + itemInstance.ItemGUID);
         ItemGUID = itemInstance.ItemGUID;
-        PriceLabel.text = price.ToString();
     }
 
     public void ClearItem()
     {
         Icon.sprite = null;
         ItemGUID = System.Guid.Empty;
-        PriceLabel.text = "0";
     }
 }
