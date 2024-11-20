@@ -12,7 +12,11 @@ public class ShopManager : MonoBehaviour
     {
         InitializeShop();
     }
-
+    public void InitializeWithConfig(ShopConfiguration config)
+    {
+        shopConfig = config;
+        InitializeShop();
+    }
     private void InitializeShop()
     {
         if (shopConfig == null)

@@ -26,6 +26,12 @@ public class ShopUIManager : MonoBehaviour
 
     private IEnumerator Start()
     {
+        StartCoroutine(Initialize());
+        return null;
+    }
+
+    public IEnumerator Initialize()
+    {
         // Wait a frame to ensure ShopManager is initialized
         _playerInventory = InventoryManager.Instance;
         if (_playerInventory == null)
@@ -40,15 +46,10 @@ public class ShopUIManager : MonoBehaviour
             Debug.LogError("CurrencyManager instance not found!");
             yield break;
         }
-        StartCoroutine(InitializeAfterDelay());
-    }
 
-    private IEnumerator InitializeAfterDelay()
-    {
-        yield return new WaitForSeconds(0.1f);
+        yield return null; //wait for 1 frame
 
         root = GetComponent<UIDocument>().rootVisualElement;
-
 
 
         _shopManager = GetComponent<ShopManager>();
