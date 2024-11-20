@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
@@ -33,13 +34,8 @@ public class InputManager : MonoBehaviour
         return inputActions.Player.Move.ReadValue<Vector2>();
     }
 
-    public bool IsInteractButtonPressed() {
-        float val = inputActions.Player.Interact.ReadValue<float>();
-        return val == 1.0f;
+    public bool GetFishing(){
+        return  1.0f == inputActions.Player.Fish.ReadValue<float>();
     }
 
-    public bool WasInteractButtonPressed()
-    {
-        return inputActions.Player.Interact.WasPressedThisFrame();
-    }
 }

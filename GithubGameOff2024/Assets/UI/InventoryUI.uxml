@@ -1,0 +1,97 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Inventory.uss?fileID=7433441132597879392&amp;guid=5f10b64da6d4ada438eb17cd63fed364&amp;type=3#Inventory" />
+    <ui:VisualElement name="Container" class="container">
+        <ui:VisualElement name="Inventory" class="inventory-container">
+            <ui:Label text="Inventory" name="Header" class="inventory-header" />
+            <ui:TabView name="InventoryView" class="inventory-view">
+                <ui:Tab label="Fish" name="Fish" view-data-key="FishTab" class="inventory-tab">
+                    <ui:VisualElement name="TabContainer" class="tab-container">
+                        <ui:VisualElement name="FishSlotContainer" class="slot-container">
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="FishDescriptionSlot" enabled="true" view-data-key="FishDescriptionSlot" class="description-container">
+                            <DescriptionSlot />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:Tab>
+                <ui:Tab label="Tools" name="Tool" view-data-key="ToolTab" class="inventory-tab">
+                    <ui:VisualElement name="TabContainer" class="tab-container" style="width: 1656px;">
+                        <ui:VisualElement name="ToolSlotContainer" class="slot-container">
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="ToolDescriptionSlot" enabled="true" view-data-key="ToolDescriptionSlot" class="description-container">
+                            <DescriptionSlot />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:Tab>
+                <ui:Tab label="Trinkets" name="Trinkets" view-data-key="TrinketTab" class="inventory-tab">
+                    <ui:VisualElement name="TabContainer" class="tab-container">
+                        <ui:VisualElement name="TrinketSlotContainer" class="slot-container">
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                            <InventorySlot />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="TrinketDescriptionSlot" enabled="true" view-data-key="TrinketDescriptionSlot" class="description-container">
+                            <DescriptionSlot />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:Tab>
+            </ui:TabView>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

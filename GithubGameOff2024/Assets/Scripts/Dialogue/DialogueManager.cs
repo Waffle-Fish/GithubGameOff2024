@@ -9,18 +9,18 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
 
-    public Animator animator;
+    private Animator _animator;
     private bool _isDialogueComplete = true;
 
     void Start()
     {
         sentences = new Queue<string>();
-
+        _animator = GetComponent<Animator>();
     }
     public void StartDialogue(Dialogue dialogue)
     {
         _isDialogueComplete = false;
-        animator.SetBool("isOpen", true);
+        _animator.SetBool("isOpen", true);
         sentences.Clear();
         nameText.text = dialogue.name;
         foreach (string sentence in dialogue.sentences)
@@ -45,7 +45,7 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
-        animator.SetBool("isOpen", false);
+        _animator.SetBool("isOpen", false);
         _isDialogueComplete = true;
         Debug.Log("End of dialogue");
     }
