@@ -67,21 +67,16 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void OpenShop(ShopConfiguration shopConfig)
+    public void OpenShop(ShopManager shopManager)
     {
         if (shopUIManager == null) return;
 
         // Close inventory if it's open
         inventoryUIDocument.rootVisualElement.visible = false;
 
-        // Create and initialize shop manager for this specific shop
-        var shopGameObject = new GameObject("ShopManager_" + shopConfig.shopName);
-        var shopManager = shopGameObject.AddComponent<ShopManager>();
-        shopManager.InitializeWithConfig(shopConfig); // You'll need to add this method to ShopManager
-
         // Update shop UI
         shopUIDocument.rootVisualElement.visible = true;
-        shopUIManager.Initialize();
+        shopUIManager.OpenShop(shopManager);
     }
 
     public void CloseShop()
@@ -89,33 +84,26 @@ public class UIManager : MonoBehaviour
         if (shopUIDocument != null)
         {
             shopUIDocument.rootVisualElement.visible = false;
-
-            // Clean up the temporary shop manager
-            var shopManager = GameObject.FindFirstObjectByType<ShopManager>();
-            if (shopManager != null)
-            {
-                Destroy(shopManager.gameObject);
-            }
         }
     }
-
+    private void OpenInventory()
+    {
+        inventoryUIDocument.rootVisualElement.visible = true;
+        inventoryUIManager.PopulateInventory();
+    }
+    private void CloseInventory()
+    {
+        inventoryUIDocument.rootVisualElement.visible = false;
+    }
     private void ToggleInventoryUI()
     {
-        bool isVisible = inventoryUIDocument.rootVisualElement.visible;
-        if (isVisible)
+        if (inventoryUIDocument.rootVisualElement.visible)
         {
-            inventoryUIManager.PopulateInventory();
+            CloseInventory();
         }
-        inventoryUIDocument.rootVisualElement.visible = !isVisible;
-
-        // Close shop if inventory is being opened
-        if (!isVisible)
+        else
         {
-            CloseShop();
+            OpenInventory();
         }
     }
-
-
-
-
 }

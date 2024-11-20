@@ -1,22 +1,20 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class ShopManager : MonoBehaviour
 {
     [SerializeField] private ShopConfiguration shopConfig;
     private IShop _currentShop;
     private List<ShopItem> _shopItems = new List<ShopItem>();
+    private System.Guid _shopID;
 
     private void Start()
     {
         InitializeShop();
     }
-    public void InitializeWithConfig(ShopConfiguration config)
-    {
-        shopConfig = config;
-        InitializeShop();
-    }
+
     private void InitializeShop()
     {
         if (shopConfig == null)
@@ -24,7 +22,7 @@ public class ShopManager : MonoBehaviour
             Debug.LogError("Shop Configuration is missing!");
             return;
         }
-
+        _shopID = System.Guid.NewGuid();
         // Convert configuration data to runtime shop items
         _shopItems = shopConfig.availableItems
             .Select(itemData => new ShopItem(itemData))
@@ -103,5 +101,9 @@ public class ShopManager : MonoBehaviour
     public bool CanPurchaseItem(ShopItem item)
     {
         return _currentShop.CanPurchaseItem(item);
+    }
+    public System.Guid GetShopID()
+    {
+        return _shopID;
     }
 }

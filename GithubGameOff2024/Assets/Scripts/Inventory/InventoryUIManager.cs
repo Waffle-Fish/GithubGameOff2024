@@ -37,7 +37,7 @@ public class InventoryUIManager : MonoBehaviour
             trinketsDescriptionSlot = root.Q<VisualElement>("TrinketDescriptionSlot");
 
             coinLabel = root.Q<Label>("CoinAmount");
-            coinLabel.text = CurrencyManager.Instance.GetCurrency().ToString();
+
         }
         else
         {
@@ -71,6 +71,7 @@ public class InventoryUIManager : MonoBehaviour
                 trinketsInventoryContainer.Q<InventorySlot>().HoldItem(item);
             }
         }
+        coinLabel.text = CurrencyManager.Instance.GetCurrency().ToString();
     }
 
 

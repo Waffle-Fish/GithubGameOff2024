@@ -109,6 +109,10 @@ public class ShopDescriptionSlot : VisualElement
         M_Container.RemoveFromClassList("rarity-rare");
         M_Container.AddToClassList($"rarity-{itemInstance.item.rarity.ToString().ToLower()}");
     }
+    public void SetItemQuantity(int quantity)
+    {
+        M_Quantity.text = $"Quantity: {quantity}";
+    }
 
     public void ClearDetails()
     {

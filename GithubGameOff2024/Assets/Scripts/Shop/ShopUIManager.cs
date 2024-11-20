@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
 using System.Linq;
-using System.Collections;
 
 public class ShopUIManager : MonoBehaviour
 {
@@ -20,54 +19,32 @@ public class ShopUIManager : MonoBehaviour
     private Dictionary<System.Guid, ShopSlot> shopSlots = new Dictionary<System.Guid, ShopSlot>();
 
     private InventoryManager _playerInventory;
-    private ShopManager _shopManager;
     private CurrencyManager _currencyManager;
+    private ShopManager _shopManager;
 
-
-    private IEnumerator Start()
+    private void Start()
     {
-        StartCoroutine(Initialize());
-        return null;
-    }
-
-    public IEnumerator Initialize()
-    {
-        // Wait a frame to ensure ShopManager is initialized
+        InitializeUI();
         _playerInventory = InventoryManager.Instance;
         if (_playerInventory == null)
         {
             Debug.LogError("InventoryManager instance not found!");
-            yield break;
+            return;
         }
-
         _currencyManager = CurrencyManager.Instance;
         if (_currencyManager == null)
         {
             Debug.LogError("CurrencyManager instance not found!");
-            yield break;
+            return;
         }
-
-        yield return null; //wait for 1 frame
-
-        root = GetComponent<UIDocument>().rootVisualElement;
-
-
-        _shopManager = GetComponent<ShopManager>();
-        if (_shopManager == null)
-        {
-            Debug.LogError("ShopManager component not found!");
-            yield break;
-        }
-
-        InitializeUI();
-        PopulateShop();
-        UpdatePlayerInventory();
 
     }
+
     private void InitializeUI()
     {
         Debug.Log("Initializing UI");
         // Get references to UI elements
+        root = GetComponent<UIDocument>().rootVisualElement;
         playerInventoryContainer = root.Q<VisualElement>("PlayerInventory");
         shopInventoryContainer = root.Q<VisualElement>("ShopInventory");
         coinAmountLabel = root.Q<Label>("CoinAmount");
@@ -83,9 +60,15 @@ public class ShopUIManager : MonoBehaviour
         sellButton.style.display = DisplayStyle.None;
         buyButton.style.display = DisplayStyle.None;
 
-        UpdateCoinDisplay();
     }
-
+    public void OpenShop(ShopManager shopManager)
+    {
+        _shopManager = shopManager;
+        PopulateShop();
+        UpdatePlayerInventory();
+        UpdateCoinDisplay();
+        UpdatePlayerInventory();
+    }
     private void PopulateShop()
     {
         Debug.Log("Populating shop");
