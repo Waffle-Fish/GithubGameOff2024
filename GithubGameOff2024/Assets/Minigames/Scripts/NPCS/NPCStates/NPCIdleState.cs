@@ -12,7 +12,7 @@ public class NPCIdleState : NPCState
     public override void EnterState()
     {
         base.EnterState();
-        _waitTime = Random.Range(5f, 10f);
+        _waitTime = Random.Range(5f, 7f);
     }
 
     public override void ExitState()

@@ -19,4 +19,9 @@ public class Activity : MonoBehaviour, IInteractable, IInteractableNPC
     {
         return transform.position;
     }
+
+    public bool Taken()
+    {
+        return false;
+    }
 }

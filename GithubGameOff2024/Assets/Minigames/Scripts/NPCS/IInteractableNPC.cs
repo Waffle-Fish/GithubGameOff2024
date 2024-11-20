@@ -6,4 +6,5 @@ public interface IInteractableNPC
 
     bool NPCInteract();
     Vector3 GetPosition();
+    bool Taken();
 }

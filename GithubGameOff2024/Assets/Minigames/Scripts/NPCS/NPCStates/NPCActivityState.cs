@@ -13,6 +13,9 @@ public class NPCActivityState : NPCState
     {
         base.EnterState();
 
+        if (npc.activity.Taken())
+            npc.StateMachine.ChangeState(npc.RoamState);
+
         npc.activity.NPCInteract();
         _waitTime = Random.Range(npc.activity._timeMinMax.x, npc.activity._timeMinMax.y);
     }

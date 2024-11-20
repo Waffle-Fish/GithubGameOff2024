@@ -17,7 +17,12 @@ public class NPCRoamState : NPCState
         _waitTime = Random.Range(15f, 25f);
 
         _targetPos = npc.GetRandomActivity();
+
+        if (npc.activity == null)
+            npc.StateMachine.ChangeState(npc.IdleState);
+
         npc.agent.SetDestination(_targetPos);
+        _targetPos = npc.agent.destination;
     }
 
     public override void ExitState()
