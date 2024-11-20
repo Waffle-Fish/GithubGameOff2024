@@ -427,6 +427,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8987320879423097047, guid: 9ad570d0eb960ad479631469cd5b859a, type: 3}
+      propertyPath: ListOfFishRare.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8987320879423097047, guid: 9ad570d0eb960ad479631469cd5b859a, type: 3}
+      propertyPath: ListOfFishCommon.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8987320879423097047, guid: 9ad570d0eb960ad479631469cd5b859a, type: 3}
+      propertyPath: 'ListOfFishRare.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: a26ca28adbc074b20892e5e8aba1a159, type: 2}
+    - target: {fileID: 8987320879423097047, guid: 9ad570d0eb960ad479631469cd5b859a, type: 3}
+      propertyPath: ListOfFishUnCommon.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8987320879423097047, guid: 9ad570d0eb960ad479631469cd5b859a, type: 3}
+      propertyPath: 'ListOfFishCommon.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: a92254a7e83e84f1ab90049a094e47fc, type: 2}
+    - target: {fileID: 8987320879423097047, guid: 9ad570d0eb960ad479631469cd5b859a, type: 3}
+      propertyPath: 'ListOfFishCommon.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: a92254a7e83e84f1ab90049a094e47fc, type: 2}
+    - target: {fileID: 8987320879423097047, guid: 9ad570d0eb960ad479631469cd5b859a, type: 3}
+      propertyPath: 'ListOfFishCommon.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: a92254a7e83e84f1ab90049a094e47fc, type: 2}
+    - target: {fileID: 8987320879423097047, guid: 9ad570d0eb960ad479631469cd5b859a, type: 3}
+      propertyPath: 'ListOfFishUnCommon.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: efc994febea08492491db6f48079ff9f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

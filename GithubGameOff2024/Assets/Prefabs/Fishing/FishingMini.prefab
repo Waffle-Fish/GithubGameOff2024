@@ -358,6 +358,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ba8727e7b0092b43bb68971bdbb17ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ListOfFishCommon:
+  - {fileID: 11400000, guid: a92254a7e83e84f1ab90049a094e47fc, type: 2}
+  ListOfFishUnCommon:
+  - {fileID: 11400000, guid: efc994febea08492491db6f48079ff9f, type: 2}
+  ListOfFishRare:
+  - {fileID: 11400000, guid: a26ca28adbc074b20892e5e8aba1a159, type: 2}
+  timerDuration: 2
+  CurrentInventory: {fileID: 0}
   CurrentFish:
     item: {fileID: 0}
     weight: 0
