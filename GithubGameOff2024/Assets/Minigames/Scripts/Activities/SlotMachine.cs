@@ -13,6 +13,7 @@ public class SlotMachine : MonoBehaviour, IInteractable, IInteractableNPC
     public float[] spinTimer;
     public Transform leverArm;
     public AnimationCurve correctionCurve;
+    public AnimationCurve leverCurve;
     public int[] valueTypes;
     public float[] rotateAmounts;
 
@@ -143,7 +144,7 @@ public class SlotMachine : MonoBehaviour, IInteractable, IInteractableNPC
 
         while (time < duration)
         {
-            leverArm.localRotation = Quaternion.LerpUnclamped(startValue, endValue, correctionCurve.Evaluate(time / duration));
+            leverArm.localRotation = Quaternion.LerpUnclamped(startValue, endValue, leverCurve.Evaluate(time / duration));
             time += Time.deltaTime;
             yield return null;
         }
@@ -156,7 +157,7 @@ public class SlotMachine : MonoBehaviour, IInteractable, IInteractableNPC
 
         while (time < duration)
         {
-            leverArm.localRotation = Quaternion.LerpUnclamped(startValue, endValue, correctionCurve.Evaluate(time / duration));
+            leverArm.localRotation = Quaternion.LerpUnclamped(startValue, endValue, leverCurve.Evaluate(time / duration));
             time += Time.deltaTime;
             yield return null;
         }
