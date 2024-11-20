@@ -3851,7 +3851,7 @@ MonoBehaviour:
   isSpinning: 0
   canSpin: 1
   spinTimeMinMax: {x: 3, y: 4}
-  spinAmount: 650
+  spinAmount: 250
   spinTimer:
   - 0
   - 0
@@ -3919,6 +3919,7 @@ MonoBehaviour:
   - 0
   - 0
   - 0
+  stopped: 000000
   slotWheels:
   - {fileID: 3601395040322576020}
   - {fileID: 8324601196966958664}

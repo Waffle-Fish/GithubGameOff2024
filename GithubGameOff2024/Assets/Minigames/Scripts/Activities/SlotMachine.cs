@@ -16,17 +16,19 @@ public class SlotMachine : MonoBehaviour, IInteractable, IInteractableNPC
     public AnimationCurve leverCurve;
     public int[] valueTypes;
     public float[] rotateAmounts;
+    public bool[] stopped;
 
     public Transform[] slotWheels;
     private bool npcInteractedWith;
 
-    public Vector2 _timeMinMax { get { return new Vector2(4.5f, 5f); } set { } }
+    public Vector2 _timeMinMax { get { return new Vector2(4f, 4.5f); } set { } }
 
     public GameObject Interact()
     {
         if (npcInteractedWith)
             return null;
 
+        npcInteractedWith = false;
         activityCam.Priority = activityCam.Priority == 30 ? 0 : 30;
         beingInteracted = !beingInteracted;
         return gameObject;
@@ -59,9 +61,23 @@ public class SlotMachine : MonoBehaviour, IInteractable, IInteractableNPC
 
     private void Update()
     {
-        if(beingInteracted && InputManager.Instance.WasSpacePressed() && canSpin)
+        if(beingInteracted && InputManager.Instance.WasSpacePressed())
         {
-            Spin();
+            if(canSpin)
+            {
+                Spin();
+            }else if(!npcInteractedWith)
+            {
+                for (int i = 0; i < stopped.Length; i++)
+                {
+                    if (!stopped[i])
+                    {
+                        stopped[i] = true;
+                        //spinTimer[i] = 0.1f;
+                        break;
+                    }
+                }
+            }
         }
 
         if(isSpinning)
@@ -75,8 +91,9 @@ public class SlotMachine : MonoBehaviour, IInteractable, IInteractableNPC
                     rotateAmounts[i] += spinAmount * spinTimer[i] * Time.deltaTime;
                     isSpinning = true;
                 }
-                
-                spinTimer[i] -= Time.deltaTime;
+
+                if(stopped[i] || npcInteractedWith)
+                    spinTimer[i] -= Time.deltaTime * (npcInteractedWith ? 1 : 10);
             }
 
             if(!isSpinning)
@@ -94,10 +111,9 @@ public class SlotMachine : MonoBehaviour, IInteractable, IInteractableNPC
         for (int i = 0; i < spinTimer.Length; i++)
         {
             spinTimer[i] = Random.Range(spinTimeMinMax.x, spinTimeMinMax.y);
+            stopped[i] = false;
             //rotateAmounts[i] = 0;
         }
-
-        npcInteractedWith = false;
     }
 
     IEnumerator ClockWheels(float duration)
@@ -131,6 +147,14 @@ public class SlotMachine : MonoBehaviour, IInteractable, IInteractableNPC
             slotWheels[i].localRotation = endMoves[i];
             rotateAmounts[i] = valueTypes[i] * 45;
             //valueTypes[i] = Mathf.RoundToInt(slotWheels[i].localRotation.eulerAngles.x / 45);
+        }
+
+        if(valueTypes[0] == valueTypes[1] && valueTypes[1] == valueTypes[2])
+        {
+
+        }else
+        {
+
         }
 
         canSpin = true;
