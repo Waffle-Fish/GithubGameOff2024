@@ -47,4 +47,9 @@ public class InputManager : MonoBehaviour
     {
         return inputActions.Player.Jump.WasPressedThisFrame();
     }
+
+    public bool IsSpacePressed()
+    {
+        return inputActions.Player.Jump.IsPressed();
+    }
 }
