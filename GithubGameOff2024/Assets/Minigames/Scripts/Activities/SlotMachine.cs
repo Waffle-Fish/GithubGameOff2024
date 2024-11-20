@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SlotMachine : MonoBehaviour, IInteractable, IInteractableNPC
 {
@@ -19,6 +20,8 @@ public class SlotMachine : MonoBehaviour, IInteractable, IInteractableNPC
     public bool[] stopped;
 
     public Transform[] slotWheels;
+    public UnityEvent winEffects;
+    public UnityEvent loseEffects;
     private bool npcInteractedWith;
 
     public Vector2 _timeMinMax { get { return new Vector2(4f, 4.5f); } set { } }
@@ -151,10 +154,19 @@ public class SlotMachine : MonoBehaviour, IInteractable, IInteractableNPC
 
         if(valueTypes[0] == valueTypes[1] && valueTypes[1] == valueTypes[2])
         {
+            if(valueTypes[0] == 6) // Jackpot
+            {
 
-        }else
+            }else
+            {
+
+            }
+
+            winEffects.Invoke();
+        }
+        else
         {
-
+            loseEffects.Invoke();
         }
 
         canSpin = true;
