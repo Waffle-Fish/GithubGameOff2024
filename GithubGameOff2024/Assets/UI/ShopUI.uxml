@@ -14,11 +14,13 @@
             <ui:VisualElement name="ShopContainer" class="shop-container">
                 <ui:VisualElement name="SellSection" class="shop-section">
                     <ui:Label text="Your Items" class="section-header" />
-                    <ui:VisualElement name="PlayerInventory" class="shop-slot-container" />
+                    <ui:ScrollView>
+                        <ui:VisualElement name="PlayerInventory" class="shop-slot-container" />
+                    </ui:ScrollView>
                 </ui:VisualElement>
                 <ui:VisualElement name="BuySection" class="shop-section">
                     <ui:Label text="Shop Items" class="section-header" />
-                    <ui:VisualElement name="ShopInventory" class="shop-slot-container" />
+                        <ui:VisualElement name="ShopInventory" class="shop-slot-container" />
                 </ui:VisualElement>
                 <ui:VisualElement name="DescriptionSection" class="description-section">
                     <ShopDescriptionSlot name="ItemDescription" />

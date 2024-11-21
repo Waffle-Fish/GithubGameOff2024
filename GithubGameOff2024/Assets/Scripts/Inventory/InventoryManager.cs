@@ -39,7 +39,7 @@ public class InventoryManager : MonoBehaviour
     public List<InventoryItemInstance> FishInventory = new List<InventoryItemInstance>();
     public int maxFish = 28;
     public List<InventoryItemInstance> ToolsInventory = new List<InventoryItemInstance>();
-    public int maxTools = 4;
+    public int maxTools = 14;
     public List<InventoryItemInstance> TrinketsInventory = new List<InventoryItemInstance>();
     public int maxTrinkets = 28;
 
@@ -65,7 +65,34 @@ public class InventoryManager : MonoBehaviour
     public InventoryItemInstance GetItemByGUID(System.Guid guid)
     {
         Debug.Log("getting item by guid" + guid);
-        return FishInventory.Find(item => item.ItemGUID == guid);
+        // Check Fish inventory
+        foreach (var fishItem in FishInventory)
+        {
+            if (fishItem != null && fishItem.ItemGUID == guid)
+            {
+                return fishItem;
+            }
+        }
+
+        // Check Tools inventory 
+        foreach (var toolItem in ToolsInventory)
+        {
+            if (toolItem != null && toolItem.ItemGUID == guid)
+            {
+                return toolItem;
+            }
+        }
+
+        // Check Trinkets inventory
+        foreach (var trinketItem in TrinketsInventory)
+        {
+            if (trinketItem != null && trinketItem.ItemGUID == guid)
+            {
+                return trinketItem;
+            }
+        }
+
+        return null;
     }
     public bool AddItem(InventoryType inventoryType, InventoryItemInstance item)
     {

@@ -6,10 +6,10 @@
 
 .inventory-container {
     flex-grow: 1;
-    width: 90%;
+    width: 95%;
     height: 70%;
-    max-width: 90%;
-    max-height: 90%;
+    max-width: 95%;
+    max-height: 95%;
     margin: 0;
     padding: 24px;
     background-color: rgb(95, 52, 14);

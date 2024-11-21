@@ -75,6 +75,7 @@ public class DescriptionSlot : VisualElement
         Debug.Log("item details" + itemInstance.item.name);
 
         M_Icon.style.backgroundImage = new StyleBackground(itemInstance.item.itemIcon);
+        M_Icon.visible = true;
         M_Name.text = itemInstance.item.name;
         M_Description.text = itemInstance.item.description;
         M_Weight.text = $"{itemInstance.weight:F1} kg";
@@ -89,6 +90,7 @@ public class DescriptionSlot : VisualElement
     }
     public void ClearDetails()
     {
+        M_Icon.visible = false;
         M_Icon.style.backgroundImage = null;
         M_Name.text = "Select an item";
         M_Description.text = "No item selected";

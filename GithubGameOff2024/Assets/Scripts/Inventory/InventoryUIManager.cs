@@ -38,6 +38,19 @@ public class InventoryUIManager : MonoBehaviour
 
             coinLabel = root.Q<Label>("CoinAmount");
 
+            for (int i = 0; i < InventoryManager.Instance.maxFish; i++)
+            {
+                fishInventoryContainer.Add(new InventorySlot());
+            }
+            for (int i = 0; i < InventoryManager.Instance.maxTools; i++)
+            {
+                toolsInventoryContainer.Add(new InventorySlot());
+            }
+            for (int i = 0; i < InventoryManager.Instance.maxTrinkets; i++)
+            {
+                trinketsInventoryContainer.Add(new InventorySlot());
+            }
+
         }
         else
         {

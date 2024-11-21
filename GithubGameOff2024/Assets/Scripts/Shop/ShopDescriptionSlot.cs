@@ -73,13 +73,14 @@ public class ShopDescriptionSlot : VisualElement
 
         M_PriceTag.Add(coinIcon);
         M_PriceTag.Add(M_Value);
+        M_PriceTag.Add(new Label("Stock:"));
+        M_PriceTag.Add(M_Quantity);
 
         M_Container.Add(M_IconContainer);
         M_Container.Add(M_Description);
         M_Container.Add(M_StatsContainer);
         M_StatsContainer.Add(M_Rarity);
         M_StatsContainer.Add(M_Weight);
-        M_StatsContainer.Add(M_Quantity);
         M_Container.Add(M_PriceTag);
 
         Add(M_Container);
@@ -99,7 +100,7 @@ public class ShopDescriptionSlot : VisualElement
         M_Name.text = itemInstance.item.name;
         M_Description.text = itemInstance.item.description;
         M_Rarity.text = $"Rarity: {itemInstance.item.rarity}";
-        M_Weight.text = $"Weight: {itemInstance.item.weight:F1}";
+        M_Weight.text = $"Weight: {itemInstance.item.weight:F1} kg";
         M_Value.text = $"{itemInstance.value:F0}";
 
         // Add visual feedback for rarity
@@ -110,7 +111,7 @@ public class ShopDescriptionSlot : VisualElement
     }
     public void SetItemQuantity(int quantity)
     {
-        M_Quantity.text = $"Quantity: {quantity}";
+        M_Quantity.text = quantity.ToString();
     }
 
     public void ClearDetails()

@@ -2,12 +2,13 @@
     flex-direction: row;
     justify-content: flex-start;
     height: 100%;
+    width: 100%;
     padding: 24px;
     gap: 24px;
 }
 
 .shop-section {
-    width: 35%;
+    width: 40%;
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 20px;
     padding: 16px;
@@ -15,6 +16,33 @@
     border-color: rgba(243, 214, 179, 0.4);
     margin-left: 8px;
     margin-right: 8px;
+    align-items: center;
+}
+
+.shop-section .unity-scroller .unity-scroller__low-button,
+.shop-section .unity-scroller .unity-scroller__high-button {
+    display: none;
+}
+.shop-section .unity-scroller {
+    margin-left: -38px;
+}
+.shop-section .unity-base-slider__tracker {
+    background-color: rgb(54, 43, 38);
+    border-radius: 8px;
+    border-width: 2px;
+    min-height: 100%;
+}
+
+.shop-section .unity-base-slider__dragger {
+    background-color: rgb(243, 214, 179);
+    border-radius: 8px;
+}
+
+
+.shop-section .unity-scroll-view__horizontal-scroller,
+.shop-section .unity-scroll-view__vertical-scroller::before,
+.shop-section .unity-scroll-view__vertical-scroller::after {
+    display: none;
 }
 
 .description-section {
@@ -84,17 +112,14 @@
     background-color: rgba(0, 0, 0, 0.2);
     flex-direction: row;
     flex-wrap: wrap;
-    width: 100%;
     border-radius: 20px;
-    padding: 16px;
-    gap: 8px;
-    justify-content: flex-start;
-    align-items: flex-start;
-    height: 100%;
-    align-self: flex-start;
+    padding: 12px;
+    gap: 6px;
+    justify-content: center;
     border-width: 4px;
     border-color: rgba(243, 214, 179, 0.4);
 }
+
 .shop-description-slot {
     padding: 12px;
     background-color: rgba(54, 43, 38, 0.9);
@@ -153,21 +178,31 @@
 .stats-container {
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 12px;
-    padding: 8px;
+    padding: 8px 16px;
     margin: 8px 0;
     flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 16px;
+}
+
+.stat-pair {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+.stat-label {
+    -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
+    color: rgb(253, 240, 221);
+    font-size: 18px;
+    opacity: 0.8;
 }
 
 .item-stat {
     -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
     color: rgb(253, 240, 221);
     font-size: 18px;
-    flex-basis: 30%;
-    -unity-text-align: middle-left;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-    white-space: normal;
 }
 
 #SellAllButton {
@@ -195,4 +230,18 @@
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 12px;
     transition: opacity 0.2s ease-out;
+}
+
+.shop-section .unity-slider__input {
+    background-color: rgba(54, 43, 38, 0.9);
+    border-radius: 8px;
+    border-width: 2px;
+    border-color: rgba(243, 214, 179, 0.2);
+}
+
+.price-tag Label {
+    -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
+    color: rgb(255, 246, 229);
+    font-size: 24px;
+    margin-right: 8px;
 }
