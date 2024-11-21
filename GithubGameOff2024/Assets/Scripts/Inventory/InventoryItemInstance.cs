@@ -6,12 +6,14 @@ public class InventoryItemInstance
     public float weight { get; protected set; }
     public int value { get; protected set; }
     public int quantity { get; set; } = 1;
+    public InventoryItemRarity rarity;
 
     public System.Guid ItemGUID { get; private set; }
 
     protected InventoryItemInstance(InventoryItem item)
     {
         this.item = item;
+        this.rarity = item.rarity;
         this.ItemGUID = System.Guid.NewGuid();
         InitializeInstance();
     }

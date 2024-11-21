@@ -20,6 +20,7 @@ public class TestInventory : MonoBehaviour
         InventoryManager.Instance.AddItem(InventoryManager.InventoryType.Fish, new FishInstance(fish1));
         InventoryManager.Instance.AddItem(InventoryManager.InventoryType.Fish, new FishInstance(fish2));
         InventoryManager.Instance.AddItem(InventoryManager.InventoryType.Fish, new FishInstance(fish3));
+        while (InventoryManager.Instance.AddItem(InventoryManager.InventoryType.Fish, new FishInstance(fish3)));
     }
 
     void Update()
