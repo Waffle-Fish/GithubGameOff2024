@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,6 +27,8 @@ public class ShopUIManager : MonoBehaviour
     private CurrencyManager _currencyManager;
     private ShopManager _shopManager;
 
+    private const float ANIMATION_DELAY = 0.5f;
+
     private void Start()
     {
         InitializeUI();
@@ -49,6 +52,7 @@ public class ShopUIManager : MonoBehaviour
         Debug.Log("Initializing UI");
         // Get references to UI elements
         root = GetComponent<UIDocument>().rootVisualElement;
+        root.visible = false;
         shopNameLabel = root.Q<Label>("ShopName");
         playerInventoryContainer = root.Q<VisualElement>("PlayerInventory");
         shopInventoryContainer = root.Q<VisualElement>("ShopInventory");
@@ -80,6 +84,12 @@ public class ShopUIManager : MonoBehaviour
         UpdatePlayerInventory();
         UpdateCoinDisplay();
         UpdatePlayerInventory();
+
+        root.visible = true;
+        root.RemoveFromClassList("slide-out");
+        root.RemoveFromClassList("slide-out-active");
+        root.AddToClassList("slide-in");
+        root.AddToClassList("slide-in-active");
     }
     private void PopulateShop()
     {
@@ -291,4 +301,25 @@ public class ShopUIManager : MonoBehaviour
         UIManager.Instance.CloseShop();
     }
 
+    public void CloseShop()
+    {
+        root.RemoveFromClassList("slide-in");
+        root.RemoveFromClassList("slide-in-active");
+        root.AddToClassList("slide-out");
+        root.AddToClassList("slide-out-active");
+
+        StartCoroutine(HideAfterAnimation(root, ANIMATION_DELAY));
+    }
+    private IEnumerator HideAfterAnimation(VisualElement element, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        // Clean up fade classes
+        element.RemoveFromClassList("fade-out");
+        element.RemoveFromClassList("fade-out-active");
+        element.visible = false;
+    }
+    public bool IsShopOpen()
+    {
+        return root.visible;
+    }
 }

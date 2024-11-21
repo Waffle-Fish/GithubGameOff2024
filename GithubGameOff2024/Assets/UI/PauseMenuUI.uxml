@@ -1,0 +1,26 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/PauseMenu.uss?fileID=7433441132597879392&amp;guid=PauseMenu&amp;type=3#PauseMenu" />
+    
+    <engine:VisualElement class="pause-menu-container">
+        <!-- Main Pause Menu Panel -->
+        <engine:VisualElement name="pause-panel" class="menu-panel">
+            <engine:Label text="PAUSED" class="pause-title" />
+            <engine:Button name="resume-button" text="Resume" class="menu-button" />
+            <engine:Button name="settings-button" text="Settings" class="menu-button" />
+            <engine:Button name="main-menu-button" text="Main Menu" class="menu-button" />
+            <engine:Button name="quit-button" text="Quit Game" class="menu-button" />
+        </engine:VisualElement>
+
+        <!-- Settings Panel -->
+        <engine:VisualElement name="settings-panel" class="settings-panel">
+            <engine:Label text="Settings" class="settings-title" />
+            <engine:VisualElement class="settings-container">
+                <engine:Label text="Audio" class="settings-heading" />
+                <engine:VisualElement class="slider-container">
+                    <engine:Slider label="Master Volume" name="master-volume" value="100" high-value="100" fill="true" />
+                </engine:VisualElement>
+            </engine:VisualElement>
+            <engine:Button name="settings-back-button" text="Back" class="back-button" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

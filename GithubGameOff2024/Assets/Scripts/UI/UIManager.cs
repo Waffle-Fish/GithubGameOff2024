@@ -6,12 +6,12 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
-    [SerializeField] private UIDocument shopUIDocument;
-    [SerializeField] private UIDocument inventoryUIDocument;
     [SerializeField] private KeyCode inventoryToggleKey = KeyCode.I;
+    [SerializeField] private KeyCode pauseMenuKey = KeyCode.Escape;
 
     private ShopUIManager shopUIManager;
     private InventoryUIManager inventoryUIManager;
+    private PauseMenuManager pauseMenuManager;
     private CurrencyManager currencyManager;
     private InventoryManager inventoryManager;
 
@@ -34,50 +34,48 @@ public class UIManager : MonoBehaviour
 
         InitializeShopUI();
         InitializeInventoryUI();
-
-        // Hide UIs initially
-        shopUIDocument.rootVisualElement.visible = false;
-        inventoryUIDocument.rootVisualElement.visible = false;
+        InitializePauseMenu();
     }
 
     private void Update()
     {
         // Handle inventory toggle
-        if (Input.GetKeyDown(inventoryToggleKey))
+        if (Input.GetKeyDown(inventoryToggleKey) && !pauseMenuManager.IsPauseMenuOpen())
         {
             ToggleInventoryUI();
+        }
+
+        // Handle pause menu toggle
+        if (Input.GetKeyDown(pauseMenuKey))
+        {
+            TogglePauseMenu();
+        }
+    }
+
+    private void InitializePauseMenu()
+    {
+        pauseMenuManager = GameObject.FindFirstObjectByType<PauseMenuManager>();
+        if (pauseMenuManager == null)
+        {
+            Debug.LogError("PauseMenuManager not found in Scene.");
         }
     }
 
     private void InitializeShopUI()
     {
-        if (shopUIDocument != null)
+        shopUIManager = GameObject.FindFirstObjectByType<ShopUIManager>();
+        if (shopUIManager == null)
         {
-            shopUIManager = GameObject.FindFirstObjectByType<ShopUIManager>();
-            if (shopUIManager == null)
-            {
-                Debug.LogError("ShopUIManager not found in Scene.");
-            }
-        }
-        else
-        {
-            Debug.LogError("Shop UIDocument is not assigned.");
+            Debug.LogError("ShopUIManager not found in Scene.");
         }
     }
 
     private void InitializeInventoryUI()
     {
-        if (inventoryUIDocument != null)
+        inventoryUIManager = GameObject.FindFirstObjectByType<InventoryUIManager>();
+        if (inventoryUIManager == null)
         {
-            inventoryUIManager = GameObject.FindFirstObjectByType<InventoryUIManager>();
-            if (inventoryUIManager == null)
-            {
-                Debug.LogError("InventoryUIManager not found in Scene.");
-            }
-        }
-        else
-        {
-            Debug.LogError("Inventory UIDocument is not assigned.");
+            Debug.LogError("InventoryUIManager not found in Scene.");
         }
     }
 
@@ -85,79 +83,46 @@ public class UIManager : MonoBehaviour
     {
         if (shopUIManager == null) return;
 
-        CloseInventory();
-
-        var root = shopUIDocument.rootVisualElement;
-
-        // Setup root fade first
-        root.visible = true;
-        root.RemoveFromClassList("slide-out");
-        root.RemoveFromClassList("slide-out-active");
-        root.AddToClassList("slide-in");
-        root.AddToClassList("slide-in-active");
-
-
         shopUIManager.OpenShop(shopManager);
     }
 
     public void CloseShop()
     {
-        var root = shopUIDocument.rootVisualElement;
-
-        // Start with sliding out the container
-        root.RemoveFromClassList("slide-in");
-        root.RemoveFromClassList("slide-in-active");
-        root.AddToClassList("slide-out");
-        root.AddToClassList("slide-out-active");
-
-        StartCoroutine(HideAfterAnimation(root, ANIMATION_DELAY));
-    }
-
-    private void OpenInventory()
-    {
-        var root = inventoryUIDocument.rootVisualElement;
-
-        root.visible = true;
-        root.RemoveFromClassList("slide-out");
-        root.RemoveFromClassList("slide-out-active");
-        root.AddToClassList("slide-in");
-        root.AddToClassList("slide-in-active");
-
-        inventoryUIManager.PopulateInventory();
-
-    }
-
-    public void CloseInventory()
-    {
-        var root = inventoryUIDocument.rootVisualElement;
-
-        // Start with sliding out the container
-        root.RemoveFromClassList("slide-in");
-        root.RemoveFromClassList("slide-in-active");
-        root.AddToClassList("slide-out");
-        root.AddToClassList("slide-out-active");
-
-        StartCoroutine(HideAfterAnimation(root, ANIMATION_DELAY));
+        shopUIManager.CloseShop();
     }
 
     private void ToggleInventoryUI()
     {
-        if (inventoryUIDocument.rootVisualElement.visible)
+        if (inventoryUIManager.IsInventoryOpen())
         {
-            CloseInventory();
+            inventoryUIManager.CloseInventory();
         }
-        else if (!shopUIDocument.rootVisualElement.visible)
+        else if (!shopUIManager.IsShopOpen() && !pauseMenuManager.IsPauseMenuOpen())
         {
-            OpenInventory();
+            inventoryUIManager.OpenInventory();
         }
     }
 
-    private IEnumerator HideAfterAnimation(VisualElement element, float delay)
+    public void TogglePauseMenu()
     {
-        yield return new WaitForSeconds(delay);
-        // Clean up fade classes
-        element.RemoveFromClassList("fade-out");
-        element.RemoveFromClassList("fade-out-active");
-        element.visible = false;
+        if (pauseMenuManager.IsPauseMenuOpen())
+        {
+            ClosePauseMenu();
+        }
+        else if (!shopUIManager.IsShopOpen() && !inventoryUIManager.IsInventoryOpen())
+        {
+            OpenPauseMenu();
+        }
     }
+
+    public void OpenPauseMenu()
+    {
+        pauseMenuManager.OpenPauseMenu();
+    }
+
+    public void ClosePauseMenu()
+    {
+        pauseMenuManager.ClosePauseMenu();
+    }
+
 }

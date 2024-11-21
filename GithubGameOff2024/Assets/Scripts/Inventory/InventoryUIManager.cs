@@ -1,8 +1,7 @@
-using System;
-using System.Net.Sockets;
+
 using UnityEngine;
 using UnityEngine.UIElements;
-
+using System.Collections;
 public class InventoryUIManager : MonoBehaviour
 {
     private UIDocument uiDocument;
@@ -15,6 +14,7 @@ public class InventoryUIManager : MonoBehaviour
 
     private Label coinLabel;
 
+    private const float ANIMATION_DELAY = 0.5f;
 
     void Awake()
     {
@@ -25,7 +25,7 @@ public class InventoryUIManager : MonoBehaviour
         {
             // Get the root VisualElement
             var root = uiDocument.rootVisualElement;
-
+            root.visible = false;
             // Query the container that holds InventorySlot elements (replace "InventoryContainer" with your actual container name)
             fishInventoryContainer = root.Q<VisualElement>("FishSlotContainer");
             toolsInventoryContainer = root.Q<VisualElement>("ToolSlotContainer");
@@ -60,6 +60,27 @@ public class InventoryUIManager : MonoBehaviour
     void OnDestroy()
     {
         InventoryManager.Instance.OnInventoryChanged -= OnInventoryChanged;
+    }
+    public void OpenInventory()
+    {
+        uiDocument.rootVisualElement.visible = true;
+        uiDocument.rootVisualElement.RemoveFromClassList("slide-out");
+        uiDocument.rootVisualElement.RemoveFromClassList("slide-out-active");
+        uiDocument.rootVisualElement.AddToClassList("slide-in");
+        uiDocument.rootVisualElement.AddToClassList("slide-in-active");
+    }
+    public void CloseInventory()
+    {
+        uiDocument.rootVisualElement.RemoveFromClassList("slide-in");
+        uiDocument.rootVisualElement.RemoveFromClassList("slide-in-active");
+        uiDocument.rootVisualElement.AddToClassList("slide-out");
+        uiDocument.rootVisualElement.AddToClassList("slide-out-active");
+
+        StartCoroutine(HideAfterAnimation(uiDocument.rootVisualElement, ANIMATION_DELAY));
+    }
+    public bool IsInventoryOpen()
+    {
+        return uiDocument.rootVisualElement.visible;
     }
     public void PopulateInventory()
     {
@@ -221,5 +242,13 @@ public class InventoryUIManager : MonoBehaviour
                 }
             }
         }
+    }
+    private IEnumerator HideAfterAnimation(VisualElement element, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        // Clean up fade classes
+        element.RemoveFromClassList("fade-out");
+        element.RemoveFromClassList("fade-out-active");
+        element.visible = false;
     }
 }
