@@ -7,9 +7,11 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance { get; private set; }
 
     [SerializeField] private KeyCode inventoryToggleKey = KeyCode.I;
+    [SerializeField] private KeyCode pauseMenuKey = KeyCode.Escape;
 
     private ShopUIManager shopUIManager;
     private InventoryUIManager inventoryUIManager;
+    private PauseMenuManager pauseMenuManager;
     private CurrencyManager currencyManager;
     private InventoryManager inventoryManager;
 
@@ -32,15 +34,30 @@ public class UIManager : MonoBehaviour
 
         InitializeShopUI();
         InitializeInventoryUI();
-
+        InitializePauseMenu();
     }
 
     private void Update()
     {
         // Handle inventory toggle
-        if (Input.GetKeyDown(inventoryToggleKey))
+        if (Input.GetKeyDown(inventoryToggleKey) && !pauseMenuManager.IsPauseMenuOpen())
         {
             ToggleInventoryUI();
+        }
+
+        // Handle pause menu toggle
+        if (Input.GetKeyDown(pauseMenuKey))
+        {
+            TogglePauseMenu();
+        }
+    }
+
+    private void InitializePauseMenu()
+    {
+        pauseMenuManager = GameObject.FindFirstObjectByType<PauseMenuManager>();
+        if (pauseMenuManager == null)
+        {
+            Debug.LogError("PauseMenuManager not found in Scene.");
         }
     }
 
@@ -80,11 +97,32 @@ public class UIManager : MonoBehaviour
         {
             inventoryUIManager.CloseInventory();
         }
-        else if (!shopUIManager.IsShopOpen())
+        else if (!shopUIManager.IsShopOpen() && !pauseMenuManager.IsPauseMenuOpen())
         {
             inventoryUIManager.OpenInventory();
         }
     }
 
+    public void TogglePauseMenu()
+    {
+        if (pauseMenuManager.IsPauseMenuOpen())
+        {
+            ClosePauseMenu();
+        }
+        else if (!shopUIManager.IsShopOpen() && !inventoryUIManager.IsInventoryOpen())
+        {
+            OpenPauseMenu();
+        }
+    }
+
+    public void OpenPauseMenu()
+    {
+        pauseMenuManager.OpenPauseMenu();
+    }
+
+    public void ClosePauseMenu()
+    {
+        pauseMenuManager.ClosePauseMenu();
+    }
 
 }
