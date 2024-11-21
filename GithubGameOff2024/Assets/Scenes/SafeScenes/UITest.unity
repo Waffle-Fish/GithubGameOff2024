@@ -351,9 +351,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 926d82eb61772498882213fcd867db21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxFish: 24
-  maxTools: 4
-  maxTrinkets: 24
+  maxFish: 28
+  maxTools: 14
+  maxTrinkets: 28
 --- !u!4 &1441288483
 Transform:
   m_ObjectHideFlags: 0
