@@ -8,6 +8,7 @@ public class ShopUIManager : MonoBehaviour
     private VisualElement root;
     private VisualElement playerInventoryContainer;
     private VisualElement shopInventoryContainer;
+    private Label shopNameLabel;
     private Label coinAmountLabel;
     private Button sellButton;
     private Button buyButton;
@@ -48,6 +49,7 @@ public class ShopUIManager : MonoBehaviour
         Debug.Log("Initializing UI");
         // Get references to UI elements
         root = GetComponent<UIDocument>().rootVisualElement;
+        shopNameLabel = root.Q<Label>("ShopName");
         playerInventoryContainer = root.Q<VisualElement>("PlayerInventory");
         shopInventoryContainer = root.Q<VisualElement>("ShopInventory");
         coinAmountLabel = root.Q<Label>("CoinAmount");
@@ -84,6 +86,8 @@ public class ShopUIManager : MonoBehaviour
         Debug.Log("Populating shop");
         shopInventoryContainer.Clear();
         shopSlots.Clear();
+
+        shopNameLabel.text = _shopManager.GetShopName();
 
         var availableItems = _shopManager.GetAvailableItems();
         Debug.Log($"Available items: {availableItems.Count}");

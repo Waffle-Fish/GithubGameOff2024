@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 public class ShopManager : MonoBehaviour
 {
     [SerializeField] private ShopConfiguration shopConfig;
+    private string _shopName;
     private IShop _currentShop;
     private List<ShopItem> _shopItems = new List<ShopItem>();
     private System.Guid _shopID;
@@ -23,6 +24,8 @@ public class ShopManager : MonoBehaviour
             return;
         }
         _shopID = System.Guid.NewGuid();
+        _shopName = shopConfig.shopName;
+
         // Convert configuration data to runtime shop items
         _shopItems = shopConfig.availableItems
             .Select(itemData => new ShopItem(itemData))
@@ -47,6 +50,10 @@ public class ShopManager : MonoBehaviour
                 Debug.LogError($"Unsupported shop type: {shopConfig.shopType}");
                 break;
         }
+    }
+    public string GetShopName()
+    {
+        return _shopName;
     }
 
     private void InitializeProgressionShop(List<ShopItem> items)

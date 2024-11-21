@@ -5,7 +5,7 @@
     <ui:VisualElement name="Container" class="container">
         <ui:VisualElement name="Shop" class="inventory-container">
             <ui:VisualElement name="HeaderContainer" class="header-container">
-                <ui:Label text="Shop" class="inventory-header" />
+                <ui:Label name="ShopName" text="Shop" class="inventory-header" />
                 <ui:VisualElement name="CoinDisplay" class="coin-display">
                     <ui:VisualElement name="CoinIcon" class="coin-icon" />
                     <ui:Label text="0" name="CoinAmount" class="coin-amount" />
