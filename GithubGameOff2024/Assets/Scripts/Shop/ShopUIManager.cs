@@ -14,6 +14,7 @@ public class ShopUIManager : MonoBehaviour
     private ShopDescriptionSlot itemDescription;
     private Button sellAllButton;
     private Label statusLabel;
+    private Button exitButton;
 
     private ShopSlot selectedSlot;
 
@@ -56,6 +57,8 @@ public class ShopUIManager : MonoBehaviour
         sellAllButton = root.Q<Button>("SellAllButton");
         statusLabel = root.Q<Label>("StatusLabel");
         statusLabel.style.display = DisplayStyle.None;
+        exitButton = root.Q<Button>("ExitButton");
+        exitButton.clicked += OnExitButtonClicked;
 
         // Set up button listeners
         sellButton.clicked += OnSellButtonClicked;
@@ -277,6 +280,11 @@ public class ShopUIManager : MonoBehaviour
             statusLabel.style.display = DisplayStyle.Flex;
             statusLabel.text = message;
         }
+    }
+
+    private void OnExitButtonClicked()
+    {
+        UIManager.Instance.CloseShop();
     }
 
 }

@@ -4,6 +4,8 @@ using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance { get; private set; }
+
     [SerializeField] private UIDocument shopUIDocument;
     [SerializeField] private UIDocument inventoryUIDocument;
     [SerializeField] private KeyCode inventoryToggleKey = KeyCode.I;
@@ -17,6 +19,16 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         currencyManager = CurrencyManager.Instance;
         inventoryManager = InventoryManager.Instance;
 

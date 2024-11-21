@@ -10,6 +10,7 @@
                     <ui:VisualElement name="CoinIcon" class="coin-icon" />
                     <ui:Label text="0" name="CoinAmount" class="coin-amount" />
                 </ui:VisualElement>
+                <ui:Button name="ExitButton" text="Exit" class="exit-button" />
             </ui:VisualElement>
             <ui:VisualElement name="ShopContainer" class="shop-container">
                 <ui:VisualElement name="SellSection" class="shop-section">
