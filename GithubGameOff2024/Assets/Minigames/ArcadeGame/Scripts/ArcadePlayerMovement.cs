@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ArcadePlayerMovement : MonoBehaviour
 {
+    public bool squashAndStrech;
     public Animator animator;
     public LayerMask whatIsGround;
     public Transform groundCheck;
@@ -57,6 +58,9 @@ public class ArcadePlayerMovement : MonoBehaviour
 
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isGrounded = false;
+
+            if(squashAndStrech)
+                StartCoroutine(JumpSqueeze(0.9f, 1.1f, 0.1f));
         }
 
         if((!isGrounded && !InputManager.Instance.IsSpacePressed()) || rb.linearVelocity.y < 0)
@@ -67,7 +71,10 @@ public class ArcadePlayerMovement : MonoBehaviour
                 animator.SetBool("Falling", true);
         }
 
+        bool wasCrouching = isCrouching;
         isCrouching = isGrounded && input.y < 0;
+        if(isCrouching != wasCrouching && squashAndStrech)
+            StartCoroutine(JumpSqueeze(1.1f, 0.9f, 0.1f));
         animator.SetBool("Crouching", isCrouching);
 
         jumpCoolDown -= Time.deltaTime;
@@ -84,5 +91,26 @@ public class ArcadePlayerMovement : MonoBehaviour
 
         Vector3 move = new Vector3(x * speed, rb.linearVelocity.y, 0f);
         rb.AddForce(move);
+    }
+
+    IEnumerator JumpSqueeze(float xSqueeze, float ySqueeze, float seconds)
+    {
+        Vector3 originalSize = Vector3.one;
+        Vector3 newSize = new Vector3(xSqueeze, ySqueeze, originalSize.z);
+        float t = 0f;
+        while (t <= 1.0)
+        {
+            t += Time.deltaTime / seconds;
+            animator.transform.localScale = Vector3.Lerp(originalSize, newSize, t);
+            yield return null;
+        }
+        t = 0f;
+        while (t <= 1.0)
+        {
+            t += Time.deltaTime / seconds;
+            animator.transform.localScale = Vector3.Lerp(newSize, originalSize, t);
+            yield return null;
+        }
+
     }
 }
