@@ -1,0 +1,292 @@
+.main-menu-container {
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background-color: rgb(95, 52, 14);
+}
+
+.menu-panel {
+    width: 60%;
+    padding: 32px;
+    background-color: rgb(139, 76, 20);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border-width: 6px;
+    border-color: rgb(243, 214, 179);
+    align-items: center;
+}
+
+.game-title {
+    -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
+    font-size: 96px;
+    color: rgb(255, 246, 229);
+    -unity-text-align: middle-center;
+    margin-bottom: 48px;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+    letter-spacing: 4px;
+}
+
+.menu-button {
+    width: 60%;
+    padding: 16px;
+    margin: 12px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    border-width: 4px;
+    border-color: rgb(243, 214, 179);
+    transition: all 0.2s ease-out;
+    -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
+    font-size: 42px;
+    color: rgb(255, 246, 229);
+    -unity-text-align: middle-center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.menu-button:hover {
+    scale: 1.05;
+    background-color: rgba(253, 240, 221, 0.15);
+    rotate: 1deg;
+}
+
+.menu-button:active {
+    scale: 0.95;
+    rotate: -1deg;
+}
+
+.menu-button {
+    -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
+    font-size: 42px;
+    color: rgb(255, 246, 229);
+    -unity-text-align: middle-center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.version-label {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
+    font-size: 24px;
+    color: rgba(255, 246, 229, 0.6);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.credits-panel {
+    display: none;
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    padding: 16px;
+    background-color: rgb(139, 76, 20);
+    border-radius: 24px;
+    border-width: 6px;
+    border-color: rgb(243, 214, 179);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    align-items: center;
+}
+
+.credits-title {
+    -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
+    font-size: 64px;
+    color: rgb(255, 246, 229);
+    margin-bottom: 8px;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+}
+
+.credits-content {
+    width: 100%;
+    margin: 16px;
+}
+
+.credits-heading {
+    -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
+    font-size: 36px;
+    color: rgb(243, 214, 179);
+    -unity-text-align: middle-center;
+    margin-bottom: 8px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.credits-text {
+    -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
+    font-size: 24px;
+    overflow: auto;
+    color: rgb(255, 246, 229);
+    -unity-text-align: middle-center;
+    margin-bottom: 16px;
+}
+
+.back-button {
+    width: 40%;
+    padding: 12px;
+    margin-top: 16px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    border-width: 4px;
+    border-color: rgb(243, 214, 179);
+    transition: all 0.2s ease-out;
+    -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
+    font-size: 32px;
+    color: rgb(255, 246, 229);
+    -unity-text-align: middle-center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.back-button:hover {
+    scale: 1.05;
+    background-color: rgba(253, 240, 221, 0.15);
+    rotate: 1deg;
+}
+
+.back-button:active {
+    scale: 0.95;
+    rotate: -1deg;
+}
+
+.contributor-cards {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    padding: 16px;
+    gap: 24px;
+}
+
+.contributor-card {
+    width: 350px;
+    height: 350px;
+    margin: 8px 24px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    border-width: 4px;
+    border-color: rgb(243, 214, 179);
+    align-items: center;
+    transition: all 0.2s ease-out;
+}
+
+.contributor-card:hover {
+    scale: 1.05;
+    background-color: rgba(253, 240, 221, 0.15);
+    rotate: 2deg;
+}
+
+.contributor-image {
+    width: 180px;
+    height: 180px;
+    margin: 12px;
+    border-radius: 90px;
+    border-width: 3px;
+    border-color: rgb(243, 214, 179);
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.contributor-name {
+    -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
+    font-size: 28px;
+    max-width: 100%;
+    color: rgb(255, 246, 229);
+    -unity-text-align: middle-center;
+    margin-top: 16px;
+    margin-bottom: 4px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.contributor-role {
+    -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
+    font-size: 22px;
+    color: rgb(243, 214, 179);
+    -unity-text-align: middle-center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.settings-panel {
+    display: none;
+    position: absolute;
+    width: 70%;
+    height: auto;
+    padding: 32px;
+    background-color: rgb(139, 76, 20);
+    border-radius: 24px;
+    border-width: 6px;
+    border-color: rgb(243, 214, 179);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    align-items: center;
+}
+
+.settings-title {
+    -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
+    font-size: 64px;
+    color: rgb(255, 246, 229);
+    margin-bottom: 32px;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+}
+
+.settings-container {
+    width: 100%;
+    padding: 16px;
+}
+
+.settings-heading {
+    -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
+    font-size: 32px;
+    color: rgb(243, 214, 179);
+    -unity-text-align: middle-center;
+}
+
+.slider-container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 16px 0;
+    padding: 8px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    border-width: 2px;
+    border-color: rgb(243, 214, 179);
+}
+
+.unity-slider-int .unity-label {
+    -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
+    font-size: 28px;
+    color: rgb(255, 246, 229);
+    margin-right: 16px;
+    min-width: 120px;
+}
+
+.unity-slider-int {
+    flex-grow: 1;
+    margin: 0 16px;
+    height: 40px;
+}
+
+.unity-base-slider__dragger {
+    background-color: rgb(255, 246, 229);
+    border-color: rgb(243, 214, 179);
+    border-width: 3px;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    transition: all 0.1s ease-out;
+}
+
+.unity-base-slider__dragger:hover {
+    scale: 1.1;
+    background-color: rgb(243, 214, 179);
+}
+
+.unity-base-slider__tracker {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-color: rgb(243, 214, 179);
+    border-width: 0;
+    border-radius: 8px;
+    height: 8px;
+}
+
+.unity-base-slider__progress {
+    background-color: rgb(243, 0, 0);
+    border-radius: 8px;
+    margin: 0;
+}
