@@ -1,0 +1,67 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/MainMenu.uss?fileID=7433441132597879392&amp;guid=b106106e37718be4db401fedf8a58afb&amp;type=3#MainMenu" />
+    <engine:VisualElement class="main-menu-container">
+        <engine:VisualElement class="menu-panel">
+            <engine:Label name="game-title" text="Fishy Secrets" class="game-title" />
+            <engine:Button name="play-button" text="Play" class="menu-button" />
+            <engine:Button name="settings-button" text="Settings" class="menu-button" />
+            <engine:Button name="credits-button" text="Credits" class="menu-button" />
+            <engine:Button name="quit-button" text="Quit" class="menu-button" />
+        </engine:VisualElement>
+        <engine:VisualElement name="credits-panel" class="credits-panel" style="top: 57px; left: 89px;">
+            <engine:Label text="Credits" class="credits-title" style="margin-top: 0; margin-bottom: 0;" />
+            <engine:Label text="Development Team" class="credits-heading" style="margin-bottom: 14px; margin-top: -18px;" />
+            <engine:VisualElement class="credits-content">
+                <engine:VisualElement class="contributor-cards">
+                    <engine:VisualElement class="contributor-card">
+                        <engine:Image name="contributor-image" class="contributor-image" />
+                        <engine:Label text="Jhoshua Ampo" class="contributor-name" />
+                        <engine:Label text="Team Lead" class="contributor-role" />
+                    </engine:VisualElement>
+                    <engine:VisualElement class="contributor-card">
+                        <engine:Image name="contributor-image" class="contributor-image" />
+                        <engine:Label text="Colleen Zheng" class="contributor-name" />
+                        <engine:Label text="Art Director" class="contributor-role" />
+                    </engine:VisualElement>
+                    <engine:VisualElement class="contributor-card">
+                        <engine:Image name="contributor-image" class="contributor-image" />
+                        <engine:Label text="Ryan Agundez" class="contributor-name" />
+                        <engine:Label text="Audio Lead" class="contributor-role" />
+                    </engine:VisualElement>
+                    <engine:VisualElement class="contributor-card">
+                        <engine:Image name="contributor-image" class="contributor-image" />
+                        <engine:Label text="Safe Gergis" class="contributor-name" />
+                        <engine:Label text="Programmer" class="contributor-role" />
+                    </engine:VisualElement>
+                    <engine:VisualElement class="contributor-card">
+                        <engine:Image name="contributor-image" class="contributor-image" />
+                        <engine:Label text="Alexander Blocker" class="contributor-name" />
+                        <engine:Label text="Programmer" class="contributor-role" />
+                    </engine:VisualElement>
+                    <engine:VisualElement class="contributor-card">
+                        <engine:Image name="contributor-image" class="contributor-image" />
+                        <engine:Label text="Brandon" class="contributor-name" />
+                        <engine:Label text="Programmer" class="contributor-role" />
+                    </engine:VisualElement>
+                    <engine:VisualElement class="contributor-card">
+                        <engine:Image name="contributor-image" class="contributor-image" />
+                        <engine:Label text="Alena Aviles" class="contributor-name" />
+                        <engine:Label text="Enviromental Artist" class="contributor-role" />
+                    </engine:VisualElement>
+                </engine:VisualElement>
+            </engine:VisualElement>
+            <engine:Button name="back-button" text="Back" class="back-button" style="margin-top: 40px;" />
+        </engine:VisualElement>
+        <engine:VisualElement name="settings-panel" class="settings-panel">
+            <engine:Label text="Settings" class="settings-title" />
+            <engine:VisualElement class="settings-container">
+                <engine:Label text="Audio" class="settings-heading" />
+                <engine:VisualElement class="slider-container">
+                    <engine:SliderInt label="Master" view_data_key="masterVolume" value="100" high-value="100" fill="true"/>
+                </engine:VisualElement>
+            </engine:VisualElement>
+            <engine:Button name="settings-back-button" text="Back" class="back-button" />
+        </engine:VisualElement>
+        <engine:Label text="v0.1.0" class="version-label" />
+    </engine:VisualElement>
+</engine:UXML>
