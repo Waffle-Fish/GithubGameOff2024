@@ -21,7 +21,7 @@ public class QuantityShop : BaseShop
 
     public override List<ShopItem> GetAvailableItems()
     {
-        return _shopItems.Where(item => _itemQuantities[item] > 0).ToList();
+        return _shopItems;
     }
 
     protected override void OnItemPurchased(ShopItem item)

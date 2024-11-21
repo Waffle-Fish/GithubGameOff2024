@@ -24,6 +24,8 @@
                     <ShopDescriptionSlot name="ItemDescription" />
                     <ui:Button text="Buy Selected" name="BuyButton" class="transaction-button" style="display: none;" />
                     <ui:Button text="Sell Selected" name="SellButton" class="transaction-button" style="display: none;" />
+                    <ui:Button text="Sell All Fish" name="SellAllButton" class="transaction-button" />
+                    <ui:Label name="StatusLabel" class="status-label" />
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>

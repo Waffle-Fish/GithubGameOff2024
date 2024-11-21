@@ -12,6 +12,8 @@ public class ShopUIManager : MonoBehaviour
     private Button sellButton;
     private Button buyButton;
     private ShopDescriptionSlot itemDescription;
+    private Button sellAllButton;
+    private Label statusLabel;
 
     private ShopSlot selectedSlot;
 
@@ -51,14 +53,19 @@ public class ShopUIManager : MonoBehaviour
         sellButton = root.Q<Button>("SellButton");
         buyButton = root.Q<Button>("BuyButton");
         itemDescription = root.Q<ShopDescriptionSlot>("ItemDescription");
+        sellAllButton = root.Q<Button>("SellAllButton");
+        statusLabel = root.Q<Label>("StatusLabel");
+        statusLabel.style.display = DisplayStyle.None;
 
         // Set up button listeners
         sellButton.clicked += OnSellButtonClicked;
         buyButton.clicked += OnBuyButtonClicked;
+        sellAllButton.clicked += OnSellAllButtonClicked;
 
         // Initialize buttons as hidden
         sellButton.style.display = DisplayStyle.None;
         buyButton.style.display = DisplayStyle.None;
+
 
     }
     public void OpenShop(ShopManager shopManager)
@@ -122,6 +129,7 @@ public class ShopUIManager : MonoBehaviour
 
         buyButton.style.display = DisplayStyle.None;
         sellButton.style.display = DisplayStyle.None;
+        SetStatusText("");
 
         if (slot.parent == shopInventoryContainer)
         {
@@ -131,10 +139,19 @@ public class ShopUIManager : MonoBehaviour
             {
                 itemDescription.SetItemDetails(item);
                 itemDescription.SetItemQuantity(_shopManager.GetItemQuantity(item));
-                buyButton.style.display =
-                    _shopManager.CanPurchaseItem(item) && _currencyManager.GetCurrency() >= item.value
-                    ? DisplayStyle.Flex
-                    : DisplayStyle.None;
+
+                if (!_shopManager.CanPurchaseItem(item))
+                {
+                    SetStatusText("Item not available!");
+                }
+                else if (_currencyManager.GetCurrency() < item.value)
+                {
+                    SetStatusText("Not enough coins!");
+                }
+                else
+                {
+                    buyButton.style.display = DisplayStyle.Flex;
+                }
             }
         }
         else
@@ -155,14 +172,11 @@ public class ShopUIManager : MonoBehaviour
         var item = _playerInventory.GetItemByGUID(selectedSlot.ItemGUID);
         if (item != null && _shopManager.SellItem(item))
         {
-            // UI will update via currency changed event
             UpdatePlayerInventory();
             UpdateCoinDisplay();
 
-            // Clear selection
-            selectedSlot = null;
-            sellButton.style.display = DisplayStyle.None;
-            itemDescription.ClearDetails();
+
+            SetStatusText($"Sold {item.item.itemName} for {item.value} coins!");
         }
     }
 
@@ -173,22 +187,77 @@ public class ShopUIManager : MonoBehaviour
         var shopItem = _shopManager.GetAvailableItems()
             .FirstOrDefault(i => i.ItemGUID == selectedSlot.ItemGUID);
 
-        if (shopItem != null && _shopManager.PurchaseItem(shopItem))
+        if (shopItem != null)
         {
-            // UI will update via currency changed event
-            UpdatePlayerInventory();
-            UpdateCoinDisplay();
-            PopulateShop(); // Refresh shop in case quantities changed
-            itemDescription.SetItemQuantity(_shopManager.GetItemQuantity(shopItem));
-            // Clear selection
+            if (_currencyManager.GetCurrency() < shopItem.value)
+            {
+                SetStatusText("Not enough coins!");
+                return;
+            }
+
+            if (!_shopManager.CanPurchaseItem(shopItem))
+            {
+                SetStatusText("Item not available!");
+                return;
+            }
+
+            if (_shopManager.PurchaseItem(shopItem))
+            {
+                UpdatePlayerInventory();
+                UpdateCoinDisplay();
+                PopulateShop();
+                itemDescription.SetItemQuantity(_shopManager.GetItemQuantity(shopItem));
+
+
+                SetStatusText($"Purchased {shopItem.item.itemName}!");
+            }
+        }
+    }
+
+    private void OnSellAllButtonClicked()
+    {
+        var fishInventory = _playerInventory.GetInventory(InventoryManager.InventoryType.Fish);
+        if (fishInventory.Count == 0)
+        {
+            SetStatusText("No fish to sell!");
+            return;
+        }
+
+        int totalSold = 0;
+        int totalEarned = 0;
+
+        var itemsToSell = new List<InventoryItemInstance>(fishInventory);
+
+        foreach (var fish in itemsToSell)
+        {
+            if (_shopManager.SellItem(fish))
+            {
+                totalSold++;
+                totalEarned += fish.value;
+            }
+        }
+
+        // Update UI
+        UpdatePlayerInventory();
+        UpdateCoinDisplay();
+
+        // Clear any selected item
+        if (selectedSlot != null)
+        {
+            selectedSlot.RemoveFromClassList("selected");
             selectedSlot = null;
-            buyButton.style.display = DisplayStyle.None;
+            sellButton.style.display = DisplayStyle.None;
             itemDescription.ClearDetails();
+        }
+
+        // Update status label
+        if (totalSold > 0)
+        {
+            SetStatusText($"Sold {totalSold} fish for {totalEarned} coins!");
         }
         else
         {
-            // TODO: Show error message UI
-            Debug.Log("Cannot purchase item!");
+            SetStatusText("No fish were sold.");
         }
     }
 
@@ -197,5 +266,17 @@ public class ShopUIManager : MonoBehaviour
         coinAmountLabel.text = _currencyManager.GetCurrency().ToString();
     }
 
+    private void SetStatusText(string message)
+    {
+        if (string.IsNullOrEmpty(message))
+        {
+            statusLabel.style.display = DisplayStyle.None;
+        }
+        else
+        {
+            statusLabel.style.display = DisplayStyle.Flex;
+            statusLabel.text = message;
+        }
+    }
 
 }

@@ -169,3 +169,30 @@
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
     white-space: normal;
 }
+
+#SellAllButton {
+    margin-top: 10px;
+    background-color: #4CAF50;
+}
+
+#SellAllButton:hover {
+    background-color: #45a049;
+}
+
+#SellAllButton:active {
+    background-color: #3d8b40;
+}
+
+.status-label {
+    margin-top: 16px;
+    padding: 12px 16px;
+    -unity-text-align: middle-center;
+    white-space: normal;
+    -unity-font-definition: resource('Fonts & Materials/BaksoSapi');
+    color: rgb(255, 246, 229);
+    font-size: 28px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    transition: opacity 0.2s ease-out;
+}
