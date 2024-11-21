@@ -56,7 +56,7 @@ public class PlayerInteract : MonoBehaviour
         IInteractable newInteract;
         if (other.TryGetComponent(out newInteract) || other.transform.root.TryGetComponent(out newInteract))
         {
-            if(newInteract == interactable)
+            if (newInteract == interactable)
             {
                 interactable = null;
                 interactIcon.gameObject.SetActive(false);

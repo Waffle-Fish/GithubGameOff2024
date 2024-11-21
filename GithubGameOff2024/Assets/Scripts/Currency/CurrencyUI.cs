@@ -13,6 +13,6 @@ public class CurrencyUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currencyText.text = CurrencyManager.instance.GetCurrency().ToString();
+        currencyText.text = CurrencyManager.Instance.GetCurrency().ToString();
     }
 }

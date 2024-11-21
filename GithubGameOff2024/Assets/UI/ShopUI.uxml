@@ -1,0 +1,36 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Shop.uss?fileID=7433441132597879392&amp;guid=234ad4ef4b337ef4888701fccc2a531e&amp;type=3#Shop" />
+    <Style src="project://database/Assets/UI/Inventory.uss?fileID=7433441132597879392&amp;guid=5f10b64da6d4ada438eb17cd63fed364&amp;type=3#Inventory" />
+    <Style src="project://database/Assets/UI/UIAnimations.uss?fileID=7433441132597879392&amp;guid=2ea762a4abedb42469ae103676d2ff64&amp;type=3#UIAnimations" />
+    <ui:VisualElement name="Container" class="container">
+        <ui:VisualElement name="Shop" class="inventory-container">
+            <ui:VisualElement name="HeaderContainer" class="header-container">
+                <ui:Label name="ShopName" text="Shop" class="inventory-header" />
+                <ui:VisualElement name="CoinDisplay" class="coin-display">
+                    <ui:VisualElement name="CoinIcon" class="coin-icon" />
+                    <ui:Label text="0" name="CoinAmount" class="coin-amount" />
+                </ui:VisualElement>
+                <ui:Button name="ExitButton" text="Exit" class="exit-button" />
+            </ui:VisualElement>
+            <ui:VisualElement name="ShopContainer" class="shop-container">
+                <ui:VisualElement name="SellSection" class="shop-section">
+                    <ui:Label text="Your Items" class="section-header" />
+                    <ui:ScrollView>
+                        <ui:VisualElement name="PlayerInventory" class="shop-slot-container" />
+                    </ui:ScrollView>
+                </ui:VisualElement>
+                <ui:VisualElement name="BuySection" class="shop-section">
+                    <ui:Label text="Shop Items" class="section-header" />
+                        <ui:VisualElement name="ShopInventory" class="shop-slot-container" />
+                </ui:VisualElement>
+                <ui:VisualElement name="DescriptionSection" class="description-section">
+                    <ShopDescriptionSlot name="ItemDescription" />
+                    <ui:Button text="Buy Selected" name="BuyButton" class="transaction-button" style="display: none;" />
+                    <ui:Button text="Sell Selected" name="SellButton" class="transaction-button" style="display: none;" />
+                    <ui:Button text="Sell All Fish" name="SellAllButton" class="transaction-button" />
+                    <ui:Label name="StatusLabel" class="status-label" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

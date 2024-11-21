@@ -7,7 +7,7 @@ public class CurrencyManager : MonoBehaviour
 
     public int amount = 0;
     public float saveInterval = 1f;
-    public static CurrencyManager instance
+    public static CurrencyManager Instance
     {
         get
         {
@@ -54,13 +54,13 @@ public class CurrencyManager : MonoBehaviour
     }
     public void AddCurrency(int amount)
     {
-        instance.amount += amount;
+        Instance.amount += amount;
     }
     public bool RemoveCurrency(int amount)
     {
-        if (instance.amount >= amount)
+        if (Instance.amount >= amount)
         {
-            instance.amount -= amount;
+            Instance.amount -= amount;
             return true;
         }
         return false;
@@ -68,7 +68,7 @@ public class CurrencyManager : MonoBehaviour
 
     public int GetCurrency()
     {
-        return instance.amount;
+        return Instance.amount;
     }
 
 

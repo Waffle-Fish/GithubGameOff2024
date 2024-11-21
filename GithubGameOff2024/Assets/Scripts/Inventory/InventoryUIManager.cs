@@ -1,3 +1,4 @@
+using System;
 using System.Net.Sockets;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -11,11 +12,13 @@ public class InventoryUIManager : MonoBehaviour
     private VisualElement fishDescriptionSlot;
     private VisualElement toolsDescriptionSlot;
     private VisualElement trinketsDescriptionSlot;
-    // Start is called before the first frame update
+
+    private Label coinLabel;
+
+
     void Awake()
     {
         InventoryManager.Instance.OnInventoryChanged += OnInventoryChanged;
-
 
         uiDocument = gameObject.GetComponent<UIDocument>();
         if (uiDocument != null)
@@ -32,6 +35,22 @@ public class InventoryUIManager : MonoBehaviour
             fishDescriptionSlot = root.Q<VisualElement>("FishDescriptionSlot");
             toolsDescriptionSlot = root.Q<VisualElement>("ToolDescriptionSlot");
             trinketsDescriptionSlot = root.Q<VisualElement>("TrinketDescriptionSlot");
+
+            coinLabel = root.Q<Label>("CoinAmount");
+
+            for (int i = 0; i < InventoryManager.Instance.maxFish; i++)
+            {
+                fishInventoryContainer.Add(new InventorySlot());
+            }
+            for (int i = 0; i < InventoryManager.Instance.maxTools; i++)
+            {
+                toolsInventoryContainer.Add(new InventorySlot());
+            }
+            for (int i = 0; i < InventoryManager.Instance.maxTrinkets; i++)
+            {
+                trinketsInventoryContainer.Add(new InventorySlot());
+            }
+
         }
         else
         {
@@ -41,6 +60,31 @@ public class InventoryUIManager : MonoBehaviour
     void OnDestroy()
     {
         InventoryManager.Instance.OnInventoryChanged -= OnInventoryChanged;
+    }
+    public void PopulateInventory()
+    {
+        foreach (InventoryItemInstance item in InventoryManager.Instance.GetInventory(InventoryManager.InventoryType.Fish))
+        {
+            if (fishInventoryContainer.Q<InventorySlot>().ItemGUID == System.Guid.Empty)
+            {
+                fishInventoryContainer.Q<InventorySlot>().HoldItem(item);
+            }
+        }
+        foreach (InventoryItemInstance item in InventoryManager.Instance.GetInventory(InventoryManager.InventoryType.Tools))
+        {
+            if (toolsInventoryContainer.Q<InventorySlot>().ItemGUID == System.Guid.Empty)
+            {
+                toolsInventoryContainer.Q<InventorySlot>().HoldItem(item);
+            }
+        }
+        foreach (InventoryItemInstance item in InventoryManager.Instance.GetInventory(InventoryManager.InventoryType.Trinkets))
+        {
+            if (trinketsInventoryContainer.Q<InventorySlot>().ItemGUID == System.Guid.Empty)
+            {
+                trinketsInventoryContainer.Q<InventorySlot>().HoldItem(item);
+            }
+        }
+        coinLabel.text = CurrencyManager.Instance.GetCurrency().ToString();
     }
 
 

@@ -1,0 +1,22 @@
+.slide-in {
+    transition-property: translate;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
+    translate: 0 -160%;
+}
+
+.slide-in-active {
+    translate: 0 0;
+}
+
+.slide-out {
+    transition-property: translate;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
+    translate: 0 0;
+}
+
+.slide-out-active {
+    translate: 0 -160%;
+}
+
