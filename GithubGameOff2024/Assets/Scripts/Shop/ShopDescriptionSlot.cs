@@ -100,7 +100,6 @@ public class ShopDescriptionSlot : VisualElement
         M_Description.text = itemInstance.item.description;
         M_Rarity.text = $"Rarity: {itemInstance.item.rarity}";
         M_Weight.text = $"Weight: {itemInstance.item.weight:F1}";
-        M_Quantity.text = $"Quantity: {itemInstance.quantity}";
         M_Value.text = $"{itemInstance.value:F0}";
 
         // Add visual feedback for rarity

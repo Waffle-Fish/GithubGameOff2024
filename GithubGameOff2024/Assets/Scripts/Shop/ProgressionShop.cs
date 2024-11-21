@@ -16,6 +16,15 @@ public class ProgressionShop : BaseShop
         return _shopItems.GetRange(0, Mathf.Min(_currentUnlockedIndex + 1, _shopItems.Count));
     }
 
+    public int GetItemQuantity(ShopItem item)
+    {
+        if (_currentUnlockedIndex < _shopItems.Count && item == _shopItems[_currentUnlockedIndex])
+        {
+            return 1;
+        }
+        return 0;
+    }
+
     protected override void OnItemPurchased(ShopItem item)
     {
         _currentUnlockedIndex++;

@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour
     private CurrencyManager currencyManager;
     private InventoryManager inventoryManager;
 
-    private const float FADE_DELAY = 0.2f;
+    private const float ANIMATION_DELAY = 0.55f;
 
     private void Awake()
     {
@@ -76,15 +76,14 @@ public class UIManager : MonoBehaviour
         CloseInventory();
 
         var root = shopUIDocument.rootVisualElement;
-        var shopContainer = root.Q<VisualElement>("Shop");
 
         // Setup root fade first
         root.visible = true;
-        root.AddToClassList("fade-in");
-        root.AddToClassList("fade-in-active");
+        root.RemoveFromClassList("slide-out");
+        root.RemoveFromClassList("slide-out-active");
+        root.AddToClassList("slide-in");
+        root.AddToClassList("slide-in-active");
 
-        // Delay the slide animation
-        StartCoroutine(DelayedSlideIn(shopContainer));
 
         shopUIManager.OpenShop(shopManager);
     }
@@ -92,47 +91,41 @@ public class UIManager : MonoBehaviour
     public void CloseShop()
     {
         var root = shopUIDocument.rootVisualElement;
-        var shopContainer = root.Q<VisualElement>("Shop");
 
         // Start with sliding out the container
-        shopContainer.RemoveFromClassList("slide-in");
-        shopContainer.RemoveFromClassList("slide-in-active");
-        shopContainer.AddToClassList("slide-out");
-        shopContainer.AddToClassList("slide-out-active");
+        root.RemoveFromClassList("slide-in");
+        root.RemoveFromClassList("slide-in-active");
+        root.AddToClassList("slide-out");
+        root.AddToClassList("slide-out-active");
 
-        // Delay the fade out
-        StartCoroutine(DelayedFadeOut(root));
+        StartCoroutine(HideAfterAnimation(root, ANIMATION_DELAY));
     }
 
     private void OpenInventory()
     {
         var root = inventoryUIDocument.rootVisualElement;
-        var inventoryContainer = root.Q<VisualElement>("Inventory");
 
-        // Setup root fade first
         root.visible = true;
-        root.AddToClassList("fade-in");
-        root.AddToClassList("fade-in-active");
-
-        // Delay the slide animation
-        StartCoroutine(DelayedSlideIn(inventoryContainer));
+        root.RemoveFromClassList("slide-out");
+        root.RemoveFromClassList("slide-out-active");
+        root.AddToClassList("slide-in");
+        root.AddToClassList("slide-in-active");
 
         inventoryUIManager.PopulateInventory();
+
     }
 
     public void CloseInventory()
     {
         var root = inventoryUIDocument.rootVisualElement;
-        var inventoryContainer = root.Q<VisualElement>("Inventory");
 
         // Start with sliding out the container
-        inventoryContainer.RemoveFromClassList("slide-in");
-        inventoryContainer.RemoveFromClassList("slide-in-active");
-        inventoryContainer.AddToClassList("slide-out");
-        inventoryContainer.AddToClassList("slide-out-active");
+        root.RemoveFromClassList("slide-in");
+        root.RemoveFromClassList("slide-in-active");
+        root.AddToClassList("slide-out");
+        root.AddToClassList("slide-out-active");
 
-        // Delay the fade out
-        StartCoroutine(DelayedFadeOut(root));
+        StartCoroutine(HideAfterAnimation(root, ANIMATION_DELAY));
     }
 
     private void ToggleInventoryUI()
@@ -141,7 +134,7 @@ public class UIManager : MonoBehaviour
         {
             CloseInventory();
         }
-        else
+        else if (!shopUIDocument.rootVisualElement.visible)
         {
             OpenInventory();
         }
@@ -154,25 +147,5 @@ public class UIManager : MonoBehaviour
         element.RemoveFromClassList("fade-out");
         element.RemoveFromClassList("fade-out-active");
         element.visible = false;
-    }
-
-    private IEnumerator DelayedSlideIn(VisualElement container)
-    {
-        yield return new WaitForSeconds(FADE_DELAY);
-        container.RemoveFromClassList("slide-out");
-        container.RemoveFromClassList("slide-out-active");
-        container.AddToClassList("slide-in");
-        container.AddToClassList("slide-in-active");
-    }
-
-    private IEnumerator DelayedFadeOut(VisualElement root)
-    {
-        yield return new WaitForSeconds(FADE_DELAY);
-        root.RemoveFromClassList("fade-in");
-        root.RemoveFromClassList("fade-in-active");
-        root.AddToClassList("fade-out");
-        root.AddToClassList("fade-out-active");
-
-        StartCoroutine(HideAfterAnimation(root, 0.5f));
     }
 }

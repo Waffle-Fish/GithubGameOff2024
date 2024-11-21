@@ -9,6 +9,10 @@ public class QuantityShop : BaseShop
     {
         _itemQuantities[item] = quantity;
     }
+    public int GetItemQuantity(ShopItem item)
+    {
+        return _itemQuantities.ContainsKey(item) ? _itemQuantities[item] : 0;
+    }
 
     public override bool CanPurchaseItem(ShopItem item)
     {

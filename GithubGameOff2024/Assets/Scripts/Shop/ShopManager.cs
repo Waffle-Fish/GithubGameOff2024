@@ -98,6 +98,23 @@ public class ShopManager : MonoBehaviour
         }
         return _currentShop.GetAvailableItems();
     }
+    public int GetItemQuantity(ShopItem item)
+    {
+        if (_currentShop == null)
+        {
+            Debug.LogError("Shop not initialized!");
+            return 0;
+        }
+        if (_currentShop is QuantityShop quantityShop)
+        {
+            return quantityShop.GetItemQuantity(item);
+        }
+        if (_currentShop is ProgressionShop progressionShop)
+        {
+            return progressionShop.GetItemQuantity(item);
+        }
+        return 0;
+    }
     public bool CanPurchaseItem(ShopItem item)
     {
         return _currentShop.CanPurchaseItem(item);

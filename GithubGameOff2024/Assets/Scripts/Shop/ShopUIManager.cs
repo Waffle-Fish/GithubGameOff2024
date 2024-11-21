@@ -127,10 +127,10 @@ public class ShopUIManager : MonoBehaviour
         {
             var item = _shopManager.GetAvailableItems()
                 .FirstOrDefault(i => i.ItemGUID == slot.ItemGUID);
-
             if (item != null)
             {
                 itemDescription.SetItemDetails(item);
+                itemDescription.SetItemQuantity(_shopManager.GetItemQuantity(item));
                 buyButton.style.display =
                     _shopManager.CanPurchaseItem(item) && _currencyManager.GetCurrency() >= item.value
                     ? DisplayStyle.Flex
@@ -179,7 +179,7 @@ public class ShopUIManager : MonoBehaviour
             UpdatePlayerInventory();
             UpdateCoinDisplay();
             PopulateShop(); // Refresh shop in case quantities changed
-
+            itemDescription.SetItemQuantity(_shopManager.GetItemQuantity(shopItem));
             // Clear selection
             selectedSlot = null;
             buyButton.style.display = DisplayStyle.None;
