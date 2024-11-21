@@ -40,13 +40,13 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         // Handle inventory toggle
-        if (Input.GetKeyDown(inventoryToggleKey) && !pauseMenuManager.IsPauseMenuOpen())
+        if (InputManager.Instance.WasInventoryButtonPressed() && !pauseMenuManager.IsPauseMenuOpen())
         {
             ToggleInventoryUI();
         }
 
         // Handle pause menu toggle
-        if (Input.GetKeyDown(pauseMenuKey))
+        if (InputManager.Instance.WasPauseButtonPressed())
         {
             TogglePauseMenu();
         }

@@ -47,4 +47,12 @@ public class InputManager : MonoBehaviour
     public bool GetFishing(){
         return  1.0f == inputActions.Player.Fish.ReadValue<float>();
     }
+
+    public bool WasInventoryButtonPressed(){
+        return inputActions.Player.Inventory.WasPressedThisFrame();
+    }
+
+    public bool WasPauseButtonPressed(){
+        return inputActions.Player.Pause.WasPressedThisFrame();
+    }
 }
