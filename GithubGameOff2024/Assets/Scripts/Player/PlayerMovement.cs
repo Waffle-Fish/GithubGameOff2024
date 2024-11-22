@@ -14,8 +14,11 @@ public class PlayerMovement : MonoBehaviour
     private InputManager inputManager;
     private Transform cameraTransform;
 
+    private Animator animator;
+
     private void Awake() {
         controller = GetComponent<CharacterController>();
+        animator = GetComponentInChildren<Animator>();
         inputManager = InputManager.Instance;
         cameraTransform = Camera.main.transform;
     }
@@ -44,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         if (move != Vector3.zero) {
             gameObject.transform.forward = move;
         }
+        animator.SetBool("Walking", move != Vector3.zero);
     }
 
     private void Gravity()
@@ -51,8 +55,4 @@ public class PlayerMovement : MonoBehaviour
         playerVelocity.y -= gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
     }
-
-
-
-    
 }
