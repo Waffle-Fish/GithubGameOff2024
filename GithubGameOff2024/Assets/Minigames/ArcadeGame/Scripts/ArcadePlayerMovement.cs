@@ -11,7 +11,9 @@ public class ArcadePlayerMovement : MonoBehaviour
     public bool isGrounded;
     public bool isCrouching;
     public float jumpForce;
+    public float groundCheckDistance;
     public float speed;
+    public float maxSpeed;
     Rigidbody2D rb;
 
     private float jumpBuffer;
@@ -63,13 +65,15 @@ public class ArcadePlayerMovement : MonoBehaviour
                 StartCoroutine(JumpSqueeze(0.9f, 1.1f, 0.1f));
         }
 
-        if((!isGrounded && !InputManager.Instance.IsSpacePressed()) || rb.linearVelocity.y < 0)
+        if ((!isGrounded && !InputManager.Instance.IsSpacePressed()) || rb.linearVelocity.y < 0 && !isGrounded)
         {
             rb.gravityScale = 6;
 
-            if(!isGrounded)
+            if (!isGrounded)
                 animator.SetBool("Falling", true);
         }
+        else if (isGrounded && jumpCoolDown < 0)
+            rb.gravityScale = 1;
 
         bool wasCrouching = isCrouching;
         isCrouching = isGrounded && input.y < 0;
@@ -84,12 +88,23 @@ public class ArcadePlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        isGrounded = Physics2D.OverlapPoint(groundCheck.position, whatIsGround);
+        RaycastHit2D hit2D = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
+        if (!hit2D)
+            hit2D = Physics2D.Raycast(groundCheck.position + Vector3.right * 0.25f, Vector2.down, groundCheckDistance, whatIsGround);
+        else if (!hit2D)
+            hit2D = Physics2D.Raycast(groundCheck.position + Vector3.left * 0.25f, Vector2.down, groundCheckDistance, whatIsGround);
+
+        isGrounded = hit2D;
+
+        isGrounded = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
         float x = InputManager.Instance.GetPlayerMovement().x;
         if (Mathf.Approximately(x, 0) || isCrouching)
             x = -rb.linearVelocity.x / 10;
 
-        Vector3 move = new Vector3(x * speed, rb.linearVelocity.y, 0f);
+        if (Mathf.Abs(rb.linearVelocity.x) > maxSpeed && (rb.linearVelocity.x > 0 == x > 0))
+            x = 0;
+
+        Vector3 move = new Vector3(x * speed, 0, 0f);
         rb.AddForce(move);
     }
 
@@ -112,5 +127,12 @@ public class ArcadePlayerMovement : MonoBehaviour
             yield return null;
         }
 
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(transform.position, transform.position - Vector3.up * groundCheckDistance);
+        Gizmos.DrawLine(transform.position + Vector3.right * 0.25f, transform.position + Vector3.right * 0.25f - Vector3.up * groundCheckDistance);
+        Gizmos.DrawLine(transform.position + Vector3.left * 0.25f, transform.position + Vector3.left * 0.25f - Vector3.up * groundCheckDistance);
     }
 }
