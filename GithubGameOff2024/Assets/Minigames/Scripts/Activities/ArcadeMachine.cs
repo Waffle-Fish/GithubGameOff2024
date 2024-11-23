@@ -5,11 +5,12 @@ using UnityEngine.Events;
 public class ArcadeMachine : MonoBehaviour, IInteractable, IInteractableNPC
 {
     public Cinemachine.CinemachineVirtualCamera activityCam;
+    public rcadeManager arcadeManager;
     public Vector3 standOffset;
     public bool beingInteracted;
     private bool npcInteractedWith;
 
-    public Vector2 _timeMinMax { get { return new Vector2(4f, 4.5f); } set { } }
+    public Vector2 _timeMinMax { get { return new Vector2(5f, 5f); } set { } }
 
     public GameObject Interact()
     {
@@ -19,6 +20,9 @@ public class ArcadeMachine : MonoBehaviour, IInteractable, IInteractableNPC
         npcInteractedWith = false;
         activityCam.Priority = activityCam.Priority == 30 ? 0 : 30;
         beingInteracted = !beingInteracted;
+
+        TurnOn(beingInteracted);
+
         return gameObject;
     }
 
@@ -29,12 +33,22 @@ public class ArcadeMachine : MonoBehaviour, IInteractable, IInteractableNPC
 
     public bool NPCInteract()
     {
+        TurnOn(true);
+        Invoke(nameof(TurnOn), 5f);
         return false;
     }
 
     public Vector3 GetPosition()
     {
         return transform.position + standOffset;
+    }
+
+    public void TurnOn(bool on = false)
+    {
+        if (on)
+            arcadeManager.TurnOn();
+        else
+            arcadeManager.TurnOff();
     }
 
     private void OnDrawGizmosSelected()
