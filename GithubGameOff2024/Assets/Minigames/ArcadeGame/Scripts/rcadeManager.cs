@@ -7,15 +7,17 @@ public class rcadeManager : MonoBehaviour
     public Transform blackScreen;
     public float turnOnSpeed;
     public ArcadePlayerMovement playerMovement;
+    public bool playerOperated;
 
     private void Start()
     {
         TurnOff();
     }
 
-    public void TurnOn()
+    public void TurnOn(bool isPlayer)
     {
         playerMovement.enabled = true;
+        playerOperated = isPlayer;
         StopAllCoroutines();
         StartCoroutine(LerpFunction(0, turnOnSpeed, blackScreen.localScale.x, true));
     }

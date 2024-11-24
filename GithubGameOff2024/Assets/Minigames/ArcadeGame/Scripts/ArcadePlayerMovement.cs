@@ -22,17 +22,65 @@ public class ArcadePlayerMovement : MonoBehaviour
 
     private Transform spriteHolder;
 
+    private Vector2 input;
+    private bool jumpWasPressed;
+    private bool jumpIsPressed;
+
+    public rcadeManager manager;
+
+    private float randomSwitchMovementTimer;
+    private float randomJumpTimer;
+    private float letGoOfSpaceTimer;
+
     void Start()
     {
         spriteHolder = transform.GetChild(0);
         rb = GetComponent<Rigidbody2D>();
     }
 
+    void GetInput()
+    {
+        input = InputManager.Instance.GetPlayerMovement();
+        jumpWasPressed = InputManager.Instance.WasSpacePressed();
+        jumpIsPressed = InputManager.Instance.IsSpacePressed();
+    }
+
+    void CrazyInput()
+    {
+        if(randomSwitchMovementTimer < 0)
+        {
+            randomSwitchMovementTimer = Random.Range(0.1f, 1.4f);
+            input.x = Random.Range(-1, 2);
+            input.y = Random.Range(-1, 5);
+        }
+
+        if(randomJumpTimer < 0)
+        {
+            jumpWasPressed = true;
+            jumpIsPressed = true;
+            randomJumpTimer = Random.Range(0.2f, 2f);
+            letGoOfSpaceTimer = Random.Range(0.1f, 0.5f);
+        }
+
+        if(letGoOfSpaceTimer < 0)
+        {
+            jumpWasPressed = false;
+            jumpIsPressed = false;
+        }
+
+        randomSwitchMovementTimer -= Time.deltaTime;
+        randomJumpTimer -= Time.deltaTime;
+        letGoOfSpaceTimer -= Time.deltaTime;
+    }
+
     void Update()
     {
-        animator.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
+        if (manager.playerOperated)
+            GetInput();
+        else
+            CrazyInput();
 
-        Vector2 input = InputManager.Instance.GetPlayerMovement();
+        animator.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
 
         if(input.x < 0)
         {
@@ -42,7 +90,7 @@ public class ArcadePlayerMovement : MonoBehaviour
             spriteHolder.localScale = new Vector3(1, 1, 1);
         }
 
-        if (InputManager.Instance.WasSpacePressed())
+        if (jumpWasPressed)
             jumpBuffer = 0.1f;
 
         if (isGrounded)
@@ -65,7 +113,7 @@ public class ArcadePlayerMovement : MonoBehaviour
                 StartCoroutine(JumpSqueeze(0.9f, 1.1f, 0.1f));
         }
 
-        if ((!isGrounded && !InputManager.Instance.IsSpacePressed()) || rb.linearVelocity.y < 0 && !isGrounded)
+        if ((!isGrounded && !jumpIsPressed) || rb.linearVelocity.y < 0 && !isGrounded)
         {
             rb.gravityScale = 6;
 
@@ -97,7 +145,7 @@ public class ArcadePlayerMovement : MonoBehaviour
         isGrounded = hit2D;
 
         isGrounded = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
-        float x = InputManager.Instance.GetPlayerMovement().x;
+        float x = input.x;
         if (Mathf.Approximately(x, 0) || isCrouching)
             x = -rb.linearVelocity.x / 10;
 

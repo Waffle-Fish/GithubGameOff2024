@@ -10,7 +10,7 @@ public class ArcadeMachine : MonoBehaviour, IInteractable, IInteractableNPC
     public bool beingInteracted;
     private bool npcInteractedWith;
 
-    public Vector2 _timeMinMax { get { return new Vector2(5f, 5f); } set { } }
+    public Vector2 _timeMinMax { get { return new Vector2(5f, 25f); } set { } }
 
     public GameObject Interact()
     {
@@ -36,15 +36,15 @@ public class ArcadeMachine : MonoBehaviour, IInteractable, IInteractableNPC
 
     public bool NPCInteract()
     {
-        TurnOn();
         npcInteractedWith = true;
+        TurnOn();
         return false;
     }
 
     public void EndNPCInteract() 
     {
-        TurnOff();
         npcInteractedWith = false;
+        TurnOff();
     }
 
     public Vector3 GetPosition()
@@ -54,7 +54,7 @@ public class ArcadeMachine : MonoBehaviour, IInteractable, IInteractableNPC
 
     public void TurnOn()
     {
-        arcadeManager.TurnOn();
+        arcadeManager.TurnOn(!npcInteractedWith);
     }
 
     public void TurnOff()
