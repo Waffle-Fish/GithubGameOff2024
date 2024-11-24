@@ -41,6 +41,9 @@ public class PlayerInteract : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (intertactableTransform != null && Vector3.Distance(other.transform.position, transform.position) > Vector3.Distance(intertactableTransform.position, transform.position))
+            return;
+
         IInteractable newInteract;
         if(other.TryGetComponent(out newInteract) || other.transform.root.TryGetComponent(out newInteract))
         {

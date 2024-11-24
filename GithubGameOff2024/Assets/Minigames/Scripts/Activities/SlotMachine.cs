@@ -26,6 +26,11 @@ public class SlotMachine : MonoBehaviour, IInteractable, IInteractableNPC
 
     public Vector2 _timeMinMax { get { return new Vector2(5f, 5.5f); } set { } }
 
+    private void Start()
+    {
+        NPCInteract();
+    }
+
     public GameObject Interact()
     {
         if (npcInteractedWith)
@@ -34,6 +39,15 @@ public class SlotMachine : MonoBehaviour, IInteractable, IInteractableNPC
         npcInteractedWith = false;
         activityCam.Priority = activityCam.Priority == 30 ? 0 : 30;
         beingInteracted = !beingInteracted;
+
+        if(isSpinning)
+        {
+            for (int i = 0; i < stopped.Length; i++)
+            {
+                stopped[i] = true;
+            }
+        }
+
         return gameObject;
     }
 
