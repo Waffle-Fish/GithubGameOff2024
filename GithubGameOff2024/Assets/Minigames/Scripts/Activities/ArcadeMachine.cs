@@ -21,7 +21,10 @@ public class ArcadeMachine : MonoBehaviour, IInteractable, IInteractableNPC
         activityCam.Priority = activityCam.Priority == 30 ? 0 : 30;
         beingInteracted = !beingInteracted;
 
-        TurnOn(beingInteracted);
+        if (beingInteracted)
+            TurnOn();
+        else
+            TurnOff();
 
         return gameObject;
     }
@@ -33,9 +36,15 @@ public class ArcadeMachine : MonoBehaviour, IInteractable, IInteractableNPC
 
     public bool NPCInteract()
     {
-        TurnOn(true);
-        Invoke(nameof(TurnOn), 5f);
+        TurnOn();
+        npcInteractedWith = true;
         return false;
+    }
+
+    public void EndNPCInteract() 
+    {
+        TurnOff();
+        npcInteractedWith = false;
     }
 
     public Vector3 GetPosition()
@@ -43,12 +52,14 @@ public class ArcadeMachine : MonoBehaviour, IInteractable, IInteractableNPC
         return transform.position + standOffset;
     }
 
-    public void TurnOn(bool on = false)
+    public void TurnOn()
     {
-        if (on)
-            arcadeManager.TurnOn();
-        else
-            arcadeManager.TurnOff();
+        arcadeManager.TurnOn();
+    }
+
+    public void TurnOff()
+    {
+        arcadeManager.TurnOff();
     }
 
     private void OnDrawGizmosSelected()

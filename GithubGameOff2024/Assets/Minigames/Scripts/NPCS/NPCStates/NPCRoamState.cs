@@ -13,16 +13,20 @@ public class NPCRoamState : NPCState
 
     public override void EnterState()
     {
-        base.EnterState();
         _waitTime = Random.Range(15f, 25f);
 
-        _targetPos = npc.GetRandomActivity();
+        if(!(npc.activity != null && npc.interupted))
+        {
+            _targetPos = npc.GetRandomActivity();
+        }
+
 
         if (npc.activity == null)
             npc.StateMachine.ChangeState(npc.IdleState);
 
         npc.agent.SetDestination(_targetPos);
         _targetPos = npc.agent.destination;
+        base.EnterState();
     }
 
     public override void ExitState()
@@ -34,7 +38,7 @@ public class NPCRoamState : NPCState
     {
         base.FrameUpdate();
 
-        if (_time >= _waitTime)
+        if (_time >= _waitTime || npc.activity.Taken())
         {
             npc.StateMachine.ChangeState(npc.IdleState);
         }

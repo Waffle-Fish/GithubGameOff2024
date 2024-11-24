@@ -24,7 +24,7 @@ public class SlotMachine : MonoBehaviour, IInteractable, IInteractableNPC
     public UnityEvent loseEffects;
     private bool npcInteractedWith;
 
-    public Vector2 _timeMinMax { get { return new Vector2(4f, 4.5f); } set { } }
+    public Vector2 _timeMinMax { get { return new Vector2(5f, 5.5f); } set { } }
 
     public GameObject Interact()
     {
@@ -51,6 +51,8 @@ public class SlotMachine : MonoBehaviour, IInteractable, IInteractableNPC
         }
         return false;
     }
+
+    public void EndNPCInteract() { }
 
     public Vector3 GetPosition()
     {
