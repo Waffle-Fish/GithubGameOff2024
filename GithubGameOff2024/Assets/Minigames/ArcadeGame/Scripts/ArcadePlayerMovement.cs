@@ -138,9 +138,9 @@ public class ArcadePlayerMovement : MonoBehaviour
     {
         RaycastHit2D hit2D = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
         if (!hit2D)
-            hit2D = Physics2D.Raycast(groundCheck.position + Vector3.right * 0.25f, Vector2.down, groundCheckDistance, whatIsGround);
+            hit2D = Physics2D.Raycast(groundCheck.position + Vector3.right * 0.4f, Vector2.down, groundCheckDistance, whatIsGround);
         else if (!hit2D)
-            hit2D = Physics2D.Raycast(groundCheck.position + Vector3.left * 0.25f, Vector2.down, groundCheckDistance, whatIsGround);
+            hit2D = Physics2D.Raycast(groundCheck.position + Vector3.left * 0.4f, Vector2.down, groundCheckDistance, whatIsGround);
 
         isGrounded = hit2D;
 
@@ -148,9 +148,11 @@ public class ArcadePlayerMovement : MonoBehaviour
         float x = input.x;
         if (Mathf.Approximately(x, 0) || isCrouching)
             x = -rb.linearVelocity.x / 10;
+        else if (x > 0 != rb.linearVelocity.x > 0)
+            x *= 2;
 
         if (Mathf.Abs(rb.linearVelocity.x) > maxSpeed && (rb.linearVelocity.x > 0 == x > 0))
-            x = 0;
+            x /= 10;
 
         Vector3 move = new Vector3(x * speed, 0, 0f);
         rb.AddForce(move);
@@ -180,7 +182,7 @@ public class ArcadePlayerMovement : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawLine(transform.position, transform.position - Vector3.up * groundCheckDistance);
-        Gizmos.DrawLine(transform.position + Vector3.right * 0.25f, transform.position + Vector3.right * 0.25f - Vector3.up * groundCheckDistance);
-        Gizmos.DrawLine(transform.position + Vector3.left * 0.25f, transform.position + Vector3.left * 0.25f - Vector3.up * groundCheckDistance);
+        Gizmos.DrawLine(transform.position + Vector3.right * 0.4f, transform.position + Vector3.right * 0.4f - Vector3.up * groundCheckDistance);
+        Gizmos.DrawLine(transform.position + Vector3.left * 0.4f, transform.position + Vector3.left * 0.4f - Vector3.up * groundCheckDistance);
     }
 }
