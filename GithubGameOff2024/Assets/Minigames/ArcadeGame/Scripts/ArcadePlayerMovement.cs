@@ -45,7 +45,7 @@ public class ArcadePlayerMovement : MonoBehaviour
         jumpIsPressed = InputManager.Instance.IsSpacePressed();
     }
 
-    void CrazyInput()
+    void NPCInput()
     {
         if(randomSwitchMovementTimer < 0)
         {
@@ -78,7 +78,7 @@ public class ArcadePlayerMovement : MonoBehaviour
         if (manager.playerOperated)
             GetInput();
         else
-            CrazyInput();
+            NPCInput();
 
         animator.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
 

@@ -1,10 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class rcadeManager : MonoBehaviour
 {
     public Camera cam;
-    public Transform blackScreen;
+    public Image blackScreen;
+    public Image actualBlackScreen;
     public float turnOnSpeed;
     public ArcadePlayerMovement playerMovement;
     public bool playerOperated;
@@ -19,34 +21,33 @@ public class rcadeManager : MonoBehaviour
         playerMovement.enabled = true;
         playerOperated = isPlayer;
         StopAllCoroutines();
-        StartCoroutine(LerpFunction(0, turnOnSpeed, blackScreen.localScale.x, true));
+        StartCoroutine(LerpFunction(0, turnOnSpeed, true));
     }
 
     public void TurnOff()
     {
         playerMovement.enabled = false;
         StopAllCoroutines();
-        StartCoroutine(LerpFunction(1, turnOnSpeed, blackScreen.localScale.x, false));
+        StartCoroutine(LerpFunction(1, 0.1f, false));
     }
 
-    IEnumerator LerpFunction(float endValue, float duration, float scaler, bool on)
+    IEnumerator LerpFunction(float endValue, float duration, bool on)
     {
+        float time = 0;
+        float startValue = blackScreen.color.a;
+
         if (on)
             cam.enabled = true;
 
-        float time = 0;
-        float startValue = scaler;
-        Vector3 startScale = Vector3.one;
+        actualBlackScreen.color = on ? Color.clear : Color.black;
 
         while (time < duration)
         {
-            scaler = Mathf.Lerp(startValue, endValue, time / duration);
-            blackScreen.localScale = new Vector3(scaler, 1);
+            blackScreen.color = new Color(1, 1, 1, Mathf.Lerp(startValue, endValue, time / duration));
             time += Time.deltaTime;
             yield return null;
         }
-
-        blackScreen.localScale = startScale * endValue;
+        blackScreen.color = Vector4.one * endValue;
 
         yield return new WaitForEndOfFrame();
 

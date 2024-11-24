@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2158910671887040661}
   - component: {fileID: 5794253135584060348}
+  - component: {fileID: -8073319417845395335}
   m_Layer: 15
   m_Name: CornerCollider
   m_TagString: Untagged
@@ -82,3 +83,15 @@ PolygonCollider2D:
       - {x: 0.5, y: 0.5}
       - {x: -0.5, y: -0.5}
   m_UseDelaunayMesh: 0
+--- !u!114 &-8073319417845395335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5645739822557600023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b0e58a4e285e14c91b1a21bdc9270e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
