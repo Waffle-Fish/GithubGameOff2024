@@ -10,6 +10,7 @@ public class rcadeManager : MonoBehaviour
     public float turnOnSpeed;
     public ArcadePlayerMovement playerMovement;
     public bool playerOperated;
+    public AnimationCurve fadeCurve;
 
     private void Start()
     {
@@ -18,7 +19,6 @@ public class rcadeManager : MonoBehaviour
 
     public void TurnOn(bool isPlayer)
     {
-        playerMovement.enabled = true;
         playerOperated = isPlayer;
         StopAllCoroutines();
         StartCoroutine(LerpFunction(0, turnOnSpeed, true));
@@ -26,7 +26,6 @@ public class rcadeManager : MonoBehaviour
 
     public void TurnOff()
     {
-        playerMovement.enabled = false;
         StopAllCoroutines();
         StartCoroutine(LerpFunction(1, 0.1f, false));
     }
@@ -38,12 +37,34 @@ public class rcadeManager : MonoBehaviour
 
         if (on)
             cam.enabled = true;
+        else
+        {
+            actualBlackScreen.color = Color.black;
+            playerMovement.enabled = false;
+        }
 
-        actualBlackScreen.color = on ? Color.clear : Color.black;
+        if(on)
+            actualBlackScreen.transform.SetAsFirstSibling();
+        else
+            actualBlackScreen.transform.SetAsLastSibling();
+
+        //actualBlackScreen.color = on ? Color.clear : Color.black;
+
+        if(on)
+        {
+            float secretStartValue = 0, secretEndValue = 1;
+            while (time < duration)
+            {
+                blackScreen.color = new Color(1, 1, 1, Mathf.Lerp(secretStartValue, secretEndValue, fadeCurve.Evaluate(time / duration)));
+                time += Time.deltaTime;
+                yield return null;
+            }
+            time = 0;
+        }
 
         while (time < duration)
         {
-            blackScreen.color = new Color(1, 1, 1, Mathf.Lerp(startValue, endValue, time / duration));
+            blackScreen.color = new Color(1, 1, 1, Mathf.Lerp(startValue, endValue, fadeCurve.Evaluate(time / duration)));
             time += Time.deltaTime;
             yield return null;
         }
@@ -53,5 +74,10 @@ public class rcadeManager : MonoBehaviour
 
         if (!on)
             cam.enabled = false;
+        else
+        {
+            actualBlackScreen.color = Color.clear;
+            playerMovement.enabled = true;
+        }
     }
 }

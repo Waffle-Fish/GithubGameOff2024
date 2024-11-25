@@ -10,7 +10,7 @@ public class ArcadeMachine : MonoBehaviour, IInteractable, IInteractableNPC
     public bool beingInteracted;
     private bool npcInteractedWith;
 
-    public Vector2 _timeMinMax { get { return new Vector2(5f, 25f); } set { } }
+    public Vector2 _timeMinMax { get { return new Vector2(15f, 30f); } set { } }
 
     public GameObject Interact()
     {
