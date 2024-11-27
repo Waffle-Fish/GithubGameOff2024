@@ -228,14 +228,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3074316452255615067
-Transform:
+--- !u!224 &3074316452255615067
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4930006212416125512}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -244,6 +243,11 @@ Transform:
   - {fileID: 5742029428686214983}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5835613371240947516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,7 +262,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 6358019317836293210}
   dialogueText: {fileID: 4931590167546710487}
-  animator: {fileID: 0}
 --- !u!95 &6383126242874928439
 Animator:
   serializedVersion: 7
