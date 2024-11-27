@@ -55,4 +55,8 @@ public class InputManager : MonoBehaviour
     public bool WasPauseButtonPressed(){
         return inputActions.Player.Pause.WasPressedThisFrame();
     }
+
+    public Vector2 GetLook() {
+        return inputActions.Player.Look.ReadValue<Vector2>();
+    }
 }

@@ -3,7 +3,10 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Speed")]
-    public float moveSpeed;
+    [SerializeField]
+    private float moveSpeed;
+    [SerializeField]
+    private float lookSpeed;
     [SerializeField]
     float gravityValue;
 
@@ -33,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     public void MoveUpdate()
     {
         Move();
+        Look();
     }
     
     private void Move() {
@@ -41,9 +45,9 @@ public class PlayerMovement : MonoBehaviour
         move = cameraTransform.forward * move.z + cameraTransform.right * move.x;
         move.y = 0f;
         controller.Move(moveSpeed * Time.deltaTime * move);
-        if (move != Vector3.zero) {
-            gameObject.transform.forward = move;
-        }
+        // if (move != Vector3.zero) {
+        //     gameObject.transform.forward = move;
+        // }
     }
 
     private void Gravity()
@@ -52,7 +56,9 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
-
+    private void Look() {
+        transform.Rotate(Vector3.up, lookSpeed * InputManager.Instance.GetLook().x);
+    }
 
     
 }
