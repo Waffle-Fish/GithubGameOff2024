@@ -1,19 +1,37 @@
 using UnityEngine;
+using UnityEngine.Events;
+using System.Collections;
 
 namespace ArcadePlatformer
 {
     public class ArcadePlayer : MonoBehaviour
     {
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
+        private Vector3 startPos;
+        public ParticleSystem deathPS;
+
+        private void Awake()
+        {
+            startPos = transform.position;
+        }
+
+        public void CollectFish()
         {
 
         }
 
-        // Update is called once per frame
-        void Update()
+        public void Die()
         {
+            deathPS.Play();
+            GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
+            StartCoroutine(death());
+        }
 
+        public IEnumerator death()
+        {
+            yield return new WaitForEndOfFrame();
+
+            GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
+            transform.position = startPos;
         }
     }
 }

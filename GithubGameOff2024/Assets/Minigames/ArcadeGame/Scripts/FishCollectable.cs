@@ -11,6 +11,7 @@ namespace ArcadePlatformer
             if(collision.gameObject.layer == 10)
             {
                 particleManager.EmitParticles(0, transform.localPosition, 10);
+                collision.GetComponent<ArcadePlayer>().CollectFish();
                 gameObject.SetActive(false);
             }
         }
