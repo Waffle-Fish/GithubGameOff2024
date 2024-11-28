@@ -28,7 +28,7 @@ public class ArcadeManager : MonoBehaviour
     public void TurnOff()
     {
         StopAllCoroutines();
-        StartCoroutine(LerpFunction(1, 0.1f, false));
+        StartCoroutine(LerpFunction(1, 0.25f, false));
     }
 
     IEnumerator LerpFunction(float endValue, float duration, bool on)
@@ -46,8 +46,8 @@ public class ArcadeManager : MonoBehaviour
 
         if (on)
             actualBlackScreen.transform.SetAsFirstSibling();
-        else
-            actualBlackScreen.transform.SetAsLastSibling();
+        //else
+        //    actualBlackScreen.transform.SetAsLastSibling();
 
         //actualBlackScreen.color = on ? Color.clear : Color.black;
 
@@ -74,7 +74,13 @@ public class ArcadeManager : MonoBehaviour
         yield return new WaitForEndOfFrame();
 
         if (!on)
+        {
+            actualBlackScreen.transform.SetAsLastSibling();
+
+            yield return new WaitForEndOfFrame();
+
             cam.enabled = false;
+        }
         else
         {
             actualBlackScreen.color = Color.clear;
