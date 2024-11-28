@@ -698,6 +698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35834781b9fd0f343b86e7f97d646662, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiManager: {fileID: 1719428712}
   deathPS: {fileID: 422780953}
 --- !u!114 &138181840
 MonoBehaviour:
@@ -40830,7 +40831,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 52, y: -53.1}
+  m_AnchoredPosition: {x: 51.8, y: -53.1}
   m_SizeDelta: {x: 16, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1356875138
@@ -42203,6 +42204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: 0
   playerMovement: {fileID: 138181840}
+  uiManager: {fileID: 1719428712}
   collectables:
   - {fileID: 1271364203}
   - {fileID: 1550812926}
@@ -44246,7 +44248,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 52.5, y: 29.8}
+  m_AnchoredPosition: {x: 52.3, y: 29.8}
   m_SizeDelta: {x: 65.928, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2093593573
