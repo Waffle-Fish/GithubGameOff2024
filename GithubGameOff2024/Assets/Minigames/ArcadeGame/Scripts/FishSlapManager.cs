@@ -6,6 +6,7 @@ namespace ArcadePlatformer
     {
         public int score;
         public ArcadePlayerMovement playerMovement;
+        public ArcadeUI uiManager;
         public FishCollectable[] collectables;
 
         private Vector3 startingPlayerPos;
@@ -20,6 +21,7 @@ namespace ArcadePlatformer
             playerMovement.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
             playerMovement.transform.position = startingPlayerPos;
             playerMovement.enabled = true;
+            uiManager.ResetData();
         }
 
         public override void TurnOff()
@@ -32,6 +34,8 @@ namespace ArcadePlatformer
             {
                 collectables[i].gameObject.SetActive(true);
             }
+
+            uiManager.ResetData();
         }
     }
 }

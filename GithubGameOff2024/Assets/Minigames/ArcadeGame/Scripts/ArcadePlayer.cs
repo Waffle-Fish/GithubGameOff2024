@@ -6,8 +6,9 @@ namespace ArcadePlatformer
 {
     public class ArcadePlayer : MonoBehaviour
     {
-        private Vector3 startPos;
+        public ArcadeUI uiManager;
         public ParticleSystem deathPS;
+        private Vector3 startPos;
 
         private void Awake()
         {
@@ -16,7 +17,7 @@ namespace ArcadePlatformer
 
         public void CollectFish()
         {
-
+            uiManager.CollectFish();
         }
 
         public void Die()
