@@ -1,15 +1,18 @@
 using UnityEngine;
 
-public class ArcadeCameraFollow : MonoBehaviour
+namespace ArcadePlatformer
 {
-    public Transform player;
-    public float speed;
-
-    private void LateUpdate()
+    public class ArcadeCameraFollow : MonoBehaviour
     {
-        Vector3 newPos = Vector3.Lerp(transform.localPosition, player.localPosition, Time.deltaTime * speed);
-        newPos.z = -10;
+        public Transform player;
+        public float speed;
 
-        transform.localPosition = newPos;
+        private void LateUpdate()
+        {
+            Vector3 newPos = Vector3.Lerp(transform.localPosition, player.localPosition, Time.deltaTime * speed);
+            newPos.z = -10;
+
+            transform.localPosition = newPos;
+        }
     }
 }

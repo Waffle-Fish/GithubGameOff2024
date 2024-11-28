@@ -1,3 +1,4 @@
+using ArcadePlatformer;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -5,7 +6,7 @@ using UnityEngine.Events;
 public class ArcadeMachine : MonoBehaviour, IInteractable, IInteractableNPC
 {
     public Cinemachine.CinemachineVirtualCamera activityCam;
-    public rcadeManager arcadeManager;
+    public ArcadeManager arcadeManager;
     public Vector3 standOffset;
     public bool beingInteracted;
     private bool npcInteractedWith;
