@@ -20,6 +20,11 @@ namespace ArcadePlatformer
             uiManager.CollectFish();
         }
 
+        public void Checkpoint(Vector3 pos)
+        {
+            startPos = pos;
+        }
+
         public void Die()
         {
             deathPS.Play();
