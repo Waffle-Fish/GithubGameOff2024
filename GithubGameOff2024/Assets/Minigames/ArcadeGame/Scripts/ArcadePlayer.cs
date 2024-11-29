@@ -38,6 +38,7 @@ namespace ArcadePlatformer
 
             GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
             transform.position = startPos;
+            deathPS.Play();
         }
     }
 }

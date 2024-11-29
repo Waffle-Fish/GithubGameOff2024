@@ -35,6 +35,8 @@ namespace ArcadePlatformer
         private float randomJumpTimer;
         private float letGoOfSpaceTimer;
 
+        private float normalGrav = 3, fallingGrav = 8;
+
         private ArcadePlayer player;
 
         void Start()
@@ -114,7 +116,7 @@ namespace ArcadePlatformer
                 jumpCoolDown = 0.2f;
                 coyoteTime = 0;
                 jumpBuffer = 0;
-                rb.gravityScale = 3f;
+                rb.gravityScale = normalGrav;
 
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
                 isGrounded = false;
@@ -125,7 +127,7 @@ namespace ArcadePlatformer
 
             if (!isGrounded && !jumpIsPressed || rb.linearVelocity.y < 0 && !isGrounded)
             {
-                rb.gravityScale = 8;
+                rb.gravityScale = fallingGrav;
 
                 if (!isGrounded)
                     animator.SetBool("Falling", true);
@@ -166,6 +168,21 @@ namespace ArcadePlatformer
 
             Vector3 move = new Vector3(x * speed, 0, 0f);
             rb.AddForce(move);
+        }
+
+        public void SpringJump(float power)
+        {
+            jumpCoolDown = 0.2f;
+            coyoteTime = 0;
+            jumpBuffer = 0;
+            rb.gravityScale = fallingGrav;
+
+            rb.linearVelocity = rb.linearVelocity * Vector2.right;
+            rb.AddForce(Vector2.up * power, ForceMode2D.Impulse);
+            isGrounded = false;
+
+            if (squashAndStrech)
+                StartCoroutine(JumpSqueeze(0.9f, 1.1f, 0.1f));
         }
 
         IEnumerator JumpSqueeze(float xSqueeze, float ySqueeze, float seconds)
