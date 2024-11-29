@@ -16,6 +16,7 @@ namespace ArcadePlatformer
         public float groundCheckDistance;
         public float speed;
         public float maxSpeed;
+        public float maxSpeedReduction = 0.1f;
         Rigidbody2D rb;
 
         private float jumpBuffer;
@@ -34,8 +35,11 @@ namespace ArcadePlatformer
         private float randomJumpTimer;
         private float letGoOfSpaceTimer;
 
+        private ArcadePlayer player;
+
         void Start()
         {
+            player = GetComponent<ArcadePlayer>();
             spriteHolder = transform.GetChild(0);
             rb = GetComponent<Rigidbody2D>();
         }
@@ -45,6 +49,9 @@ namespace ArcadePlatformer
             input = InputManager.Instance.GetPlayerMovement();
             jumpWasPressed = InputManager.Instance.WasSpacePressed();
             jumpIsPressed = InputManager.Instance.IsSpacePressed();
+
+            if (UnityEngine.InputSystem.Keyboard.current.rKey.wasPressedThisFrame)
+                player.Die();
         }
 
         void NPCInput()
@@ -118,7 +125,7 @@ namespace ArcadePlatformer
 
             if (!isGrounded && !jumpIsPressed || rb.linearVelocity.y < 0 && !isGrounded)
             {
-                rb.gravityScale = 6;
+                rb.gravityScale = 8;
 
                 if (!isGrounded)
                     animator.SetBool("Falling", true);
@@ -155,7 +162,7 @@ namespace ArcadePlatformer
                 x *= 2;
 
             if (Mathf.Abs(rb.linearVelocity.x) > maxSpeed && rb.linearVelocity.x > 0 == x > 0)
-                x /= 10;
+                x *= maxSpeedReduction;
 
             Vector3 move = new Vector3(x * speed, 0, 0f);
             rb.AddForce(move);
