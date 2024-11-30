@@ -1109,7 +1109,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 138181835}
-  speed: 15
+  playerRB: {fileID: 138181837}
+  speed: 10
+  maxOffset: 10
+  velocityStrength: 0.2
 --- !u!114 &157651654
 MonoBehaviour:
   m_ObjectHideFlags: 0

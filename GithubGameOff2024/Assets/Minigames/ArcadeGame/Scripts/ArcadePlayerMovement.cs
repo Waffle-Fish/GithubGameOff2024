@@ -158,8 +158,9 @@ namespace ArcadePlatformer
 
             isGrounded = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
             float x = input.x;
-            if (Mathf.Approximately(x, 0) || isCrouching)
-                x = -rb.linearVelocity.x / 10;
+            if ((Mathf.Approximately(x, 0) || isCrouching))
+                if(isGrounded)
+                    x = -rb.linearVelocity.x / 10;
             else if (x > 0 != rb.linearVelocity.x > 0)
                 x *= 2;
 
