@@ -9,6 +9,7 @@ namespace ArcadePlatformer
         public ArcadeUI uiManager;
         public FishCollectable[] collectables;
         public Checkpoint[] checkpoints;
+        public FlatParticleManager psManager;
 
         private Vector3 startingPlayerPos;
 
@@ -17,13 +18,27 @@ namespace ArcadePlatformer
             startingPlayerPos = playerMovement.transform.position;
         }
 
-        private void Start()
+        public Checkpoint[] FindCheckPoints()
         {
             checkpoints = FindObjectsByType<Checkpoint>(FindObjectsSortMode.None);
             for (int i = 0; i < checkpoints.Length; i++)
             {
                 checkpoints[i].slapManager = this;
+                checkpoints[i].psManager = psManager;
             }
+
+            return checkpoints;
+        }
+
+        public FishCollectable[] FindCollectables()
+        {
+            collectables = FindObjectsByType<FishCollectable>(FindObjectsSortMode.None);
+            for (int i = 0; i < collectables.Length; i++)
+            {
+                collectables[i].particleManager = psManager;
+            }
+
+            return collectables;
         }
 
         public override void TurnOn()
