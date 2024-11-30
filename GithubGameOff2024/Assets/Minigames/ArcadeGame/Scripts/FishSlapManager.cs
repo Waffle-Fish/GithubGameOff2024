@@ -45,6 +45,7 @@ namespace ArcadePlatformer
         {
             playerMovement.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
             playerMovement.transform.position = startingPlayerPos;
+            playerMovement.GetComponent<ArcadePlayer>().Checkpoint(startingPlayerPos);
             playerMovement.enabled = true;
 
             CallOffCheckpoints();
@@ -57,6 +58,7 @@ namespace ArcadePlatformer
             playerMovement.enabled = false;
             playerMovement.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
             playerMovement.transform.position = startingPlayerPos;
+            playerMovement.GetComponent<ArcadePlayer>().Checkpoint(startingPlayerPos);
 
             for (int i = 0; i < collectables.Length; i++)
             {
