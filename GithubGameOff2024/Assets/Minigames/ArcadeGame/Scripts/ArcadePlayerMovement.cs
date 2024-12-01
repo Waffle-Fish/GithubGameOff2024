@@ -118,6 +118,8 @@ namespace ArcadePlatformer
                 jumpBuffer = 0;
                 rb.gravityScale = normalGrav;
 
+                if (rb.linearVelocity.y < 0)
+                    rb.linearVelocity = Vector2.right * rb.linearVelocity;
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
                 isGrounded = false;
 
@@ -148,15 +150,17 @@ namespace ArcadePlatformer
 
         void FixedUpdate()
         {
-            RaycastHit2D hit2D = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
-            if (!hit2D)
-                hit2D = Physics2D.Raycast(groundCheck.position + Vector3.right * 0.4f, Vector2.down, groundCheckDistance, whatIsGround);
-            else if (!hit2D)
-                hit2D = Physics2D.Raycast(groundCheck.position + Vector3.left * 0.4f, Vector2.down, groundCheckDistance, whatIsGround);
+            RaycastHit2D hit2D = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance);
+            if (!hit2D || whatIsGround != (whatIsGround | (1 << hit2D.collider.gameObject.layer)))
+                hit2D = Physics2D.Raycast(groundCheck.position + Vector3.right * 0.4f, Vector2.down, groundCheckDistance);
+            else if (!hit2D || whatIsGround != (whatIsGround | (1 << hit2D.collider.gameObject.layer)))
+                hit2D = Physics2D.Raycast(groundCheck.position + Vector3.left * 0.4f, Vector2.down, groundCheckDistance);
 
             isGrounded = hit2D;
+            if (hit2D && whatIsGround != (whatIsGround | (1 << hit2D.collider.gameObject.layer)))
+                isGrounded = false;
 
-            isGrounded = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
+            //isGrounded = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
             float x = input.x;
             if ((Mathf.Approximately(x, 0) || isCrouching)) {
                 if(isGrounded)
