@@ -16,6 +16,7 @@ public class NPCState
     public virtual void EnterState() 
     {
         _time = 0;
+        npc.interupted = false;
     }
 
     public virtual void ExitState() { }
