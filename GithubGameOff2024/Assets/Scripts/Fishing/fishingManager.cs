@@ -1,8 +1,6 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.InputSystem.iOS;
 using UnityEngine.UIElements;
-using UnityEditor.SearchService;
 
 
 public class fishingManager : MonoBehaviour
