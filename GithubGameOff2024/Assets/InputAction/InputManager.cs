@@ -58,6 +58,8 @@ public class InputManager : MonoBehaviour
 
     public Vector2 GetLook() {
         return inputActions.Player.Look.ReadValue<Vector2>();
+    }
+    
     public bool WasSpacePressed()
     {
         return inputActions.Player.Jump.WasPressedThisFrame();
