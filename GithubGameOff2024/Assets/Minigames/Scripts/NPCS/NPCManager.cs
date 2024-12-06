@@ -31,6 +31,13 @@ public class NPCManager : MonoBehaviour
 
     public IInteractableNPC GetRandomActivity()
     {
-        return interactables[Random.Range(0, interactables.Length)];
+        for (int i = 0; i < 100; i++)
+        {
+            int interactableIndex = Random.Range(0, interactables.Length);
+            if (!interactables[interactableIndex].Taken())
+                return interactables[interactableIndex];
+        }
+
+        return null;
     }
 }

@@ -47,7 +47,6 @@ public class DialogueManager : MonoBehaviour
     {
         _animator.SetBool("isOpen", false);
         _isDialogueComplete = true;
-        Debug.Log("End of dialogue");
     }
 
     IEnumerator TypeSentence(string sentence)

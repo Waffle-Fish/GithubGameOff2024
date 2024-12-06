@@ -55,4 +55,14 @@ public class InputManager : MonoBehaviour
     public bool WasPauseButtonPressed(){
         return inputActions.Player.Pause.WasPressedThisFrame();
     }
+
+    public bool WasSpacePressed()
+    {
+        return inputActions.Player.Jump.WasPressedThisFrame();
+    }
+
+    public bool IsSpacePressed()
+    {
+        return inputActions.Player.Jump.IsPressed();
+    }
 }
