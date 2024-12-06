@@ -13,6 +13,13 @@ public class NPCActivityState : NPCState
     {
         base.EnterState();
 
+        if (npc.activity.Taken())
+        {
+            npc.activity = null;
+            npc.StateMachine.ChangeState(npc.RoamState);
+            return;
+        }
+
         npc.activity.NPCInteract();
         _waitTime = Random.Range(npc.activity._timeMinMax.x, npc.activity._timeMinMax.y);
     }
@@ -21,7 +28,8 @@ public class NPCActivityState : NPCState
     {
         base.ExitState();
 
-        npc.activity = null;
+        if (npc.activity != null)
+            npc.activity.EndNPCInteract();
     }
 
     public override void FrameUpdate()
@@ -30,6 +38,7 @@ public class NPCActivityState : NPCState
 
         if (_time >= _waitTime)
         {
+            npc.agent.SetDestination(npc.GetRandomNavPoint());
             npc.StateMachine.ChangeState(npc.IdleState);
         }
     }

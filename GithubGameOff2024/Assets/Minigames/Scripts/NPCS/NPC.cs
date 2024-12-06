@@ -7,6 +7,7 @@ public class NPC : MonoBehaviour, IInteractable
     public IInteractableNPC activity;
     public float maxRoamDistance = 20f;
     public NPCState pausedState;
+    public bool interupted;
     public Dialogue[] dialogue;
     public int dialogueIndex;
     public DialogueManager dialogueManager;
@@ -68,6 +69,7 @@ public class NPC : MonoBehaviour, IInteractable
         {
             pausedState = StateMachine.CurrentNPCState;
             StateMachine.ChangeState(TalkState);
+            interupted = true;
         }
         else
         {
