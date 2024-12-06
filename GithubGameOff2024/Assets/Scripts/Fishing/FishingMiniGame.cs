@@ -160,7 +160,7 @@ public class FishingMiniGame : MonoBehaviour
       return;
 
     };
-    CurrentInventory.AddItem(InventoryManager.InventoryType.Fish, CurrentFish);
+    // CurrentInventory.AddItem(InventoryManager.InventoryType.Fish, CurrentFish);
     UnityEngine.Debug.Log("You Won!!");
     Destroy(gameObject);
 
